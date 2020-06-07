@@ -1,0 +1,158 @@
+import { form_group_defaults as modal_defaults } from '../data/form_group_defaults.js';
+
+function generate_form_help_modal (opts = false)
+{
+    // set the options if passed or use default values
+    let modal_classes   = opts.modal_classes   ? opts.modal_classes   : 'modal fade fade-scale';
+    let dialog_classes  = opts.dialog_classes  ? opts.dialog_classes  : 'modal-dialog modal-dialog-centered modal-dialog-scrollable';
+    let content_classes = opts.content_classes ? opts.content_classes : 'modal-content bg-primary text-white';
+    let header_classes  = opts.header_classes  ? opts.header_classes  : 'modal-header justify-content-center border-0 px-3';
+    let title_classes   = opts.title_classes   ? opts.title_classes   : 'modal-title';
+    let body_classes    = opts.body_classes    ? opts.body_classes    : 'modal-body text-center py-0 px-4';
+    let footer_classes  = opts.footer_classes  ? opts.footer_classes  : 'modal-footer justify-content-center border-0 pt-1 px-3';
+    let button_classes  = opts.button_classes  ? opts.button_classes  : 'btn btn-outline-white';
+    let id              = opts.id              ? opts.id              : 'default-id';
+    let title           = opts.title           ? opts.title           : null;
+    let paragraph1      = opts.paragraph1      ? opts.paragraph1      : null;
+    let button_text     = opts.button_text     ? opts.button_text     : 'CLOSE';
+
+
+    let form_modal_text            = opts.form_modal_text            ? opts.form_modal_text            : modal_defaults.form_modal_text;
+    let form_modal_text_p_classes  = opts.form_modal_text_p_classes  ? opts.form_modal_text_p_classes  : modal_defaults.classes.form_modal_text_ps;
+    let form_modal_text_ul_classes = opts.form_modal_text_ul_classes ? opts.form_modal_text_ul_classes : modal_defaults.classes.form_modal_text_uls;
+    let form_modal_text_li_classes = opts.form_modal_text_li_classes ? opts.form_modal_text_li_classes : modal_defaults.classes.form_modal_text_lis;
+    
+    let help_modal_body_styles = opts.help_modal_body_styles ? opts.help_modal_body_styles : modal_defaults.help_modal_body_styles;
+
+    // create the modal element
+    let modal = document.createElement('div');
+    modal.className = modal_classes;
+    modal.setAttribute('id', id + '-modal');
+    modal.setAttribute('tabindex', '-1');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-labelledby', id + '-modal-headline');
+    modal.setAttribute('aria-hidden', 'true');
+
+    // create the modal dialog element
+    let dialog = document.createElement('div');
+    dialog.className = dialog_classes;
+
+    // create the modal content element
+    let content = document.createElement('div');
+    content.className = content_classes;
+
+    // create the modal header element
+    let header = document.createElement('div');
+    header.className = header_classes;
+
+    // create the modal header element
+    let headline = document.createElement('h5');
+    headline.className = title_classes;
+    headline.setAttribute('id', id + '-modal-headline');
+    
+    let headline_text;
+
+    if (title === null)
+    {
+        headline_text = document.createTextNode(form_modal_text.heading);
+    }
+    else
+    {
+        headline_text = document.createTextNode(title);
+    }
+
+    // create the modal body element
+    let body = document.createElement('div');
+    body.className = body_classes;
+    body.setAttribute('style', help_modal_body_styles);
+
+
+
+    // append all elements so far
+    modal.appendChild(dialog);
+    dialog.appendChild(content);
+    content.appendChild(header);
+    header.appendChild(headline);
+    headline.appendChild(headline_text);
+    content.appendChild(body);
+
+
+
+
+    let p1, p1_text;
+    
+    if (paragraph1 === null)
+    {
+        for (var i = 0; i < form_modal_text.body.length; i++)
+        {
+            if (form_modal_text.body[i].type === 'paragraphs')
+            {
+                for (var j = 0; j < form_modal_text.body[i].content.length; j++)
+                {
+                    // create a paragraph element and text node - and append together
+                    let p = document.createElement('p');
+                    p.className = form_modal_text_p_classes;
+                    let txt = document.createTextNode(form_modal_text.body[i].content[j]);
+                    p.appendChild(txt);
+
+                    // append the paragraph to the modal body element
+                    body.appendChild(p);
+                }
+            }
+            else if (form_modal_text.body[i].type === 'listitems')
+            {
+                // create a parent unordered list element
+                let ul = document.createElement('ul');
+                ul.className = form_modal_text_ul_classes;
+
+                for (var k = 0; k < form_modal_text.body[i].content.length; k++)
+                {
+                    // create a paragraph element and text node - and append together
+                    let li = document.createElement('li');
+                    li.className = form_modal_text_li_classes;
+                    let txt = document.createTextNode(form_modal_text.body[i].content[k]);
+                    li.appendChild(txt);
+
+                    // append the li to the ul element
+                    ul.appendChild(li);
+                }
+
+                // append the ul to the modal body element
+                body.appendChild(ul);
+            }
+        }
+    }
+    else
+    {
+        // create the p element and text node and combine them
+        p1 = document.createElement('p');
+        p1_text = document.createTextNode(paragraph1);
+        p1.appendChild(p1_text);
+
+        // append the p element to the body
+        body.appendChild(p1);
+    }
+
+
+
+
+    // create the modal footer element
+    let footer = document.createElement('div');
+    footer.className = footer_classes;
+
+    // create the modal button element
+    let button = document.createElement('button');
+    button.className = button_classes;
+    button.setAttribute('type', 'button');
+    button.setAttribute('data-dismiss', 'modal');
+    let button_txt = document.createTextNode(button_text);
+
+    // append all elements together
+    content.appendChild(footer);
+    footer.appendChild(button);
+    button.appendChild(button_txt);
+
+    return modal;
+}
+
+export { generate_form_help_modal };

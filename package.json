@@ -1,0 +1,24 @@
+{
+  "name": "obewds-molecular-components",
+  "version": "0.1.0",
+  "description": "A pure JavaScript ES Modules project built to compliment the OBE:WDS (OBE:BS4) Web Design System for rapid modern JavaScript development with design-flexible and deeply configurable interactive and static content components.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oberocks/obewds-molecular-components.git"
+  },
+  "keywords": [
+    "es-modules",
+    "javascript",
+    "obewds"
+  ],
+  "author": "Matt 'Smash' McT",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/oberocks/obewds-molecular-components/issues"
+  },
+  "homepage": "https://github.com/oberocks/obewds-molecular-components#readme"
+}

@@ -1,0 +1,1 @@
+export { Video_component } from './content_components/video_component.js';
