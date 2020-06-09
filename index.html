@@ -53,7 +53,55 @@
 
 
 
-    // import modules
+
+
+
+
+
+    // import module
+    import { Placeholder_text } from './js/modules/content_components.js';
+
+    // instantiate imported modules
+    const placeholder = new Placeholder_text();
+
+    /*
+    // 
+    let test1 = placeholder.headline();
+    console.log('Placeholder: ' + test1);
+
+    // 
+    let test2 = placeholder.node('headline');
+    console.log(test2);
+
+    // 
+    let test3 = placeholder.node('paragraph');
+    console.log(test3);
+
+    // 
+    let test4 = placeholder.node('quote');
+    console.log(test4);
+
+    // 
+    let test5 = placeholder.node('brand');
+    console.log(test5);
+
+    // 
+    let test6 = placeholder.node('navigation');
+    console.log(test6);
+    */
+
+
+
+
+
+
+
+
+
+
+
+
+    // import module
     import { Credit_payment_component } from './js/modules/form_components.js';
 
     // instantiate imported modules
@@ -68,7 +116,7 @@
 
 
 
-    // import modules
+    // import module
     import { Input_form_group } from './js/modules/form_components.js';
 
     // instantiate imported modules
@@ -84,7 +132,7 @@
 
 
 
-    // import modules
+    // import module
     import { Phone_input_form_group } from './js/modules/form_components.js';
 
     // instantiate imported modules
@@ -102,7 +150,7 @@
 
     
     
-    // import modules
+    // import module
     import { Input_character_counter_form_group } from './js/modules/form_components.js';
 
     // instantiate imported modules
@@ -121,7 +169,7 @@
     
     
     
-    // import modules
+    // import module
     import { Textarea_form_group } from './js/modules/form_components.js';
 
     // instantiate imported modules
@@ -141,7 +189,7 @@
     
     
     
-    // import modules
+    // import module
     import { Textarea_character_counter_form_group } from './js/modules/form_components.js';
 
     // instantiate imported modules
@@ -157,7 +205,7 @@
 
 
 
-    // import modules
+    // import module
     import { Custom_checkboxes_form_group } from './js/modules/form_components.js';
 
     // instantiate imported modules
@@ -231,7 +279,7 @@
 
 
 
-    // import modules
+    // import module
     import { Custom_radios_form_group } from './js/modules/form_components.js';
 
     // instantiate imported modules
@@ -295,7 +343,7 @@
     );
 
     fragment.appendChild(
-        headline.h1({ text: 'h1 Headline!' })
+        headline.h1({ text: '(h1)' })
     );
     fragment.appendChild(
         headline.h2({ text: 'h2 Headline!' })
@@ -311,6 +359,14 @@
     );
     fragment.appendChild(
         headline.h6({ text: 'h6 Headline!' })
+    );
+
+    // generate defaults content (for quick prototyping)
+    fragment.appendChild(
+        headline.h1({ text: placeholder.headline() })
+    );
+    fragment.appendChild(
+        paragraph.generate({ text: placeholder.paragraph() })
     );
 
 
