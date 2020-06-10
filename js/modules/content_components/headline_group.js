@@ -12,7 +12,7 @@ class Headline_group
         this._defaults = {
             parent: {
                 attributes: {
-                    class: 'border-left border-width-5 border-primary pl-3 py-3 mb-2'
+                    class: 'border-left border-width-5 border-primary pl-3 pt-2 pb-3 mb-2'
                 }
             },
             headlines: {
@@ -21,10 +21,10 @@ class Headline_group
                     attributes: {
                         class: 'mb-1'
                     },
-                    text: 'Headline Group Top Default'
+                    text: 'Headline Group Top'
                 },
                 bottom: {
-                    tag: 'h4',
+                    tag: 'h5',
                     attributes: {
                         class: 'mb-0'
                     },

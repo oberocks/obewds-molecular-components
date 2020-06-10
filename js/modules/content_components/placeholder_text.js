@@ -96,31 +96,34 @@ class Placeholder_text
 
     node (type)
     {
+        let text;
         if (type === 'headline')
         {
             // 
-            return document.createTextNode( this.headline() );
+            text = this.headline();
         }
         else if (type === 'paragraph')
         {
             // 
-            return document.createTextNode( this.paragraph() );
+            text = this.paragraph();
         }
         else if (type === 'quote')
         {
             // 
-            return document.createTextNode( this.quote() );
+            text = this.quote();
         }
         else if (type === 'brand')
         {
             // 
-            return document.createTextNode( this.brand() );
+            text = this.brand();
         }
         else if (type === 'navigation')
         {
             // 
-            return document.createTextNode( this.navigation() );
+            text = this.navigation();
         }
+
+        return document.createTextNode( text );
     }
 }
 
