@@ -1,7 +1,6 @@
 import { form_group_defaults as defaults } from './data/form_group_defaults.js';
 import { merge_objects } from '../helpers/merge_objects.js';
 import { clear_user_value } from './utilities/clear_user_value.js';
-import { update_character_count } from './utilities/update_character_count.js';
 import { generate_form_help_modal } from './utilities/generate_form_help_modal.js';
 
 class Textarea_form_group
