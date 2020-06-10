@@ -1,58 +1,57 @@
+import { merge_objects } from '../helpers/merge_objects.js';
+import { applyAttributes } from '../html_elements/utilities/dom_generation.js';
+
 class Video_component
 {
-    /** 
-     * Image : A helper script to create image elements
-     * @param {String} opts.div_classes    : Xxxxx
-     * @param {String} opts.iframe_classes : Xxxxx
-     * @param {String, Number} opts.width  : Xxxxx
-     * @param {String, Number} opts.height : Xxxxx
-     * @param {String, Number} opts.src    : Xxxxx
-     */
-
     constructor (opts = false)
     {
-        this.div_classes    = opts.parent_classes ? opts.parent_classes : 'embed-responsive embed-responsive-16by9 box-shadow-xs mb-2';
-        this.iframe_classes = opts.iframe_classes ? opts.iframe_classes : 'embed-responsive-item border-0';
-        this.width          = opts.width          ? opts.width          : '560';
-        this.height         = opts.height         ? opts.height         : '315';
-        this.src            = opts.src            ? opts.src            : 'https://www.youtube.com/embed/jr5yHAZDbm0';
-    }
-    
-    /** 
-     * Generate (Paragraph) : A helper script to generate a <p> HTML element
-     * @param {String} opts.div_classes    : Xxxxx
-     * @param {String} opts.iframe_classes : Xxxxx
-     * @param {String, Number} opts.width  : Xxxxx
-     * @param {String, Number} opts.height : Xxxxx
-     * @param {String, Number} opts.src    : Xxxxx
-     */
+        /** 
+         * Video Component : Xxxxxx
+         * @param {Xxxxxx} Xxxxxx : Xxxxxx
+         */
+        
+        this._defaults = {
+            parent: {
+                attributes: {
+                    class: 'embed-responsive embed-responsive-16by9 box-shadow-xs mb-2'
+                }
+            },
+            iframe: {
+                attributes: {
+                    class: 'embed-responsive-item border-0',
+                    width: '560',
+                    height: '315',
+                    src: 'https://www.youtube.com/embed/jr5yHAZDbm0',
+                    allowfullscreen: ''
+                }
+            }
+        };
 
-    generate (opts = false)
+        // merge any passed options settings into the default settings to get a final settings object
+        this.defaults = (opts) ? merge_objects(true, this._defaults, opts) : this._defaults;
+
+        // clear original defaults
+        this._defaults = null;
+    }
+
+    generate (options = false)
     {
-        // set up any passed options and merge attributes from any passed class settings
-        let div_classes    = opts.div_classes    ? opts.div_classes    : this.div_classes;
-        let iframe_classes = opts.iframe_classes ? opts.iframe_classes : this.iframe_classes;
-        let width          = opts.width          ? opts.width          : this.width;
-        let height         = opts.height         ? opts.height         : this.height;
-        let src            = opts.src            ? opts.src            : this.src;
+        // merge any passed options settings into the default settings to get a final settings object
+        let opts = (options) ? merge_objects(true, this.defaults, options) : this.defaults;
 
         // create the parent element
-        let div = document.createElement('div');
-        div.className = div_classes;
+        let parent = document.createElement('div');
+        applyAttributes(parent, opts.parent.attributes);
 
         // create the iframe element
         let iframe = document.createElement('iframe');
-        iframe.className = iframe_classes;
-        iframe.setAttribute('allowfullscreen', '');
-        iframe.setAttribute('width', width);
-        iframe.setAttribute('height', height);
-        iframe.setAttribute('src', src);
+        applyAttributes(iframe, opts.iframe.attributes);
 
         // append elements
-        div.appendChild(iframe);
+        parent.appendChild(iframe);
 
         // return the new elements
-        return div;
+        return parent;
     }
     
 }
