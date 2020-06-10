@@ -37,10 +37,6 @@ class Submit_button_form_group
     {
         // merge any passed options settings into the default settings to get a final settings object
         let opts = (options) ? merge_objects(true, this.defaults, options) : this.defaults;
-        console.log('opts:');
-        console.log(opts);
-        console.log('this.defaults:');
-        console.log(this.defaults);
         
         // create the parent form group element
         let parent = document.createElement('div');
