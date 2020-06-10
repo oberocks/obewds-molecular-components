@@ -1,47 +1,80 @@
-import { applyAttributes, insertText } from './utilities/dom_generation.js';
+import { applyAttributes, insertText } from '../html_elements/utilities/dom_generation.js';
 
 class Headline_group
 {
-    /** 
-     * Headline Group : A helper script for form input and textarea elements
-     * @param {Array} levels     : Xxxxx
-     * @param {Array} attributes : Xxxxx
-     * @param {Array} texts      : Xxxxx
-     */
-
-    constructor (options = false)
+    constructor (opts = false)
     {
-        this.levels     = options.levels ? options.levels : ['1', '2'];
-        this.attributes = options.attributes ? options.attributes : [{}, {}];
-        this.text       = options.text ? options.text : [['Default Primary Headline'], ['Default Secondary Headline']];
-    }
+        /** 
+         * Submit Button Form Group : Xxxxxx
+         * @param {Xxxxxx} Xxxxxx : Xxxxxx
+         */
+        
+        this._defaults = {
+            parent: {
+                attributes: {
+                    class: 'border-left border-width-5 border-primary pl-3 py-3 mb-2'
+                }
+            },
+            headlines: {
+                top: {
+                    tag: 'h1',
+                    attributes: {
+                        class: 'mb-1'
+                    },
+                    text: 'Headline Group Top Default'
+                },
+                bottom: {
+                    tag: 'h4',
+                    attributes: {
+                        class: 'mb-0'
+                    },
+                    text: 'Default Bottom Headline'
+                }
+            }
+        };
 
-    /** 
-     * Generate (Paragraph) : A helper script to generate a <p> HTML element
-     * @param {String} level       : Xxxxx
-     * @param {Object} attributes  : Xxxxx
-     * @param {String, Array} text : Xxxxx
-     */
+        // merge any passed options settings into the default settings to get a final settings object
+        this.defaults = (opts) ? merge_objects(true, this._defaults, opts) : this._defaults;
+
+        // clear original defaults
+        this._defaults = null;
+    }
 
     generate (options = false)
     {
-        // set up any passed options and merge attributes from any passed class settings
-        let level               = options.level ? options.level : this.level;
-        let instance_attributes = options.attributes ? options.attributes : {};
-        let attributes          = Object.assign(instance_attributes, this.attributes);
-        let text                = options.text ? options.text : this.text;
+        // merge any passed options settings into the default settings to get a final settings object
+        let opts = (options) ? merge_objects(true, this.defaults, options) : this.defaults;
 
-        // create the element
-        let el = document.createElement('h' + level);
+        // create the headline group element
+        let grp = document.createElement('hgroup');
 
-        // check if there are attributes then set them
-        applyAttributes(el, attributes);
+        // check if there are attributes for the headline group element - then set them
+        applyAttributes(grp, opts.parent.attributes);
+
+        // create the top headline element
+        let top = document.createElement(opts.headlines.top.tag);
+
+        // check if there are attributes for the top headline element - then set them
+        applyAttributes(top, opts.headlines.top.attributes);
 
         // check if text is a string and if so then add it as a text node
-        insertText(el, text);
+        insertText(top, opts.headlines.top.text);
+
+        // create the top headline element
+        let bottom = document.createElement(opts.headlines.bottom.tag);
+
+        // check if there are attributes for the top headline element - then set them
+        applyAttributes(bottom, opts.headlines.bottom.attributes);
+
+        // check if text is a string and if so then add it as a text node
+        insertText(bottom, opts.headlines.bottom.text);
+
+        // append all element together accordingly
+        grp.appendChild(top);
+        grp.appendChild(bottom);
 
         // return the new element node
-        return el;
+        return grp;
     }
     
 }

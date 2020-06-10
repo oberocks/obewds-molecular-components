@@ -371,6 +371,36 @@
 
 
 
+
+
+
+
+
+
+    // import module
+    import { Headline_group } from './js/modules/content_components.js';
+
+    // instantiate imported modules
+    let headline_group_factory = new Headline_group();
+
+    // generate the input form group markup with the options
+    let my_headline_group = headline_group_factory.generate();
+
+    // append the generated nodes to the fragment
+    fragment.appendChild(my_headline_group);
+
+
+
+
+
+
+
+
+
+
+
+
+
     //
     // Testing for module data use examples
     // 
