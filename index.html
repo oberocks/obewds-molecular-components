@@ -465,6 +465,35 @@
 
 
 
+    // import module
+    import { Icon } from './js/modules/html_elements.js';
+
+    // instantiate imported modules
+    let icon_factory = new Icon();
+
+    // generate the input form group markup with the options
+    let home_icon = icon_factory.generate({
+        attributes: {
+            class: 'fas fa-home text-muted mr-3'
+        }
+    });
+
+    // append the generated nodes to the fragment
+    fragment.appendChild(
+        headline.h1({ text: [
+            home_icon,
+            'Icon & Headline'
+        ] })
+    );
+
+
+
+
+
+
+
+
+
 
 
 

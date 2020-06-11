@@ -1,20 +1,18 @@
 import { merge_objects } from '../helpers/merge_objects.js';
 import { applyAttributes } from './utilities/dom_generation.js';
 
-class Image
+class Icon
 {
     constructor (opts = false)
     {
         /** 
-         * Image : A helper script to generate an image element
+         * Paragraph : A helper script to generate a paragraph element
          * @param {Xxxxxx} Xxxxxx : Xxxxxx
          */
         
         this._defaults = {
             attributes: {
-                src: 'https://obewds.com/images/obewds-logo-social-square-light-ground.jpg',
-                alt: 'OBE:WDS Square Profile Logo',
-                class: 'img-fluid box-shadow-xs mb-2'
+                class: 'fas fa-home'
             }
         };
 
@@ -31,7 +29,7 @@ class Image
         let opts = (options) ? merge_objects(true, this.defaults, options) : this.defaults;
 
         // create the element
-        let el = document.createElement('img');
+        let el = document.createElement('i');
 
         // check if there are attributes then set them
         applyAttributes(el, opts.attributes);
@@ -42,4 +40,4 @@ class Image
     
 }
   
-export { Image };
+export { Icon };

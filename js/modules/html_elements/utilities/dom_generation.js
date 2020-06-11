@@ -16,18 +16,18 @@ function insertText (node, str)
         let txt = document.createTextNode(str);
         node.appendChild(txt);
     }
-    else if (str.isArray() && str.length > 0)
+    else if (Array.isArray(str) && str.length > 0)
     {
         for (var i = 0; i < str.length; i++)
         {
-            if (typeof str[i] === 'string' && str[i].length > 0)
-            {
-                let txt = document.createTextNode(str);
-                node.appendChild(txt);
-            }
-            else if (str[i].nodeType === Node.ELEMENT_NODE)
+            if (str[i] instanceof Element || str[i] instanceof HTMLDocument)
             {
                 node.appendChild(str[i]);
+            }
+            else if (typeof str[i] === 'string' || str[i] instanceof String)
+            {
+                let txt = document.createTextNode(str[i]);
+                node.appendChild(txt);
             }
         }
     }
