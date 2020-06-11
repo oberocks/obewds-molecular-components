@@ -2,40 +2,38 @@ import { applyAttributes } from './utilities/dom_generation.js';
 
 class Image
 {
-    /** 
-     * Image : A helper script to create image elements
-     * @param {Object} attributes.src   : Xxxxx
-     * @param {Object} attributes.alt   : Xxxxx
-     * @param {Object} attributes.class : Xxxxx
-     */
-
-    constructor (attributes = false)
+    constructor (opts = false)
     {
-        this.attributes = {
-            src   : attributes.src   ? options.src      : 'https://obewds.com/images/obewds-logo-social-square-light-ground.jpg',
-            alt   : attributes.alt   ? attributes.alt   : 'OBE:WDS Square Profile Logo',
-            class : attributes.class ? attributes.class : 'img-fluid box-shadow-xs mb-2'
+        /** 
+         * Image : A helper script to generate an image element
+         * @param {Xxxxxx} Xxxxxx : Xxxxxx
+         */
+        
+        this._defaults = {
+            attributes: {
+                src: 'https://obewds.com/images/obewds-logo-social-square-light-ground.jpg',
+                alt: 'OBE:WDS Square Profile Logo',
+                class: 'img-fluid box-shadow-xs mb-2'
+            }
         };
+
+        // merge any passed options settings into the default settings to get a final settings object
+        this.defaults = (opts) ? merge_objects(true, this._defaults, opts) : this._defaults;
+
+        // clear original defaults
+        this._defaults = null;
     }
 
-    /** 
-     * Generate (Paragraph) : A helper script to generate a <p> HTML element
-     * @param {Object} attributes.src   : Xxxxx
-     * @param {Object} attributes.alt   : Xxxxx
-     * @param {Object} attributes.class : Xxxxx
-     */
-
-    generate (attrs = false)
+    generate (options = false)
     {
-        // set up any passed options and merge attributes from any passed class settings
-        let instance_attributes = attrs ? attrs : {};
-        let attributes          = Object.assign(instance_attributes, this.attributes);
+        // merge any passed options settings into the default settings to get a final settings object
+        let opts = (options) ? merge_objects(true, this.defaults, options) : this.defaults;
 
         // create the element
         let el = document.createElement('img');
 
         // check if there are attributes then set them
-        applyAttributes(el, attributes);
+        applyAttributes(el, opts.attributes);
 
         // return the new element node
         return el;
