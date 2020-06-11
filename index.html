@@ -487,6 +487,32 @@
     );
 
 
+    // import module
+    import { Anchor } from './js/modules/html_elements.js';
+
+    // instantiate imported modules
+    let anchor_factory = new Anchor();
+
+    let test_link = anchor_factory.generate();
+    let smiley_icon = icon_factory.generate({
+        attributes: {
+            class: 'fas fa-smile text-warning'
+        }
+    });
+    
+    fragment.appendChild(
+        paragraph.generate({
+            text: [
+                'This is a paragraph with a ',
+                test_link,
+                ' element in it. It is a great paragraph, and by the way... paragraphs can also have ',
+                smiley_icon,
+                ' in them!'
+            ]
+        })
+    );
+
+
 
 
 
