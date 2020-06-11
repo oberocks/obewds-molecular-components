@@ -212,7 +212,39 @@
     let custom_checkboxes_factory = new Custom_checkboxes_form_group();
 
     // generate the input form group markup with the options
-    let my_custom_checkboxes = custom_checkboxes_factory.generate();
+    let my_custom_checkboxes = custom_checkboxes_factory.generate({
+        checkboxes : [
+            {
+                label: 'Default Checkbox 1',
+                attributes:
+                {
+                    id      : 'checkbox-1',
+                    name    : 'checkbox-1',
+                    value   : 'value1',
+                    checked : ''
+                }
+            },
+            {
+                label: 'Default Checkbox 2',
+                attributes:
+                {
+                    id    : 'checkbox-2',
+                    name  : 'checkbox-2',
+                    value : 'value2'
+                }
+            },
+            {
+                label: 'Disabled Checkbox 3',
+                attributes:
+                {
+                    id       : 'checkbox-3',
+                    name     : 'checkbox-3',
+                    value    : 'value3',
+                    disabled : ''
+                }
+            }
+        ]
+    });
 
     // append the generated nodes to the fragment
     fragment.appendChild(my_custom_checkboxes);
@@ -220,9 +252,18 @@
 
 
 
-    let custom_switches_opts = {
+
+
+    // instantiate imported modules
+    let custom_switch_checkboxes_factory = new Custom_checkboxes_form_group();
+    
+    // generate the input form group markup with the options
+    let my_custom_switches = custom_switch_checkboxes_factory.generate({
         label: 'Custom Switch Checkboxes',
-        parent_classes: 'custom-control custom-switch',
+        group_id : 'default-switches',
+        classes: {
+            checkbox_parents: 'custom-control custom-switch'
+        },
         checkboxes: [
             {
                 label: 'Checkbox Switch 1',
@@ -230,7 +271,8 @@
                 {
                     id: 'switch-1',
                     name: 'switch-1',
-                    value: 'value1'
+                    value: 'value1',
+                    checked: ''
                 }
             },
             {
@@ -265,10 +307,7 @@
                 content: [ 'Custom Switches are awesome', "They're perfect for settings and features that need toggling or enabling", 'They are basically a checkbox with a different visual design.' ]
             }]
         }
-    };
-    
-    // generate the input form group markup with the options
-    let my_custom_switches = custom_checkboxes_factory.generate(custom_switches_opts);
+    });
 
     // append the generated nodes to the fragment
     fragment.appendChild(my_custom_switches);

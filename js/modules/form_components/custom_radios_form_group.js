@@ -33,7 +33,6 @@ class Custom_radios_form_group
             group_id                : 'default-radios',
             group_name              : 'custom-radios',
             label                   : 'Default Custom Radios',
-            value                   : '',
             form_text : {
                 help    : 'Custom Radios help text',
                 error   : 'Custom Radios error text',
