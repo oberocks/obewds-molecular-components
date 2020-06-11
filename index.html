@@ -286,7 +286,36 @@
     let custom_radios_factory = new Custom_radios_form_group();
 
     // generate the input form group markup with the options
-    let my_custom_radios = custom_radios_factory.generate();
+    let my_custom_radios = custom_radios_factory.generate({
+        radios : [
+                {
+                    label: 'Default Radio 1',
+                    attributes:
+                    {
+                        id    : 'radio-1',
+                        value : 'value1',
+                        checked: ''
+                    }
+                },
+                {
+                    label: 'Default Radio 2',
+                    attributes:
+                    {
+                        id    : 'radio-2',
+                        value : 'value2'
+                    }
+                },
+                {
+                    label: 'Disabled Radio 3',
+                    attributes:
+                    {
+                        id    : 'radio-3',
+                        value : 'value3',
+                        disabled : ''
+                    }
+                }
+            ]
+    });
 
     // append the generated nodes to the fragment
     fragment.appendChild(my_custom_radios);
