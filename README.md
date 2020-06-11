@@ -6,6 +6,8 @@ A pure JavaScript ES Modules project built to compliment the OBE:WDS (OBE:BS4) W
 
 # Table of Contents
 
+* [Installation](#installation)
+* [Updating](#updating)
 * [Overview](#overview)
   * [What are Molecular Components?](#what-are-molecula-components)
 * [Modules](#modules)
@@ -20,6 +22,42 @@ A pure JavaScript ES Modules project built to compliment the OBE:WDS (OBE:BS4) W
   * [Paragraph Element Class](#paragraph-element-class)
 
 
+
+# Installation
+
+Installation is pretty easy. Simply grab the repo via npm, and then add or just run a copy script in the command line to add all of the modules to your project's JavaScript directory.
+
+**Install with NPM**
+
+```bash
+npm install oberocks/obewds-molecular-components --save
+```
+
+**Copy Molecular Components to Your Working JavaScript Directory**
+
+```bash
+cp -a ./node_modules/obewds-molecular-components/js/. ./--your-directory-path--/
+```
+
+
+# Updating
+
+Updating to the newest version of the Molecular Components system is easy, too. It's recommended to go ahead and add an NPM Script toyour package.json file to make updates easy and fast for devs. 
+
+**Add NPM Script To Package.json**
+
+```json
+// package.json
+"scripts": {
+    "update_molecular_components": "cp -a ./node_modules/obewds-molecular-components/js/. ./--your-directory-path--/"
+}
+```
+
+**And Call It With**
+
+```bash
+npm run update_molecular_components
+```
 
 
 
