@@ -1,4 +1,5 @@
 import { form_group_defaults as defaults } from './data/form_group_defaults.js';
+import { merge_objects } from '../helpers/merge_objects.js';
 import { clear_user_value } from './utilities/clear_user_value.js';
 import { generate_form_help_modal } from './utilities/generate_form_help_modal.js';
 import { get_partial_cc_icon_classes } from './utilities/get_partial_cc_icon_classes.js';
@@ -11,7 +12,7 @@ class Credit_payment_component
     constructor (opts = false)
     {
         /** 
-         * Custom Radios Form Group : Xxxxxx
+         * Credit Payment Component : Xxxxxx
          * @param {Xxxxxx} Xxxxxx : Xxxxxx
          */
         

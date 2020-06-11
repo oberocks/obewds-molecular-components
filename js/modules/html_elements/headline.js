@@ -1,44 +1,41 @@
+import { merge_objects } from '../helpers/merge_objects.js';
 import { applyAttributes, insertText } from './utilities/dom_generation.js';
 
 class Headline
 {
-    /** 
-     * Headline : A helper script for form input and textarea elements
-     * @param {String} level       : Xxxxx
-     * @param {Object} attributes  : Xxxxx
-     * @param {String, Array} text : Xxxxx
-     */
-
-    constructor (options = false)
+    constructor (opts = false)
     {
-        this.level      = options.level ? options.level : '1';
-        this.attributes = options.attributes ? options.attributes : {};
-        this.text       = options.text ? options.text : 'Default Headline Text';
-    }
+        /** 
+         * Headline Element : Xxxxxx
+         * @param {Xxxxxx} Xxxxxx : Xxxxxx
+         */
+        
+        this._defaults = {
+            tag: 'h1',
+            attributes: {},
+            text: 'Default Headline Text' 
+        };
 
-    /** 
-     * Generate (Paragraph) : A helper script to generate a <p> HTML element
-     * @param {String} level       : Xxxxx
-     * @param {Object} attributes  : Xxxxx
-     * @param {String, Array} text : Xxxxx
-     */
+        // merge any passed options settings into the default settings to get a final settings object
+        this.defaults = (opts) ? merge_objects(true, this._defaults, opts) : this._defaults;
+
+        // clear original defaults
+        this._defaults = null;
+    }
 
     generate (options = false)
     {
-        // set up any passed options and merge attributes from any passed class settings
-        let level               = options.level ? options.level : this.level;
-        let instance_attributes = options.attributes ? options.attributes : {};
-        let attributes          = Object.assign(instance_attributes, this.attributes);
-        let text                = options.text ? options.text : this.text;
+        // merge any passed options settings into the default settings to get a final settings object
+        let opts = (options) ? merge_objects(true, this.defaults, options) : this.defaults;
 
         // create the element
-        let el = document.createElement('h' + level);
+        let el = document.createElement(opts.tag);
 
         // check if there are attributes then set them
-        applyAttributes(el, attributes);
+        applyAttributes(el, opts.attributes);
 
         // check if text is a string and if so then add it as a text node
-        insertText(el, text);
+        insertText(el, opts.text);
 
         // return the new element node
         return el;
@@ -46,19 +43,17 @@ class Headline
 
     h1 (options = false)
     {
-        // set up any passed options and merge attributes from any passed class settings
-        let instance_attributes = options.attributes ? options.attributes : {};
-        let attributes          = Object.assign(instance_attributes, this.attributes);
-        let text                = options.text ? options.text : this.text;
+        // merge any passed options settings into the default settings to get a final settings object
+        let opts = (options) ? merge_objects(true, this.defaults, options) : this.defaults;
 
         // create the element
         let el = document.createElement('h1');
 
         // check if there are attributes then set them
-        applyAttributes(el, attributes);
+        applyAttributes(el, opts.attributes);
 
         // check if text is a string and if so then add it as a text node
-        insertText(el, text);
+        insertText(el, opts.text);
 
         // return the new element node
         return el;
@@ -66,19 +61,17 @@ class Headline
 
     h2 (options = false)
     {
-        // set up any passed options and merge attributes from any passed class settings
-        let instance_attributes = options.attributes ? options.attributes : {};
-        let attributes          = Object.assign(instance_attributes, this.attributes);
-        let text                = options.text ? options.text : this.text;
+        // merge any passed options settings into the default settings to get a final settings object
+        let opts = (options) ? merge_objects(true, this.defaults, options) : this.defaults;
 
         // create the element
         let el = document.createElement('h2');
 
         // check if there are attributes then set them
-        applyAttributes(el, attributes);
+        applyAttributes(el, opts.attributes);
 
         // check if text is a string and if so then add it as a text node
-        insertText(el, text);
+        insertText(el, opts.text);
 
         // return the new element node
         return el;
@@ -86,19 +79,17 @@ class Headline
 
     h3 (options = false)
     {
-        // set up any passed options and merge attributes from any passed class settings
-        let instance_attributes = options.attributes ? options.attributes : {};
-        let attributes          = Object.assign(instance_attributes, this.attributes);
-        let text                = options.text ? options.text : this.text;
+        // merge any passed options settings into the default settings to get a final settings object
+        let opts = (options) ? merge_objects(true, this.defaults, options) : this.defaults;
 
         // create the element
         let el = document.createElement('h3');
 
         // check if there are attributes then set them
-        applyAttributes(el, attributes);
+        applyAttributes(el, opts.attributes);
 
         // check if text is a string and if so then add it as a text node
-        insertText(el, text);
+        insertText(el, opts.text);
 
         // return the new element node
         return el;
@@ -106,19 +97,17 @@ class Headline
 
     h4 (options = false)
     {
-        // set up any passed options and merge attributes from any passed class settings
-        let instance_attributes = options.attributes ? options.attributes : {};
-        let attributes          = Object.assign(instance_attributes, this.attributes);
-        let text                = options.text ? options.text : this.text;
+        // merge any passed options settings into the default settings to get a final settings object
+        let opts = (options) ? merge_objects(true, this.defaults, options) : this.defaults;
 
         // create the element
         let el = document.createElement('h4');
 
         // check if there are attributes then set them
-        applyAttributes(el, attributes);
+        applyAttributes(el, opts.attributes);
 
         // check if text is a string and if so then add it as a text node
-        insertText(el, text);
+        insertText(el, opts.text);
 
         // return the new element node
         return el;
@@ -126,19 +115,17 @@ class Headline
 
     h5 (options = false)
     {
-        // set up any passed options and merge attributes from any passed class settings
-        let instance_attributes = options.attributes ? options.attributes : {};
-        let attributes          = Object.assign(instance_attributes, this.attributes);
-        let text                = options.text ? options.text : this.text;
+        // merge any passed options settings into the default settings to get a final settings object
+        let opts = (options) ? merge_objects(true, this.defaults, options) : this.defaults;
 
         // create the element
         let el = document.createElement('h5');
 
         // check if there are attributes then set them
-        applyAttributes(el, attributes);
+        applyAttributes(el, opts.attributes);
 
         // check if text is a string and if so then add it as a text node
-        insertText(el, text);
+        insertText(el, opts.text);
 
         // return the new element node
         return el;
@@ -146,19 +133,17 @@ class Headline
 
     h6 (options = false)
     {
-        // set up any passed options and merge attributes from any passed class settings
-        let instance_attributes = options.attributes ? options.attributes : {};
-        let attributes          = Object.assign(instance_attributes, this.attributes);
-        let text                = options.text ? options.text : this.text;
+        // merge any passed options settings into the default settings to get a final settings object
+        let opts = (options) ? merge_objects(true, this.defaults, options) : this.defaults;
 
         // create the element
         let el = document.createElement('h6');
 
         // check if there are attributes then set them
-        applyAttributes(el, attributes);
+        applyAttributes(el, opts.attributes);
 
         // check if text is a string and if so then add it as a text node
-        insertText(el, text);
+        insertText(el, opts.text);
 
         // return the new element node
         return el;
