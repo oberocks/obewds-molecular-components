@@ -1,3 +1,4 @@
+import { get_random_index } from '../helpers/get_random_index.js';
 import { merge_objects } from '../helpers/merge_objects.js';
 
 class Placeholder_text
@@ -52,45 +53,38 @@ class Placeholder_text
         this._defaults = null;
     }
 
-    get_random_index (arrayLength)
-    {
-        // Helper function to get random index for an array length
-        // from: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
-        return Math.floor(Math.random() * Math.floor(arrayLength));
-    }
-
     headline ()
     {
         // get a random index and return placeholder text string
-        let index = this.get_random_index(this.defaults.placeholder_text.headlines.length);
+        let index = get_random_index(this.defaults.placeholder_text.headlines.length);
         return this.defaults.placeholder_text.headlines[index];
     }
 
     paragraph ()
     {
         // get a random index and return placeholder text string
-        let index = this.get_random_index(this.defaults.placeholder_text.paragraphs.length);
+        let index = get_random_index(this.defaults.placeholder_text.paragraphs.length);
         return this.defaults.placeholder_text.paragraphs[index];
     }
 
     quote ()
     {
         // get a random index and return placeholder text string
-        let index = this.get_random_index(this.defaults.placeholder_text.quotes.length);
+        let index = get_random_index(this.defaults.placeholder_text.quotes.length);
         return this.defaults.placeholder_text.quotes[index];
     }
 
     brand ()
     {
         // get a random index and return placeholder text string
-        let index = this.get_random_index(this.defaults.placeholder_text.brands.length);
+        let index = get_random_index(this.defaults.placeholder_text.brands.length);
         return this.defaults.placeholder_text.brands[index];
     }
 
     navigation ()
     {
         // get a random index and return placeholder text string
-        let index = this.get_random_index(this.defaults.placeholder_text.navigation.length);
+        let index = get_random_index(this.defaults.placeholder_text.navigation.length);
         return this.defaults.placeholder_text.navigation[index];
     }
 

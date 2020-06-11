@@ -1,7 +1,7 @@
 import { form_group_defaults as defaults } from './data/form_group_defaults.js';
 import { merge_objects } from '../helpers/merge_objects.js';
 import { generate_form_help_modal } from './utilities/generate_form_help_modal.js';
-import { applyAttributes } from '../html_elements/utilities/dom_generation.js';
+import { apply_attributes } from '../html_elements/utilities/dom_generation.js';
 
 class Custom_checkboxes_form_group
 {
@@ -128,7 +128,7 @@ class Custom_checkboxes_form_group
             input.setAttribute('aria-describedby', opts.group_id + opts.aria_describedby_suffix);
 
             // apply the passed attributes from the passed options
-            applyAttributes(input, opts.checkboxes[i].attributes);
+            apply_attributes(input, opts.checkboxes[i].attributes);
 
             // create the label and label text node elements
             let label = document.createElement('label');

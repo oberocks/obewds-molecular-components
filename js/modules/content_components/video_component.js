@@ -1,5 +1,5 @@
 import { merge_objects } from '../helpers/merge_objects.js';
-import { applyAttributes } from '../html_elements/utilities/dom_generation.js';
+import { apply_attributes } from '../html_elements/utilities/dom_generation.js';
 
 class Video_component
 {
@@ -41,11 +41,11 @@ class Video_component
 
         // create the parent element
         let parent = document.createElement('div');
-        applyAttributes(parent, opts.parent.attributes);
+        apply_attributes(parent, opts.parent.attributes);
 
         // create the iframe element
         let iframe = document.createElement('iframe');
-        applyAttributes(iframe, opts.iframe.attributes);
+        apply_attributes(iframe, opts.iframe.attributes);
 
         // append elements
         parent.appendChild(iframe);

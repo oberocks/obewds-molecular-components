@@ -1,4 +1,4 @@
-import { applyAttributes, insertText } from '../html_elements/utilities/dom_generation.js';
+import { apply_attributes, insert_text } from '../html_elements/utilities/dom_generation.js';
 
 class Headline_group
 {
@@ -49,25 +49,25 @@ class Headline_group
         let grp = document.createElement('hgroup');
 
         // check if there are attributes for the headline group element - then set them
-        applyAttributes(grp, opts.parent.attributes);
+        apply_attributes(grp, opts.parent.attributes);
 
         // create the top headline element
         let top = document.createElement(opts.headlines.top.tag);
 
         // check if there are attributes for the top headline element - then set them
-        applyAttributes(top, opts.headlines.top.attributes);
+        apply_attributes(top, opts.headlines.top.attributes);
 
         // check if text is a string and if so then add it as a text node
-        insertText(top, opts.headlines.top.text);
+        insert_text(top, opts.headlines.top.text);
 
         // create the top headline element
         let bottom = document.createElement(opts.headlines.bottom.tag);
 
         // check if there are attributes for the top headline element - then set them
-        applyAttributes(bottom, opts.headlines.bottom.attributes);
+        apply_attributes(bottom, opts.headlines.bottom.attributes);
 
         // check if text is a string and if so then add it as a text node
-        insertText(bottom, opts.headlines.bottom.text);
+        insert_text(bottom, opts.headlines.bottom.text);
 
         // append all element together accordingly
         grp.appendChild(top);

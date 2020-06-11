@@ -1,4 +1,4 @@
-function applyAttributes (node, obj)
+function apply_attributes (node, obj)
 {
     if (Object.keys(obj).length > 0)
     {
@@ -9,7 +9,7 @@ function applyAttributes (node, obj)
     }
 }
 
-function insertText (node, str)
+function insert_text (node, str)
 {
     if (typeof str === 'string' && str.length > 0)
     {
@@ -33,7 +33,7 @@ function insertText (node, str)
     }
 }
 
-function appendChildren (node, childNodes)
+function append_children (node, childNodes)
 {
     if (childNodes && childNodes.nodeType === Node.ELEMENT_NODE)
     {
@@ -41,4 +41,4 @@ function appendChildren (node, childNodes)
     }
 }
 
-export { applyAttributes, insertText, appendChildren };
+export { apply_attributes, insert_text, append_children };

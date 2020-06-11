@@ -1,5 +1,5 @@
 import { merge_objects } from '../helpers/merge_objects.js';
-import { applyAttributes } from './utilities/dom_generation.js';
+import { apply_attributes } from './utilities/dom_generation.js';
 
 class Icon
 {
@@ -32,7 +32,7 @@ class Icon
         let el = document.createElement('i');
 
         // check if there are attributes then set them
-        applyAttributes(el, opts.attributes);
+        apply_attributes(el, opts.attributes);
 
         // return the new element node
         return el;

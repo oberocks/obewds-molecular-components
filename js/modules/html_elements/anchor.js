@@ -1,5 +1,5 @@
 import { merge_objects } from '../helpers/merge_objects.js';
-import { applyAttributes, insertText } from './utilities/dom_generation.js';
+import { apply_attributes, insert_text } from './utilities/dom_generation.js';
 
 class Anchor
 {
@@ -33,10 +33,10 @@ class Anchor
         let el = document.createElement('a');
 
         // check if there are attributes then set them
-        applyAttributes(el, opts.attributes);
+        apply_attributes(el, opts.attributes);
 
         // check if text is a string and if so then add it as a text node
-        insertText(el, opts.text);
+        insert_text(el, opts.text);
 
         // return the new element node
         return el;
