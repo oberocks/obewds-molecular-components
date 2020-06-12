@@ -205,6 +205,8 @@
 
 
 
+
+
     // import module
     import { Custom_checkboxes_form_group } from './js/modules/form_components.js';
 
@@ -358,6 +360,25 @@
 
     // append the generated nodes to the fragment
     fragment.appendChild(my_custom_radios);
+
+
+
+
+
+
+
+
+    // import module
+    import { Custom_select_form_group } from './js/modules/form_components.js';
+
+    // instantiate imported modules
+    let custom_select_factory = new Custom_select_form_group();
+
+    // generate the input form group markup with the options
+    let custom_select = custom_select_factory.generate();
+
+    // append the generated nodes to the fragment
+    fragment.appendChild(custom_select);
 
 
 

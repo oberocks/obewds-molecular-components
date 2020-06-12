@@ -70,6 +70,7 @@
             radios                    : 'custom-control-input',
             radio_labels              : 'custom-control-label',
             textareas                 : 'form-control',
+            selects                   : 'custom-select',
             clear_text_parents        : 'position-relative text-right',
             clear_text_buttons        : 'btn btn-lg position-relative opacity-50 p-2 border-0 bg-transparent',
             form_text_wrappers        : 'd-flex justify-content-between align-items-start',

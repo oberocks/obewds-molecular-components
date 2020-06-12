@@ -3,15 +3,15 @@ import { merge_objects } from '../helpers/merge_objects.js';
 import { generate_form_help_modal } from './utilities/generate_form_help_modal.js';
 import { apply_attributes } from '../html_elements/utilities/dom_generation.js';
 
-class Custom_checkboxes_form_group
+class Custom_select_form_group
 {
     constructor (opts = false)
     {
         /** 
-         * Custom Checkboxes Form Group : Xxxxxx
+         * Custom Select Form Group : Xxxxxx
          * @param {Xxxxxx} Xxxxxx : Xxxxxx
          */
-        
+
         this._defaults = {
             classes : {
                 form_groups             : defaults.classes.form_groups,
@@ -19,9 +19,7 @@ class Custom_checkboxes_form_group
                 labels                  : defaults.classes.labels,
                 label_buttons           : defaults.classes.label_buttons,
                 label_button_icons      : defaults.classes.label_button_icons,
-                checkbox_parents        : defaults.classes.checkbox_parents,
-                checkboxes              : defaults.classes.checkboxes,
-                checkbox_labels         : defaults.classes.checkbox_labels,
+                selects                 : defaults.classes.selects,
                 form_text_parents       : defaults.classes.form_text_parents,
                 form_help_texts         : defaults.classes.form_help_texts,
                 form_error_texts        : defaults.classes.form_error_texts,
@@ -30,28 +28,41 @@ class Custom_checkboxes_form_group
             aria_describedby_suffix : defaults.aria_describedby_suffix,
             error_text_suffix       : defaults.error_text_suffix,
             success_text_suffix     : defaults.success_text_suffix,
-            group_id                : 'default-checkboxes',
-            label                   : 'Default Custom Checkboxes',
+            id                      : 'custom-select-id',
+            name                    : 'custom-select-name',
+            label                   : 'Default Custom Select',
             form_text : {
-                help    : 'Custom Checkboxes help text',
-                error   : 'Custom Checkboxes error text',
-                success : 'Custom Checkboxes success text'
+                help    : 'Custom Select help text',
+                error   : 'Custom Select error text',
+                success : 'Custom Select success text'
             },
             form_modal_text : {
-                heading: 'Custom Checkboxes',
+                heading: 'Custom Selects',
                 body: [{
                     type: 'paragraphs',
-                    content: [ 'Custom Checkboxes are Bootstrap 4 custom form elements. Custom Checkboxes leverage brand colors and CSS to replace the browser-defined styling of checkboxes.', 'Using Custom Checkboxes lets a web app provide users with checkbox elements that look/feel the same across different browsers.' ]
+                    content: [ 'Custom Select elements allow a user to select a single option from a list of options.', 'Custom Selects are specifically styled elements in Bootstrap 4, which is one of our core dependencies.' ]
                 }]
             },
-            checkboxes : [
+            options : [
                 {
-                    label: 'Default Checkbox 1',
+                    text: 'Select an Option',
                     attributes:
                     {
-                        id    : 'checkbox-1',
-                        name  : 'checkbox-1',
-                        value : 'value1'
+                        selected : ''
+                    }
+                },
+                {
+                    text: 'Option One',
+                    attributes:
+                    {
+                        value : 'one'
+                    }
+                },
+                {
+                    text: 'Option Two',
+                    attributes:
+                    {
+                        value : 'two'
                     }
                 }
             ]
@@ -80,6 +91,7 @@ class Custom_checkboxes_form_group
         // create the label element
         let label_el = document.createElement('label');
         label_el.className = opts.classes.labels;
+        label_el.setAttribute('for', opts.id);
         let label_el_text = document.createTextNode(opts.label);
 
         // create the button element for the input help modal
@@ -87,14 +99,14 @@ class Custom_checkboxes_form_group
         label_button.className = opts.classes.label_buttons;
         label_button.setAttribute('type', 'button');
         label_button.setAttribute('data-toggle', 'modal');
-        label_button.setAttribute('data-target', '#' + opts.group_id + '-modal');
+        label_button.setAttribute('data-target', '#' + opts.id + '-modal');
 
         label_button.addEventListener('click', function(e) {
-            let modalCheck = document.getElementById(opts.group_id + '-modal');
+            let modalCheck = document.getElementById(opts.id + '-modal');
             if (!modalCheck)
             {
                 let modal_options = {
-                    id: opts.group_id,
+                    id: opts.id,
                     form_modal_text: opts.form_modal_text
                 };
                 let modal_nodes = generate_form_help_modal(modal_options);
@@ -114,35 +126,30 @@ class Custom_checkboxes_form_group
         label_wrapper.appendChild(label_button);
         label_button.appendChild(label_button_icon);
 
-        // loop through the checkboxes array
-        for (var i = 0; i < opts.checkboxes.length; i++)
+         // create the select element
+         let select = document.createElement('select');
+         select.className = opts.classes.selects;
+         select.setAttribute('id', opts.id);
+         select.setAttribute('name', opts.name);
+         select.setAttribute('aria-describedby', opts.id + opts.aria_describedby_suffix);
+         
+         form_group.appendChild(select);
+
+        // loop through the options array
+        for (var i = 0; i < opts.options.length; i++)
         {
             // create the parent element for the checkbox
-            let parent = document.createElement('div');
-            parent.className = opts.classes.checkbox_parents;
-
-            // create the checkbox element
-            let input = document.createElement('input');
-            input.className = opts.classes.checkboxes;
-            input.setAttribute('type', 'checkbox');
-            input.setAttribute('aria-describedby', opts.group_id + opts.aria_describedby_suffix);
-
-            // apply the passed attributes from the passed options
-            apply_attributes(input, opts.checkboxes[i].attributes);
-
-            // create the label and label text node elements
-            let label = document.createElement('label');
-            label.className = opts.classes.checkbox_labels;
-            label.setAttribute('for', opts.checkboxes[i].attributes.id);
-            let label_txt = document.createTextNode(opts.checkboxes[i].label);
-
-            // append all the elements
-            parent.appendChild(input);
-            parent.appendChild(label);
-            label.appendChild(label_txt);
+            let option = document.createElement('option');
             
-            // append the parent to the current form group
-            form_group.appendChild(parent);
+            // apply the passed attributes from the passed options
+            apply_attributes(option, opts.options[i].attributes);
+
+            // create text node for option element
+            let opt_txt = document.createTextNode(opts.options[i].text);
+
+            // append all option elements to the select element
+            option.appendChild(opt_txt);
+            select.appendChild(option);
         }
 
         // create the parent form text wrapper element
@@ -152,19 +159,19 @@ class Custom_checkboxes_form_group
         // create the form help text elements
         let form_help_text = document.createElement('small');
         form_help_text.className = opts.classes.form_help_texts;
-        form_help_text.setAttribute('id', opts.group_id + opts.aria_describedby_suffix);
+        form_help_text.setAttribute('id', opts.id + opts.aria_describedby_suffix);
         let form_help_text_text = document.createTextNode(opts.form_text.help);
 
         // create the form error text elements
         let form_error_text = document.createElement('small');
         form_error_text.className = opts.classes.form_error_texts;
-        form_error_text.setAttribute('id', opts.group_id + opts.error_text_suffix);
+        form_error_text.setAttribute('id', opts.id + opts.error_text_suffix);
         let form_error_text_text = document.createTextNode(opts.form_text.error);
 
         // create the form success text elements
         let form_success_text = document.createElement('small');
         form_success_text.className = opts.classes.form_success_texts;
-        form_success_text.setAttribute('id', opts.group_id + opts.success_text_suffix);
+        form_success_text.setAttribute('id', opts.id + opts.success_text_suffix);
         let form_success_text_text = document.createTextNode(opts.form_text.success);
         
         // append all the remaining elements for this input, nested as needed
@@ -181,4 +188,4 @@ class Custom_checkboxes_form_group
     }
 }
 
-export { Custom_checkboxes_form_group };
+export { Custom_select_form_group };
