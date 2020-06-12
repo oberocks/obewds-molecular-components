@@ -14,16 +14,16 @@ class Custom_select_form_group
 
         this._defaults = {
             classes : {
-                form_groups             : defaults.classes.form_groups,
-                bordered_label_wrappers : defaults.classes.bordered_label_wrappers,
-                labels                  : defaults.classes.labels,
-                label_buttons           : defaults.classes.label_buttons,
-                label_button_icons      : defaults.classes.label_button_icons,
-                selects                 : defaults.classes.selects,
-                form_text_parents       : defaults.classes.form_text_parents,
-                form_help_texts         : defaults.classes.form_help_texts,
-                form_error_texts        : defaults.classes.form_error_texts,
-                form_success_texts      : defaults.classes.form_success_texts
+                form_groups        : defaults.classes.form_groups,
+                label_wrappers     : defaults.classes.label_wrappers,
+                labels             : defaults.classes.labels,
+                label_buttons      : defaults.classes.label_buttons,
+                label_button_icons : defaults.classes.label_button_icons,
+                selects            : defaults.classes.selects,
+                form_text_parents  : defaults.classes.form_text_parents,
+                form_help_texts    : defaults.classes.form_help_texts,
+                form_error_texts   : defaults.classes.form_error_texts,
+                form_success_texts : defaults.classes.form_success_texts
             },
             aria_describedby_suffix : defaults.aria_describedby_suffix,
             error_text_suffix       : defaults.error_text_suffix,
@@ -86,7 +86,7 @@ class Custom_select_form_group
 
         // create the (flexbox) element to wrap the label and help button
         let label_wrapper = document.createElement('div');
-        label_wrapper.className = opts.classes.bordered_label_wrappers;
+        label_wrapper.className = opts.classes.label_wrappers;
 
         // create the label element
         let label_el = document.createElement('label');
