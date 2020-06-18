@@ -50,6 +50,7 @@ class Custom_checkbox_orphan_component
         let label = document.createElement('label');
         label.className = opts.classes.checkbox_labels;
         label.setAttribute('for', opts.id);
+        input.setAttribute('id', opts.id + opts.aria_describedby_suffix);
         let label_txt = document.createTextNode(opts.label);
 
         // append all the elements
