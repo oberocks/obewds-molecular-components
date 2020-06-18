@@ -116,6 +116,23 @@
 
 
 
+
+    // import module
+    import { Custom_checkbox_orphan_component } from './js/modules/form_components.js';
+
+    // instantiate imported modules
+    let checkbox_orphan_factory = new Custom_checkbox_orphan_component();
+
+    // generate the input form group markup with the options
+    let checkbox_orphan = checkbox_orphan_factory.generate();
+
+    // append the generated nodes to the fragment
+    fragment.appendChild(checkbox_orphan);
+
+
+
+
+
     // import module
     import { Input_form_group } from './js/modules/form_components.js';
 
