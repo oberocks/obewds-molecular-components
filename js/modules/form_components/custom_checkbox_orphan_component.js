@@ -19,7 +19,8 @@ class Custom_checkbox_orphan_component
             id : 'custom-checkbox-orphan-id',
             name : 'custom-checkbox-orphan-name',
             aria_describedby_suffix : '-label',
-            label : 'Custom Orphan Checkbox Default'
+            label : 'Custom Orphan Checkbox Default',
+            value : 'default'
         };
 
         // merge any passed options settings into the default settings to get a final settings object
@@ -44,6 +45,7 @@ class Custom_checkbox_orphan_component
         input.setAttribute('id', opts.id);
         input.setAttribute('name', opts.name);
         input.setAttribute('type', 'checkbox');
+        input.setAttribute('value', opts.value);
         input.setAttribute('aria-describedby', opts.id + opts.aria_describedby_suffix);
 
         // create the label and label text node elements
