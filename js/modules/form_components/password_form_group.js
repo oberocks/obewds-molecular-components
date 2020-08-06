@@ -2,8 +2,9 @@ import { form_group_defaults as defaults } from './data/form_group_defaults.js';
 import { merge_objects } from '../helpers/merge_objects.js';
 import { clear_user_value } from './utilities/clear_user_value.js';
 import { generate_form_help_modal } from './utilities/generate_form_help_modal.js';
+import { password_visibility_toggle } from './utilities/password_visibility_toggle.js';
 
-class Input_form_group
+class Password_form_group
 {
     constructor (opts = false)
     {
@@ -15,42 +16,45 @@ class Input_form_group
         this._defaults = {
             aria_describedby_suffix : defaults.aria_describedby_suffix,
             classes : {
-                clear_text_buttons : defaults.classes.clear_text_buttons,
-                clear_text_parents : defaults.classes.clear_text_parents,
-                form_error_texts   : defaults.classes.form_error_texts,
-                form_groups        : defaults.classes.form_groups,
-                form_help_texts    : defaults.classes.form_help_texts,
-                form_success_texts : defaults.classes.form_success_texts,
-                form_text_parents  : defaults.classes.form_text_parents,
-                form_text_wrappers : defaults.classes.form_text_wrappers,
-                inputs             : defaults.classes.inputs,
-                label_buttons      : defaults.classes.label_buttons,
-                label_button_icons : defaults.classes.label_button_icons,
-                label_wrappers     : defaults.classes.label_wrappers,
-                labels             : defaults.classes.labels
+                clear_text_buttons    : defaults.classes.clear_text_buttons,
+                clear_text_parents    : defaults.classes.clear_text_parents,
+                form_error_texts      : defaults.classes.form_error_texts,
+                form_groups           : defaults.classes.form_groups,
+                form_help_texts       : defaults.classes.form_help_texts,
+                form_success_texts    : defaults.classes.form_success_texts,
+                form_text_parents     : defaults.classes.form_text_parents,
+                form_text_wrappers    : defaults.classes.form_text_wrappers,
+                inputs                : defaults.classes.inputs,
+                label_buttons         : defaults.classes.label_buttons,
+                label_button_icons    : defaults.classes.label_button_icons,
+                label_wrappers        : defaults.classes.label_wrappers,
+                labels                : defaults.classes.labels,
+                visibility_toggle_btn : 'btn btn-sm btn-link text-decoration-none'
             },
             clear_text_button_styles : defaults.clear_text_button_styles,
             clear_text_button_text   : defaults.clear_text_button_text,
             error_text_suffix        : defaults.error_text_suffix,
             form_modal_text : {
-                heading: 'Form Inputs',
+                heading: 'Password Inputs',
                 body: [{
                     type: 'paragraphs',
-                    content: [ 'Form Inputs are very useful and convenient options to help users enter data. Inputs allow a user to type in data for a single line, that expands horizontally if a user types a lot of content.' ]
+                    content: [ 'Password Inputs are very useful and convenient options to help users enter their password data. A new practice with password inputs also allows a user to toggle the visibility of the characters they have input, in order to verify they have typed the value correctly.' ]
                 }]
             },
             form_text :  {
-                help    : 'Default Input help text',
-                error   : 'Default Input error text',
-                success : 'Default Input success text'
+                help    : 'Default Password Input help text',
+                error   : 'Default Password Input error text',
+                success : 'Default Password Input success text'
             },
-            id    : 'default-input-id',
-            label : 'Default Input Label',
-            name                : 'default-input-name',
-            placeholder         : 'Default Placeholder',
-            success_text_suffix : defaults.success_text_suffix,
-            type                : 'text',
-            value               : ''
+            id                      : 'default-password-id',
+            label                   : 'Default Password Label',
+            name                    : 'default-password-name',
+            placeholder             : 'Enter Password',
+            success_text_suffix     : defaults.success_text_suffix,
+            type                    : 'password',
+            value                   : '',
+            visibility_default_text : 'VIEW',
+            visibility_toggled_text : 'HIDE'
         };
 
         // merge any passed options settings into the default settings to get a final settings object
@@ -162,6 +166,15 @@ class Input_form_group
         form_success_text.className = opts.classes.form_success_texts;
         form_success_text.setAttribute('id', opts.id + opts.success_text_suffix);
         let form_success_text_text = document.createTextNode(opts.form_text.success);
+
+        // create the password visibility toggle element
+        let form_value_visibility_btn = document.createElement('button');
+        form_value_visibility_btn.className = opts.classes.visibility_toggle_btn;
+        form_value_visibility_btn.setAttribute('type', 'button');
+        form_value_visibility_btn.addEventListener('click', function(e) {
+            password_visibility_toggle(this, opts.id, opts.visibility_default_text, opts.visibility_toggled_text);
+        });
+        let form_value_visibility_btn_text = document.createTextNode(opts.visibility_default_text);
         
         // append all the elements for this input, nested as needed
         form_group.appendChild(label_wrapper);
@@ -183,10 +196,12 @@ class Input_form_group
         form_error_text.appendChild(form_error_text_text);
         form_text_parent.appendChild(form_success_text);
         form_success_text.appendChild(form_success_text_text);
+        form_text_wrapper.appendChild(form_value_visibility_btn);
+        form_value_visibility_btn.appendChild(form_value_visibility_btn_text);
 
         // return the form group element
         return form_group;
     }
 }
 
-export { Input_form_group };
+export { Password_form_group };

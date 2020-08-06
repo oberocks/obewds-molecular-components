@@ -5,6 +5,7 @@ export { Custom_radios_form_group } from './form_components/custom_radios_form_g
 export { Custom_select_form_group } from './form_components/custom_select_form_group.js';
 export { Input_character_counter_form_group } from './form_components/input_character_counter_form_group.js';
 export { Input_form_group } from './form_components/input_form_group.js';
+export { Password_form_group } from './form_components/password_form_group.js';
 export { Phone_input_form_group } from './form_components/phone_input_form_group.js';
 export { Submit_button_form_group } from './form_components/submit_button_form_group.js';
 export { Textarea_character_counter_form_group } from './form_components/textarea_character_counter_form_group.js';

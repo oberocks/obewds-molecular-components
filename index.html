@@ -100,6 +100,22 @@
 
 
 
+    // import module
+    import { Password_form_group } from './js/modules/form_components.js';
+
+    // instantiate imported modules
+    let password_factory = new Password_form_group();
+
+    // generate the input form group markup with the options
+    let default_password = password_factory.generate();
+
+    // append the generated nodes to the fragment
+    fragment.appendChild(default_password);
+
+
+
+
+
 
     // import module
     import { Credit_payment_component } from './js/modules/form_components.js';
