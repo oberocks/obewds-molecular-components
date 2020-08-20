@@ -64,7 +64,8 @@ class Input_character_counter_form_group
             placeholder         : 'Default Placeholder',
             success_text_suffix : defaults.success_text_suffix,
             type                : 'text',
-            value               : ''
+            value               : '',
+            required            : false
         };
 
         // merge any passed options settings into the default settings to get a final settings object
@@ -131,6 +132,7 @@ class Input_character_counter_form_group
         input.setAttribute('value', opts.value);
         input.setAttribute('aria-describedby', opts.id + opts.aria_describedby_suffix);
         input.setAttribute('data-max-characters', opts.max_characters);
+        if ( opts.required ) { input.setAttribute('required', opts.required); }
         input.addEventListener('keyup', function(e) {
             update_character_count(this.id, this.id + thisClass.defaults.characters_count_suffix, Number(this.getAttribute('data-max-characters')));
         });

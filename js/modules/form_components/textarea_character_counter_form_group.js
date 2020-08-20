@@ -53,7 +53,8 @@ class Textarea_character_counter_form_group
                     type: 'paragraphs',
                     content: [ 'Textarea Inputs are very useful and convenient options to help users enter data. Textareas differ from traditional inputs by allowing desktop browser users to re-size the input, and allowing both desktop and mobile browsers to scroll vertically whenever longer content is entered.' ]
                 }]
-            }
+            },
+            required : false
         };
 
         // merge any passed options settings into the default settings to get a final settings object
@@ -120,6 +121,7 @@ class Textarea_character_counter_form_group
         textarea.value = opts.value;
         textarea.setAttribute('aria-describedby', opts.id + opts.aria_describedby_suffix);
         textarea.setAttribute('data-max-characters', opts.max_characters);
+        if ( opts.required ) { textarea.setAttribute('required', opts.required); }
         textarea.addEventListener('keyup', function(e) {
             update_character_count(this.id, this.id + thisClass.defaults.characters_count_suffix, Number(this.getAttribute('data-max-characters')));
         });

@@ -55,7 +55,8 @@ class Phone_input_form_group
             masking : {
                 enable : true,
                 type   : 'phone_us'
-            }
+            },
+            required : false
         };
 
         // merge any passed options settings into the default settings to get a final settings object
@@ -119,6 +120,7 @@ class Phone_input_form_group
         input.setAttribute('name', opts.name);
         input.setAttribute('value', opts.value);
         input.setAttribute('aria-describedby', opts.id + opts.aria_describedby_suffix);
+        if ( opts.required ) { input.setAttribute('required', opts.required); }
 
         // handle masking plugin options
         let maskedInput;

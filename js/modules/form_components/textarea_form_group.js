@@ -49,7 +49,8 @@ class Textarea_form_group
                     type: 'paragraphs',
                     content: [ 'Textarea Inputs are very useful and convenient options to help users enter data. Textareas differ from traditional inputs by allowing desktop browser users to re-size the input, and allowing both desktop and mobile browsers to scroll vertically whenever longer content is entered.' ]
                 }]
-            }
+            },
+            required : false
         };
 
         // merge any passed options settings into the default settings to get a final settings object
@@ -112,6 +113,7 @@ class Textarea_form_group
         // textarea.setAttribute('value', opts.value);
         textarea.value = opts.value;
         textarea.setAttribute('aria-describedby', opts.id + opts.aria_describedby_suffix);
+        if ( opts.required ) { textarea.setAttribute('required', opts.required); }
 
         // create the parent text clear element
         let clear_text_parent = document.createElement('div');

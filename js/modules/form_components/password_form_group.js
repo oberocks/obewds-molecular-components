@@ -54,7 +54,8 @@ class Password_form_group
             type                    : 'password',
             value                   : '',
             visibility_default_text : 'VIEW',
-            visibility_toggled_text : 'HIDE'
+            visibility_toggled_text : 'HIDE',
+            required : false
         };
 
         // merge any passed options settings into the default settings to get a final settings object
@@ -125,6 +126,7 @@ class Password_form_group
         input.setAttribute('name', opts.name);
         input.setAttribute('value', opts.value);
         input.setAttribute('aria-describedby', opts.id + opts.aria_describedby_suffix);
+        if ( opts.required ) { input.setAttribute('required', opts.required); }
 
         // create the parent text clear element
         let clear_text_parent = document.createElement('div');

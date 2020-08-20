@@ -88,7 +88,8 @@ class Credit_payment_component
                     masking: {
                         enable: true,
                         type: 'credit'
-                    }
+                    },
+                    required : true
                 },
                 card_name: {
                     classes: {
@@ -111,7 +112,8 @@ class Credit_payment_component
                         help    : 'Enter a card number & name exctly as they appear on your card',
                         error   : 'This is the card number and name error text',
                         success : 'This is the card number and name success text'
-                    }
+                    },
+                    required : true
                 },
                 card_month: {
                     classes: {
@@ -135,7 +137,8 @@ class Credit_payment_component
                         help    : 'Enter card expiration Month / Year',
                         error   : 'This is the card number and name error text',
                         success : 'This is the card number and name success text'
-                    }
+                    },
+                    required : true
                 },
                 card_year: {
                     classes: {
@@ -154,7 +157,8 @@ class Credit_payment_component
                     masking: {
                         enable: true,
                         type: 'two_digits'
-                    }
+                    },
+                    required : true
                 },
                 card_cv: {
                     classes: {
@@ -178,7 +182,8 @@ class Credit_payment_component
                         help    : '3-4 digit code',
                         error   : 'This is the card number and name error text',
                         success : 'This is the card number and name success text'
-                    }
+                    },
+                    required : true
                 }
             },
             text: {
@@ -312,6 +317,7 @@ class Credit_payment_component
         card_number_input.setAttribute('name', opts.inputs.card_number.name);
         card_number_input.setAttribute('value', opts.inputs.card_number.value);
         // NEED TO FIX THIS -> card_number_input.setAttribute('aria-describedby', settings.id + thisClass.class_defaults.aria_describedby_suffix);
+        if ( opts.inputs.card_number.required ) { card_number_input.setAttribute('required', opts.inputs.card_number.required); }
 
         // handle masking plugin options
         let card_number_input_maskedInput;
@@ -360,6 +366,7 @@ class Credit_payment_component
         card_name_input.setAttribute('name', opts.inputs.card_name.name);
         card_name_input.setAttribute('value', opts.inputs.card_name.value);
         // NEED TO FIX THIS -> card_name_input.setAttribute('aria-describedby', settings.id + thisClass.class_defaults.aria_describedby_suffix);
+        if ( opts.inputs.card_name.required ) { card_name_input.setAttribute('required', opts.inputs.card_name.required); }
 
         // handle masking plugin options
         let card_name_input_maskedInput;
@@ -493,6 +500,7 @@ class Credit_payment_component
         card_month_input.setAttribute('name', opts.inputs.card_month.name);
         card_month_input.setAttribute('value', opts.inputs.card_month.value);
         // NEED TO FIX THIS -> card_month_input.setAttribute('aria-describedby', settings.id + thisClass.class_defaults.aria_describedby_suffix);
+        if ( opts.inputs.card_month.required ) { card_month_input.setAttribute('required', opts.inputs.card_month.required); }
 
         // handle masking plugin options
         let card_month_input_maskedInput;
@@ -550,6 +558,7 @@ class Credit_payment_component
         year_input.setAttribute('name', opts.inputs.card_year.name);
         year_input.setAttribute('value', opts.inputs.card_year.value);
         // NEED TO FIX THIS -> year_input.setAttribute('aria-describedby', settings.id + thisClass.class_defaults.aria_describedby_suffix);
+        if ( opts.inputs.card_year.required ) { year_input.setAttribute('required', opts.inputs.card_year.required); }
 
         // handle masking plugin options
         let year_input_maskedInput;
@@ -684,6 +693,7 @@ class Credit_payment_component
         card_cv_input.setAttribute('name', opts.inputs.card_cv.name);
         card_cv_input.setAttribute('value', opts.inputs.card_cv.value);
         // NEED TO FIX THIS -> card_cv_input.setAttribute('aria-describedby', settings.id + thisClass.class_defaults.aria_describedby_suffix);
+        if ( opts.inputs.card_cv.required ) { card_cv_input.setAttribute('required', opts.inputs.card_cv.required); }
 
         // handle masking plugin options
         let card_cv_input_maskedInput;

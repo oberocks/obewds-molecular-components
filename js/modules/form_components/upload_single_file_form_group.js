@@ -174,55 +174,6 @@ class Upload_single_file_form_group
                 const reader = new FileReader();
                 reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(new_img);
                 reader.readAsDataURL(file);
-
-
-
-                /*
-                // loop through each file
-                for (let i = 0; i < fileList.length; i++)
-                {
-                    // get a ref for this file from the file list
-                    const file = fileList[i];
-                    
-                    // check that this file is in fact an image
-                    // if it's not an image then stop the script otherwise continue
-                    if (!file.type.startsWith('image/')){ continue }
-
-                    // create a new parent element for the user uploaded image
-                    const new_img_parent = document.createElement('div');
-                    new_img_parent.classList = opts.classes.img_parents;
-
-                    // create a new image element
-                    const new_img = document.createElement('img');
-                    new_img.classList = opts.classes.imgs;
-                    new_img.file = file;
-                    
-                    // append the image into the parent
-                    new_img_parent.appendChild(new_img);
-
-                    // get a node list for this form group and it's child nodes
-                    const form_grp = this.closest('.form-group');
-                    const child_nodes = form_grp.childNodes;
-
-                    if (child_nodes.length >= 4)
-                    {
-                        form_grp.replaceChild(new_img_parent, child_nodes[1]);
-                    }
-                    else if (child_nodes.length === 3)
-                    {
-                        form_grp.insertBefore(new_img_parent, form_grp.childNodes[1])
-                    }
-                    else
-                    {
-                        console.error('Node Reference Error: There was an unexpected child node count inside the parent .form-group element that is handling the newly uploaded image file.');
-                    }
-                    
-                    // https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications
-                    const reader = new FileReader();
-                    reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(new_img);
-                    reader.readAsDataURL(file);
-                }
-                */
             }
         });
 

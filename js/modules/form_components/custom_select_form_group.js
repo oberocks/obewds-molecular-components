@@ -65,7 +65,8 @@ class Custom_select_form_group
                         value : 'two'
                     }
                 }
-            ]
+            ],
+            required : false
         };
 
         // merge any passed options settings into the default settings to get a final settings object
@@ -132,6 +133,7 @@ class Custom_select_form_group
          select.setAttribute('id', opts.id);
          select.setAttribute('name', opts.name);
          select.setAttribute('aria-describedby', opts.id + opts.aria_describedby_suffix);
+         if ( opts.required ) { select.setAttribute('required', opts.required); }
          
          form_group.appendChild(select);
 
