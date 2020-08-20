@@ -109,7 +109,8 @@ class Textarea_form_group
         textarea.setAttribute('id', opts.id);
         textarea.setAttribute('name', opts.name);
         textarea.setAttribute('rows', opts.rows);
-        textarea.setAttribute('value', opts.value);
+        // textarea.setAttribute('value', opts.value);
+        textarea.value = opts.value;
         textarea.setAttribute('aria-describedby', opts.id + opts.aria_describedby_suffix);
 
         // create the parent text clear element

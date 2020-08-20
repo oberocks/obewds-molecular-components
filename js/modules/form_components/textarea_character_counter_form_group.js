@@ -116,7 +116,8 @@ class Textarea_character_counter_form_group
         textarea.setAttribute('id', opts.id);
         textarea.setAttribute('name', opts.name);
         textarea.setAttribute('rows', opts.rows);
-        textarea.setAttribute('value', opts.value);
+        // textarea.setAttribute('value', opts.value);
+        textarea.value = opts.value;
         textarea.setAttribute('aria-describedby', opts.id + opts.aria_describedby_suffix);
         textarea.setAttribute('data-max-characters', opts.max_characters);
         textarea.addEventListener('keyup', function(e) {
