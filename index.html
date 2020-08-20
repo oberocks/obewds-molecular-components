@@ -54,6 +54,19 @@
             <article class="container">
                 <section class="row justify-content-center">
                     <div class="col-md-8">
+                        
+                        <!--div class="form-group">
+                            <label for="file-upload">File Input:</label>
+                            <div class="bg-primary text-white p-2">
+                                <input type="file" class="form-control-file" id="file-upload" name="file-upload" aria-describedby="file-upload-help">
+                            </div>
+                            <small id="file-upload-help" class="form-text text-muted">File input help text here.</small>
+                        </div-->
+                        
+                    </div>
+                </section>
+                <section class="row justify-content-center">
+                    <div class="col-md-8">
                         <h1 class="text-center mb-4">OBE:WDS Molecular Componets</h1>
                         <form id="page-form" class=""></form>
                     </div>
@@ -432,6 +445,42 @@
 
     // append the generated nodes to the fragment
     fragment.appendChild(custom_select);
+
+
+
+
+
+    
+    
+    // import module
+    import { Upload_single_file_form_group } from './js/modules/form_components.js';
+
+    // instantiate imported modules
+    let upload_file_factory = new Upload_single_file_form_group();
+
+    // generate the input form group markup with the options
+    let upload_file = upload_file_factory.generate(
+        {
+            value: 'https://library.mattmct.com/images/1024x1024.jpg',
+            img_alt: '1024x1024.jpg'
+        }
+    );
+
+    // append the generated nodes to the fragment
+    fragment.appendChild(upload_file);
+
+
+
+    // generate the input form group markup with the options
+    let upload_file2 = upload_file_factory.generate(
+        /*{
+            value: 'https://library.mattmct.com/images/1024x1024.jpg',
+            img_alt: '1024x1024.jpg'
+        }*/
+    );
+
+    // append the generated nodes to the fragment
+    fragment.appendChild(upload_file2);
 
 
 
