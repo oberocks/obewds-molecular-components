@@ -54,15 +54,7 @@
             <article class="container">
                 <section class="row justify-content-center">
                     <div class="col-md-8">
-                        
-                        <!--div class="form-group">
-                            <label for="file-upload">File Input:</label>
-                            <div class="bg-primary text-white p-2">
-                                <input type="file" class="form-control-file" id="file-upload" name="file-upload" aria-describedby="file-upload-help">
-                            </div>
-                            <small id="file-upload-help" class="form-text text-muted">File input help text here.</small>
-                        </div-->
-                        
+                        <!-- test content here -->
                     </div>
                 </section>
                 <section class="row justify-content-center">
@@ -124,9 +116,107 @@
     */
 
 
+    // import module
+    import { Custom_checkboxes_switch_gated_form_group } from './js/modules/form_components.js';
+
+    // instantiate imported modules
+    let checkboxes_switch_factory = new Custom_checkboxes_switch_gated_form_group();
+
+
+    // generate the input form group markup with the options
+    let checkboxes_switch = checkboxes_switch_factory.generate();
+
+    // append the generated nodes to the fragment
+    fragment.appendChild(checkboxes_switch);
+
+
+    /*
+    // import module
+    let checkboxes_switch_opts2 = {
+        group_id : 'switch-default-id-2',
+        initial_switch_checked_state : true,
+        switch : {
+            initial_label : 'Privacy Mode On',
+            changed_label : 'Privacy Mode Off'
+        },
+        checkboxes : [
+            {
+                label: 'Visible to Friends',
+                attributes: {
+                    id    : 'checkbox-2-1',
+                    name  : 'checkbox-2-1',
+                    value : 'value1'
+                }
+            },
+            {
+                label: 'Visible to Followers',
+                attributes: {
+                    id    : 'checkbox-2-2',
+                    name  : 'checkbox-2-2',
+                    value : 'value2'
+                }
+            },
+            {
+                label: 'Visible to Public',
+                attributes: {
+                    id    : 'checkbox-2-3',
+                    name  : 'checkbox-2-3',
+                    value : 'value3'
+                }
+            }
+        ]
+    };
+
+    // generate the input form group markup with the options
+    let checkboxes_switch2 = checkboxes_switch_factory.generate(checkboxes_switch_opts2);
+
+    // append the generated nodes to the fragment
+    fragment.appendChild(checkboxes_switch2);
+
+
+    // import module
+    let checkboxes_switch_opts3 = {
+        group_id : 'switch-default-id-3',
+        initial_switch_checked_state : false,
+        initial_collapse_visible_state : true,
+        switch : {
+            initial_label : 'Opt-In Options',
+            changed_label : 'Opt-Out of Promotions'
+        },
+        checkboxes : [
+            {
+                label: 'Default Checkbox 1',
+                attributes: {
+                    id    : 'checkbox-3-1',
+                    name  : 'checkbox-3-1',
+                    value : 'value1',
+                    checked : ''
+                }
+            },
+            {
+                label: 'Default Checkbox 2',
+                attributes: {
+                    id    : 'checkbox-3-2',
+                    name  : 'checkbox-3-2',
+                    value : 'value2',
+                    checked : ''
+                }
+            }
+        ]
+    };
+
+    // generate the input form group markup with the options
+    let checkboxes_switch3 = checkboxes_switch_factory.generate(checkboxes_switch_opts3);
+
+    // append the generated nodes to the fragment
+    fragment.appendChild(checkboxes_switch3);
+    */
 
 
 
+
+
+            
 
 
 
