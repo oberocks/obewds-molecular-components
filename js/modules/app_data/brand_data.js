@@ -1,4 +1,4 @@
-const DM_BRAND = {
+const MC_BRAND = {
     name : 'OBE:WDS Molecular Components',
     images: {
         path: window.location.origin + '/images/brand/',
@@ -8,4 +8,4 @@ const DM_BRAND = {
     }
 };
 
-export { DM_BRAND };
+export { MC_BRAND };

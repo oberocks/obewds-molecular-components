@@ -60,11 +60,14 @@ class Upload_single_file_form_group
         // clear original defaults
         this._defaults = null;
     }
+    
+    get_class_defaults () {
+        return this.defaults;
+    }
 
-    /** 
-     * Generate Method : Generates a BS4 Input Form Group, with a label, help modal data, an input, and help/error/success text content
-     * @param {Xxxxxx} Xxxxxx : Xxxxxx
-     */
+    get_generate_options (options) {
+        return merge_objects(true, this.defaults, options);
+    }
 
     generate (options = false)
     {

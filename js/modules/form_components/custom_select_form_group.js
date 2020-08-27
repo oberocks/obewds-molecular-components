@@ -76,6 +76,14 @@ class Custom_select_form_group
         this._defaults = null;
     }
 
+    get_class_defaults () {
+        return this.defaults;
+    }
+
+    get_generate_options (options) {
+        return merge_objects(true, this.defaults, options);
+    }
+
     generate (options = false)
     {
         // merge any passed options settings into the default settings to get a final settings object

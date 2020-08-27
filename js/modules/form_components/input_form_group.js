@@ -61,11 +61,14 @@ class Input_form_group
         this._defaults = null;
     }
 
-    /** 
-     * Generate Method : Generates a BS4 Input Form Group, with a label, help modal data, an input, and help/error/success text content
-     * @param {Xxxxxx} Xxxxxx : Xxxxxx
-     */
+    get_class_defaults () {
+        return this.defaults;
+    }
 
+    get_generate_options (options) {
+        return merge_objects(true, this.defaults, options);
+    }
+    
     generate (options = false)
     {
         // dupe the class to a variable to access class data (for use inside a listner)

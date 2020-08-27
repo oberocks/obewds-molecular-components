@@ -1,9 +1,9 @@
-const DM_STRUCTURE = {
+const MC_STRUCTURE = {
     base_url: window.location.origin,
     metadata: {
-        title: 'Dousic Media Web App',
-        description: 'The Gateless Content Creation and Collaborative Production Platform'
+        title: 'OBE:WDS Molecular Components Web App',
+        description: 'A web applcation powered by OBE:WDS Molecular Components.'
     }
 };
 
-export { DM_STRUCTURE };
+export { MC_STRUCTURE };

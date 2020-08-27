@@ -53,6 +53,10 @@ class Placeholder_text
         this._defaults = null;
     }
 
+    get_class_defaults () {
+        return this.defaults;
+    }
+
     headline ()
     {
         // get a random index and return placeholder text string

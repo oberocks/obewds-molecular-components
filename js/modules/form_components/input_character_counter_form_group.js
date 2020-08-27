@@ -75,6 +75,14 @@ class Input_character_counter_form_group
         this._defaults = null;
     }
 
+    get_class_defaults () {
+        return this.defaults;
+    }
+
+    get_generate_options (options) {
+        return merge_objects(true, this.defaults, options);
+    }
+
     generate (options = false)
     {
         // dupe the class to a variable to access class data (for use inside a listner)
