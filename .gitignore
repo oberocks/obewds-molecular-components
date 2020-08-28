@@ -9,6 +9,7 @@ index.html
 test.html
 images/
 images/favicons/
+.htaccess
 
 # MacOS General
 .DS_Store
