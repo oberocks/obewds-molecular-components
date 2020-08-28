@@ -49,6 +49,7 @@ Updating to the newest version of the Molecular Components system is easy, too. 
 ```json
 // package.json
 "scripts": {
+    "install_molcular_components": "npm install oberocks/obewds-molecular-components --save",
     "update_molecular_components": "cp -a ./node_modules/obewds-molecular-components/js/. ./--your-directory-path--/"
 }
 ```
