@@ -4,6 +4,7 @@
 .htpasswd
 error_log
 node_modules/
+cgi-bin/
 
 index.html
 test.html
