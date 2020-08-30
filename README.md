@@ -49,18 +49,28 @@ Updating to the newest version of the Molecular Components system is easy, too. 
 ```json
 // package.json
 "scripts": {
-    "install_molcular_components": "npm install oberocks/obewds-molecular-components --save",
-    "update_molecular_components": "cp -a ./node_modules/obewds-molecular-components/js/. ./--your-directory-path--/"
+    "install_molecular_components": "npm install oberocks/obewds-molecular-components --save",
+    "update_molecular_components": "cp -a ./node_modules/obewds-molecular-components/js/. ./--your-directory-path--/",
+    "update_and_install_molecular_components": "npm run install_molecular_components && npm run update_molecular_components"
 }
 ```
 
-**And Call It With**
+**And After You've Filled in /--your-directory-path--/**
 
+You can install new Molecular Components updates to your `node_modules` directory with:
+```bash
+npm run install_molecular_components
+```
+
+Then move the new updated files into your project with:
 ```bash
 npm run update_molecular_components
 ```
 
-
+Or do them both in one shot with:
+```bash
+npm run update_and_install_molecular_components
+```
 
 # Overview
 
