@@ -1,5 +1,5 @@
 import { get_random_index } from '../helpers/get_random_index.js';
-import { merge_objects } from '../helpers/merge_objects.js';
+import { settings_merge } from '../helpers/settings_merge.js';
 
 class Placeholder_text
 {
@@ -47,7 +47,7 @@ class Placeholder_text
         };
 
         // merge any passed options settings into the default settings to get a final settings object
-        this.defaults = (opts) ? merge_objects(true, this._defaults, opts) : this._defaults;
+        this.defaults = (opts) ? settings_merge(this._defaults, opts) : this._defaults;
 
         // clear original defaults
         this._defaults = null;
