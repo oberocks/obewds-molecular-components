@@ -1,4 +1,5 @@
 import { apply_attributes, insert_text } from '../html_elements/utilities/dom_generation.js';
+import { settings_merge } from '../helpers/settings_merge.js';
 
 class Headline_group
 {
@@ -21,20 +22,20 @@ class Headline_group
                     attributes: {
                         class: 'mb-1'
                     },
-                    text: 'Headline Group Top'
+                    text: ['Headline Group Top']
                 },
                 bottom: {
                     tag: 'h5',
                     attributes: {
                         class: 'mb-0'
                     },
-                    text: 'Default Bottom Headline'
+                    text: ['Default Bottom Headline']
                 }
             }
         };
 
         // merge any passed options settings into the default settings to get a final settings object
-        this.defaults = (opts) ? merge_objects(true, this._defaults, opts) : this._defaults;
+        this.defaults = (opts) ? settings_merge(this._defaults, opts) : this._defaults;
 
         // clear original defaults
         this._defaults = null;
@@ -45,13 +46,13 @@ class Headline_group
     }
 
     get_generate_options (options) {
-        return merge_objects(true, this.defaults, options);
+        return settings_merge(this.defaults, options);
     }
 
     generate (options = false)
     {
         // merge any passed options settings into the default settings to get a final settings object
-        let opts = (options) ? merge_objects(true, this.defaults, options) : this.defaults;
+        let opts = (options) ? settings_merge(this.defaults, options) : this.defaults;
 
         // create the headline group element
         let grp = document.createElement('hgroup');

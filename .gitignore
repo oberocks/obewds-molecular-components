@@ -6,8 +6,8 @@ error_log
 node_modules/
 cgi-bin/
 
-index.html
-test.html
+page.php
+docs/
 images/
 images/favicons/
 .htaccess

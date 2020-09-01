@@ -1,5 +1,5 @@
 import { form_group_defaults as defaults } from './data/form_group_defaults.js';
-import { merge_objects } from '../helpers/merge_objects.js';
+import { settings_merge } from '../helpers/settings_merge.js';
 import { clear_user_value } from './utilities/clear_user_value.js';
 import { generate_form_help_modal } from './utilities/generate_form_help_modal.js';
 import { get_partial_cc_icon_classes } from './utilities/get_partial_cc_icon_classes.js';
@@ -219,7 +219,7 @@ class Credit_payment_component
         };
 
         // merge any passed options settings into the default settings to get a final settings object
-        this.defaults = (opts) ? merge_objects(true, this._defaults, opts) : this._defaults;
+        this.defaults = (opts) ? settings_merge(this._defaults, opts) : this._defaults;
 
         // clear original defaults
         this._defaults = null;
@@ -230,13 +230,13 @@ class Credit_payment_component
     }
 
     get_generate_options (options) {
-        return merge_objects(true, this.defaults, options);
+        return settings_merge(this.defaults, options);
     }
 
     generate (options = false)
     {
         // merge any passed options settings into the default settings to get a final settings object
-        let opts = (options) ? merge_objects(true, this.defaults, options) : this.defaults;
+        let opts = (options) ? settings_merge(this.defaults, options) : this.defaults;
 
         // create the form group element
         let component = document.createElement('fieldset');
