@@ -31,7 +31,7 @@ function is_element_node (val) {
     return (val instanceof Element || val instanceof HTMLDocument) ? true : false;
 }
 
-function is_defined (val) {
+function is_prop_defined (val) {
     return typeof val !== 'undefined'
 }
 
@@ -88,26 +88,26 @@ function settings_merge (baseObj, modObj) {
             // if this base object property is a boolean
             } else if ( is_string(baseObj[prop]) ) {
 
-                output[prop] = is_defined(modObj[prop]) ? String(modObj[prop]) : baseObj[prop];
+                output[prop] = is_prop_defined(modObj[prop]) ? String(modObj[prop]) : baseObj[prop];
 
             // otherwise if this base object prop is a number
             } else if ( is_number(baseObj[prop]) ) {
 
-                output[prop] = is_defined(modObj[prop]) ? Number(modObj[prop]) : baseObj[prop];
+                output[prop] = is_prop_defined(modObj[prop]) ? Number(modObj[prop]) : baseObj[prop];
 
             // or if this base object prop is a big int
             } else if ( is_bigint(baseObj[prop]) ) {
 
-                output[prop] = is_defined(modObj[prop]) ? BigInt(modObj[prop]) : baseObj[prop];
+                output[prop] = is_prop_defined(modObj[prop]) ? BigInt(modObj[prop]) : baseObj[prop];
 
             // or if this base object prop is a function
             } else if ( is_function(baseObj[prop]) ) {
 
-                output[prop] = is_defined(modObj[prop]) ? modObj[prop] : baseObj[prop];
+                output[prop] = is_prop_defined(modObj[prop]) ? modObj[prop] : baseObj[prop];
 
             } else if ( is_object(baseObj[prop]) ) {
 
-                output[prop] = is_defined(modObj[prop]) ? settings_merge( baseObj[prop], modObj[prop] ) : baseObj[prop];
+                output[prop] = is_prop_defined(modObj[prop]) ? settings_merge( baseObj[prop], modObj[prop] ) : baseObj[prop];
 
             } else if ( is_array(baseObj[prop]) ) {
 
@@ -119,22 +119,22 @@ function settings_merge (baseObj, modObj) {
 
                         if ( is_boolean(modObj[prop][i]) ) {
 
-                            let temp_value = is_defined(modObj[prop][i]) ? Boolean(modObj[prop][i]) : baseObj[prop][i];
+                            let temp_value = is_prop_defined(modObj[prop][i]) ? Boolean(modObj[prop][i]) : baseObj[prop][i];
                             temp_array.push( temp_value );
 
                         } else if ( is_string(modObj[prop][i]) ) {
 
-                            let temp_value = is_defined(modObj[prop][i]) ? String(modObj[prop][i]) : baseObj[prop][i];
+                            let temp_value = is_prop_defined(modObj[prop][i]) ? String(modObj[prop][i]) : baseObj[prop][i];
                             temp_array.push( temp_value );
 
                         } else if ( is_number(modObj[prop][i]) ) {
 
-                            let temp_value = is_defined(modObj[prop][i]) ? Number(modObj[prop][i]) : baseObj[prop][i];
+                            let temp_value = is_prop_defined(modObj[prop][i]) ? Number(modObj[prop][i]) : baseObj[prop][i];
                             temp_array.push( temp_value );
 
                         } else if ( is_bigint(modObj[prop][i]) ) {
 
-                            let temp_value = is_defined(modObj[prop][i]) ? BigInt(modObj[prop][i]) : baseObj[prop][i];
+                            let temp_value = is_prop_defined(modObj[prop][i]) ? BigInt(modObj[prop][i]) : baseObj[prop][i];
                             temp_array.push( temp_value );
 
                         } else if ( is_element_node(modObj[prop][i]) ) {
@@ -184,4 +184,4 @@ function settings_merge (baseObj, modObj) {
 
 }
 
-export { settings_merge, is_boolean, is_string, is_number, is_bigint, is_function, is_object, is_array };
+export { is_boolean, is_string, is_number, is_bigint, is_function, is_object, is_array, is_element_node, is_prop_defined, settings_merge };
