@@ -53,13 +53,6 @@ class Custom_select_form_group
                     {
                         value : 'one'
                     }
-                },
-                {
-                    text: 'Option Two',
-                    attributes:
-                    {
-                        value : 'two'
-                    }
                 }
             ],
             required : false
