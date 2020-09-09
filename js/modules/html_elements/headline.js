@@ -5,11 +5,7 @@ class Headline
 {
     constructor (opts = false)
     {
-        /** 
-         * Headline Element : Xxxxxx
-         * @param {Xxxxxx} Xxxxxx : Xxxxxx
-         */
-        
+        // define default class settings/options
         this._defaults = {
             tag: 'h1',
             attributes: {},

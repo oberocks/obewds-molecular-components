@@ -6,11 +6,7 @@ class Upload_single_file_form_group
 {
     constructor (opts = false)
     {
-        /** 
-         * Input Form Group : Xxxxxx
-         * @param {Xxxxxx} Xxxxxx : Xxxxxx
-         */
-
+        // define default class settings/options
         this._defaults = {
             aria_describedby_suffix : defaults.aria_describedby_suffix,
             classes : {

@@ -7,10 +7,7 @@ class Custom_checkboxes_switch_gated_form_group
 {
     constructor (opts = false)
     {
-        /** 
-         * Custom Checkboxes Switch Gated Form Group
-         */
-        
+        // define default class settings/options
         this._defaults = {
             classes : {
                 form_groups             : defaults.classes.form_groups,
@@ -81,14 +78,6 @@ class Custom_checkboxes_switch_gated_form_group
                         id    : 'default-switch-checkbox-1',
                         name  : 'default-switch-checkbox-1',
                         value : 'value1'
-                    }
-                },
-                {
-                    label: 'Default Checkbox 2',
-                    attributes: {
-                        id    : 'default-switch-checkbox-2',
-                        name  : 'default-switch-checkbox-2',
-                        value : 'value2'
                     }
                 }
             ]

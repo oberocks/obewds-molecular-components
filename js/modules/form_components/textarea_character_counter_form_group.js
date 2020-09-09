@@ -8,11 +8,7 @@ class Textarea_character_counter_form_group
 {
     constructor (opts = false)
     {
-        /** 
-         * Textarea Character Counter Form Group : Xxxxxx
-         * @param {Xxxxxx} Xxxxxx : Xxxxxx
-         */
-        
+        // define default class settings/options
         this._defaults = {
             classes : {
                 form_groups               : defaults.classes.form_groups,

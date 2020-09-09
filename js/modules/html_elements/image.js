@@ -5,11 +5,7 @@ class Image
 {
     constructor (opts = false)
     {
-        /** 
-         * Image : A helper script to generate an image element
-         * @param {Xxxxxx} Xxxxxx : Xxxxxx
-         */
-        
+        // define default class settings/options
         this._defaults = {
             attributes: {
                 src: 'https://obewds.com/images/obewds-logo-social-square-light-ground.jpg',

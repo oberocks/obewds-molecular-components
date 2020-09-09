@@ -7,11 +7,7 @@ class Custom_checkboxes_form_group
 {
     constructor (opts = false)
     {
-        /** 
-         * Custom Checkboxes Form Group : Xxxxxx
-         * @param {Xxxxxx} Xxxxxx : Xxxxxx
-         */
-        
+        // define default class settings/options
         this._defaults = {
             classes : {
                 form_groups             : defaults.classes.form_groups,

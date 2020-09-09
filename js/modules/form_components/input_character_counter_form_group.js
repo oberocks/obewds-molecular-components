@@ -11,11 +11,7 @@ class Input_character_counter_form_group
 {
     constructor (opts = false)
     {
-        /** 
-         * Input Character Counter Form Group : Xxxxxx
-         * @param {Xxxxxx} Xxxxxx : Xxxxxx
-         */
-
+        // define default class settings/options
         this._defaults = {
             aria_describedby_suffix : defaults.aria_describedby_suffix,
             characters_count_suffix : defaults.characters_count_suffix,

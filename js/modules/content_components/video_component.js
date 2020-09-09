@@ -5,11 +5,7 @@ class Video_component
 {
     constructor (opts = false)
     {
-        /** 
-         * Video Component : Xxxxxx
-         * @param {Xxxxxx} Xxxxxx : Xxxxxx
-         */
-        
+        // define default class settings/options
         this._defaults = {
             parent: {
                 attributes: {

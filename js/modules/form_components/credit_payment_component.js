@@ -11,11 +11,7 @@ class Credit_payment_component
 {
     constructor (opts = false)
     {
-        /** 
-         * Credit Payment Component : Xxxxxx
-         * @param {Xxxxxx} Xxxxxx : Xxxxxx
-         */
-        
+        // define default class settings/options
         this._defaults = {
             id: 'default-cc-payment-id',
             features: {

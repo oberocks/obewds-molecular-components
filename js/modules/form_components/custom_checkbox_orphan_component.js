@@ -5,11 +5,7 @@ class Custom_checkbox_orphan_component
 {
     constructor (opts = false)
     {
-        /** 
-         * Custom Checkboxes Form Group : Xxxxxx
-         * @param {Xxxxxx} Xxxxxx : Xxxxxx
-         */
-        
+        // define default class settings/options
         this._defaults = {
             classes : {
                 checkbox_parents : defaults.classes.checkbox_parents + ' mb-4',

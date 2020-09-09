@@ -5,11 +5,7 @@ class Headline_group
 {
     constructor (opts = false)
     {
-        /** 
-         * Submit Button Form Group : Xxxxxx
-         * @param {Xxxxxx} Xxxxxx : Xxxxxx
-         */
-        
+        // define default class settings/options
         this._defaults = {
             parent: {
                 attributes: {

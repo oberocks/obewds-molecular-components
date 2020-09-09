@@ -5,11 +5,7 @@ class Paragraph
 {
     constructor (opts = false)
     {
-        /** 
-         * Paragraph : A helper script to generate a paragraph element
-         * @param {Xxxxxx} Xxxxxx : Xxxxxx
-         */
-        
+        // define default class settings/options
         this._defaults = {
             attributes: {},
             text: ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut condimentum vitae risus vitae semper. Donec consectetur felis et mollis tristique. Nunc consequat lacus in urna congue, eu lacinia est placerat.']

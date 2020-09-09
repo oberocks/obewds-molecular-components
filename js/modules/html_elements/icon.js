@@ -5,11 +5,7 @@ class Icon
 {
     constructor (opts = false)
     {
-        /** 
-         * Paragraph : A helper script to generate a paragraph element
-         * @param {Xxxxxx} Xxxxxx : Xxxxxx
-         */
-        
+        // define default class settings/options
         this._defaults = {
             attributes: {
                 class: 'fas fa-home'

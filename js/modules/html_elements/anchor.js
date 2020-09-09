@@ -5,11 +5,7 @@ class Anchor
 {
     constructor (opts = false)
     {
-        /** 
-         * Anchor : A helper script to generate an anchor link element
-         * @param {Xxxxxx} Xxxxxx : Xxxxxx
-         */
-        
+        // define default class settings/options
         this._defaults = {
             attributes: {
                 href: '#'
