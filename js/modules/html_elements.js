@@ -1,4 +1,5 @@
 export { Anchor } from './html_elements/anchor.js';
+export { Cite } from './html_elements/cite.js';
 export { Headline } from './html_elements/headline.js';
 export { Icon } from './html_elements/icon.js';
 export { Image } from './html_elements/image.js';
