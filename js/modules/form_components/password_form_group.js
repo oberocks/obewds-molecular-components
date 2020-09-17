@@ -38,7 +38,7 @@ class Password_form_group
                     content: [ 'Password Inputs are very useful and convenient options to help users enter their password data. A new practice with password inputs also allows a user to toggle the visibility of the characters they have input, in order to verify they have typed the value correctly.' ]
                 }]
             },
-            form_text :  {
+            form_text : {
                 help    : ['Default Password Input help text'],
                 error   : ['Default Password Input error text'],
                 success : ['Default Password Input success text']

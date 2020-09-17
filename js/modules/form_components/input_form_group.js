@@ -36,7 +36,7 @@ class Input_form_group
                     content: [ 'Form Inputs are very useful and convenient options to help users enter data. Inputs allow a user to type in data for a single line, that expands horizontally if a user types a lot of content.' ]
                 }]
             },
-            form_text :  {
+            form_text : {
                 help    : ['Default Input help text'],
                 error   : ['Default Input error text'],
                 success : ['Default Input success text']
