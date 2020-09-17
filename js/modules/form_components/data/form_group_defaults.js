@@ -42,10 +42,10 @@ let form_group_defaults = {
     clear_text_button_text     : '×',
     rows                       : '4',
     help_modal_body_styles     : 'max-height:200px;',
-    form_text: {
-        help    : 'Default form group help text',
-        error   : 'Default form group error text',
-        success : 'Default form group success text'
+    form_text : {
+        help    : ['Default form group help text'],
+        error   : ['Default form group error text'],
+        success : ['Default form group success text']
     },
     form_modal_text: {
         heading: 'Default Modal Title',

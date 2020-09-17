@@ -3,6 +3,7 @@ import { settings_merge } from '../helpers/settings_merge.js';
 import { clear_user_value } from './utilities/clear_user_value.js';
 import { update_character_count } from './utilities/update_character_count.js';
 import { generate_form_help_modal } from './utilities/generate_form_help_modal.js';
+import { insert_text } from '../html_elements/utilities/dom_generation.js';
 
 import IMask from '../plugins/imask/index.js';
 import { set_imask_format } from './utilities/set_imask_format.js';
@@ -42,9 +43,9 @@ class Input_character_counter_form_group
                 }]
             },
             form_text :  {
-                help    : 'Default Input help text',
-                error   : 'Default Input error text',
-                success : 'Default Input success text'
+                help    : ['Default Input help text'],
+                error   : ['Default Input error text'],
+                success : ['Default Input success text']
             },
             id    : 'char-input-id',
             label : 'Character Counter Input',
@@ -176,19 +177,19 @@ class Input_character_counter_form_group
         let form_help_text = document.createElement('small');
         form_help_text.className = opts.classes.form_help_texts;
         form_help_text.setAttribute('id', opts.id + opts.aria_describedby_suffix);
-        let form_help_text_text = document.createTextNode(opts.form_text.help);
+        insert_text(form_help_text, opts.form_text.help);
 
         // create the form error text elements
         let form_error_text = document.createElement('small');
         form_error_text.className = opts.classes.form_error_texts;
         form_error_text.setAttribute('id', opts.id + opts.error_text_suffix);
-        let form_error_text_text = document.createTextNode(opts.form_text.error);
+        insert_text(form_error_text, opts.form_text.error);
 
         // create the form success text elements
         let form_success_text = document.createElement('small');
         form_success_text.className = opts.classes.form_success_texts;
         form_success_text.setAttribute('id', opts.id + opts.success_text_suffix);
-        let form_success_text_text = document.createTextNode(opts.form_text.success);
+        insert_text(form_success_text, opts.form_text.success);
 
         // create the parent character counter wrapper element
         let character_counter_parent = document.createElement('div');
@@ -215,11 +216,8 @@ class Input_character_counter_form_group
         form_group.appendChild(form_text_wrapper);
         form_text_wrapper.appendChild(form_text_parent);
         form_text_parent.appendChild(form_help_text);
-        form_help_text.appendChild(form_help_text_text);
         form_text_parent.appendChild(form_error_text);
-        form_error_text.appendChild(form_error_text_text);
         form_text_parent.appendChild(form_success_text);
-        form_success_text.appendChild(form_success_text_text);
         form_text_wrapper.appendChild(character_counter_parent);
         character_counter_parent.appendChild(char_counter);
         char_counter.appendChild(char_counter_text);

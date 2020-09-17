@@ -1,6 +1,7 @@
 import { form_group_defaults as defaults } from './data/form_group_defaults.js';
 import { settings_merge } from '../helpers/settings_merge.js';
 import { generate_form_help_modal } from './utilities/generate_form_help_modal.js';
+import { insert_text } from '../html_elements/utilities/dom_generation.js';
 
 class Upload_single_file_form_group
 {
@@ -33,10 +34,10 @@ class Upload_single_file_form_group
                     content: [ 'Upload File Inputs help users to select and upload files, and for applications to ingest files from users. This file upload input is meant for a single file upload per instance.' ]
                 }]
             },
-            form_text :  {
-                help    : 'Upload Single File help text',
-                error   : 'Upload Single File error text',
-                success : 'Upload Single File success text'
+            form_text : {
+                help    : ['Upload Single File help text'],
+                error   : ['Upload Single File error text'],
+                success : ['Upload Single File success text']
             },
             id    : 'upload-single-file-input-id',
             label : 'Default Single File Upload',
@@ -188,19 +189,19 @@ class Upload_single_file_form_group
         let form_help_text = document.createElement('small');
         form_help_text.className = opts.classes.form_help_texts;
         form_help_text.setAttribute('id', opts.id + opts.aria_describedby_suffix);
-        let form_help_text_text = document.createTextNode(opts.form_text.help);
+        insert_text(form_help_text, opts.form_text.help);
 
         // create the form error text elements
         let form_error_text = document.createElement('small');
         form_error_text.className = opts.classes.form_error_texts;
         form_error_text.setAttribute('id', opts.id + opts.error_text_suffix);
-        let form_error_text_text = document.createTextNode(opts.form_text.error);
+        insert_text(form_error_text, opts.form_text.error);
 
         // create the form success text elements
         let form_success_text = document.createElement('small');
         form_success_text.className = opts.classes.form_success_texts;
         form_success_text.setAttribute('id', opts.id + opts.success_text_suffix);
-        let form_success_text_text = document.createTextNode(opts.form_text.success);
+        insert_text(form_success_text, opts.form_text.success);
         
         // append all the elements for this input, nested as needed
         form_group.appendChild(label_wrapper);
@@ -229,11 +230,8 @@ class Upload_single_file_form_group
         form_group.appendChild(form_text_wrapper);
         form_text_wrapper.appendChild(form_text_parent);
         form_text_parent.appendChild(form_help_text);
-        form_help_text.appendChild(form_help_text_text);
         form_text_parent.appendChild(form_error_text);
-        form_error_text.appendChild(form_error_text_text);
         form_text_parent.appendChild(form_success_text);
-        form_success_text.appendChild(form_success_text_text);
 
         // return the form group element
         return form_group;

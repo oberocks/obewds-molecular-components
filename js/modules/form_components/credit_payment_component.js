@@ -3,6 +3,7 @@ import { settings_merge } from '../helpers/settings_merge.js';
 import { clear_user_value } from './utilities/clear_user_value.js';
 import { generate_form_help_modal } from './utilities/generate_form_help_modal.js';
 import { get_partial_cc_icon_classes } from './utilities/get_partial_cc_icon_classes.js';
+import { insert_text } from '../html_elements/utilities/dom_generation.js';
 
 import IMask from '../plugins/imask/index.js';
 import { set_imask_format } from './utilities/set_imask_format.js';
@@ -104,10 +105,10 @@ class Credit_payment_component
                     masking: {
                         enable: false
                     },
-                    form_text: {
-                        help    : 'Enter a card number & name exctly as they appear on your card',
-                        error   : 'This is the card number and name error text',
-                        success : 'This is the card number and name success text'
+                    form_text : {
+                        help    : ['Enter a card number & name exctly as they appear on your card'],
+                        error   : ['This is the card number and name error text'],
+                        success : ['This is the card number and name success text']
                     },
                     required : true
                 },
@@ -129,10 +130,10 @@ class Credit_payment_component
                         enable: true,
                         type: 'two_digits'
                     },
-                    form_text: {
-                        help    : 'Enter card expiration Month / Year',
-                        error   : 'This is the card number and name error text',
-                        success : 'This is the card number and name success text'
+                    form_text : {
+                        help    : ['Enter card expiration Month / Year'],
+                        error   : ['This is the card number and name error text'],
+                        success : ['This is the card number and name success text']
                     },
                     required : true
                 },
@@ -174,10 +175,10 @@ class Credit_payment_component
                         enable: true,
                         type: 'four_digits'
                     },
-                    form_text: {
-                        help    : '3-4 digit code',
-                        error   : 'This is the card number and name error text',
-                        success : 'This is the card number and name success text'
+                    form_text : {
+                        help    : ['3-4 digit code'],
+                        error   : ['This is the card number and name error text'],
+                        success : ['This is the card number and name success text']
                     },
                     required : true
                 }
@@ -409,24 +410,21 @@ class Credit_payment_component
         let card_name_form_help_text = document.createElement('small');
         card_name_form_help_text.className = opts.classes.form_help_texts;
         card_name_form_help_text.setAttribute('id', opts.id + opts.inputs.card_name.suffix + opts.aria_describedby_suffix);
-        let card_name_form_help_text_text = document.createTextNode(opts.inputs.card_name.form_text.help);
-        card_name_form_help_text.appendChild(card_name_form_help_text_text);
+        insert_text(card_name_form_help_text, opts.inputs.card_name.form_text.help);
         card_name_form_text_parent.appendChild(card_name_form_help_text);
 
         // create the form error text elements
         let card_name_form_error_text = document.createElement('small');
         card_name_form_error_text.className = opts.classes.form_error_texts;
         card_name_form_error_text.setAttribute('id', opts.id + opts.inputs.card_name.suffix + opts.error_text_suffix);
-        let card_name_form_error_text_text = document.createTextNode(opts.inputs.card_name.form_text.error);
-        card_name_form_error_text.appendChild(card_name_form_error_text_text);
+        insert_text(card_name_form_error_text, opts.inputs.card_name.form_text.error);
         card_name_form_text_parent.appendChild(card_name_form_error_text);
 
         // create the form success text elements
         let card_name_form_success_text = document.createElement('small');
         card_name_form_success_text.className = opts.classes.form_success_texts;
         card_name_form_success_text.setAttribute('id', opts.id + opts.inputs.card_name.suffix + opts.success_text_suffix);
-        let card_name_form_success_text_text = document.createTextNode(opts.inputs.card_name.form_text.success);
-        card_name_form_success_text.appendChild(card_name_form_success_text_text);
+        insert_text(card_name_form_success_text, opts.inputs.card_name.form_text.success);
         card_name_form_text_parent.appendChild(card_name_form_success_text);
 
         
@@ -601,24 +599,21 @@ class Credit_payment_component
         let exp_form_help_text = document.createElement('small');
         exp_form_help_text.className = opts.classes.form_help_texts;
         exp_form_help_text.setAttribute('id', opts.id + opts.inputs.card_month.suffix + opts.aria_describedby_suffix);
-        let exp_form_help_text_text = document.createTextNode(opts.inputs.card_month.form_text.help);
-        exp_form_help_text.appendChild(exp_form_help_text_text);
+        insert_text(exp_form_help_text, opts.inputs.card_month.form_text.help);
         exp_form_text_parent.appendChild(exp_form_help_text);
 
         // create the form error text elements
         let exp_form_error_text = document.createElement('small');
         exp_form_error_text.className = opts.classes.form_error_texts;
         exp_form_error_text.setAttribute('id', opts.id + opts.inputs.card_month.suffix + opts.error_text_suffix);
-        let exp_form_error_text_text = document.createTextNode(opts.inputs.card_month.form_text.error);
-        exp_form_error_text.appendChild(exp_form_error_text_text);
+        insert_text(exp_form_error_text, opts.inputs.card_month.form_text.error);
         exp_form_text_parent.appendChild(exp_form_error_text);
 
         // create the form success text elements
         let exp_form_success_text = document.createElement('small');
         exp_form_success_text.className = opts.classes.form_success_texts;
         exp_form_success_text.setAttribute('id', opts.id + opts.inputs.card_month.suffix + opts.success_text_suffix);
-        let exp_form_success_text_text = document.createTextNode(opts.inputs.card_month.form_text.success);
-        exp_form_success_text.appendChild(exp_form_success_text_text);
+        insert_text(exp_form_success_text, opts.inputs.card_month.form_text.success);
         exp_form_text_parent.appendChild(exp_form_success_text);
 
 
@@ -736,24 +731,21 @@ class Credit_payment_component
         let cv_form_help_text = document.createElement('small');
         cv_form_help_text.className = opts.classes.form_help_texts;
         cv_form_help_text.setAttribute('id', opts.id + opts.inputs.card_cv.suffix + opts.aria_describedby_suffix);
-        let cv_form_help_text_text = document.createTextNode(opts.inputs.card_cv.form_text.help);
-        cv_form_help_text.appendChild(cv_form_help_text_text);
+        insert_text(cv_form_help_text, opts.inputs.card_cv.form_text.help);
         cv_form_text_parent.appendChild(cv_form_help_text);
 
         // create the form error text elements
         let cv_form_error_text = document.createElement('small');
         cv_form_error_text.className = opts.classes.form_error_texts;
         cv_form_error_text.setAttribute('id', opts.id + opts.inputs.card_cv.suffix + opts.error_text_suffix);
-        let cv_form_error_text_text = document.createTextNode(opts.inputs.card_cv.form_text.error);
-        cv_form_error_text.appendChild(cv_form_error_text_text);
+        insert_text(cv_form_error_text, opts.inputs.card_cv.form_text.error);
         cv_form_text_parent.appendChild(cv_form_error_text);
 
         // create the form success text elements
         let cv_form_success_text = document.createElement('small');
         cv_form_success_text.className = opts.classes.form_success_texts;
         cv_form_success_text.setAttribute('id', opts.id + opts.inputs.card_cv.suffix + opts.success_text_suffix);
-        let cv_form_success_text_text = document.createTextNode(opts.inputs.card_cv.form_text.success);
-        cv_form_success_text.appendChild(cv_form_success_text_text);
+        insert_text(cv_form_success_text, opts.inputs.card_cv.form_text.success);
         cv_form_text_parent.appendChild(cv_form_success_text);
 
 

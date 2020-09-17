@@ -1,7 +1,7 @@
 import { form_group_defaults as defaults } from './data/form_group_defaults.js';
 import { settings_merge } from '../helpers/settings_merge.js';
 import { generate_form_help_modal } from './utilities/generate_form_help_modal.js';
-import { apply_attributes } from '../html_elements/utilities/dom_generation.js';
+import { apply_attributes, insert_text } from '../html_elements/utilities/dom_generation.js';
 
 class Custom_checkboxes_switch_gated_form_group
 {
@@ -60,9 +60,9 @@ class Custom_checkboxes_switch_gated_form_group
                 value         : ''
             },
             form_text : {
-                help    : 'Default Switch Gated Checkboxes help text',
-                error   : 'Default Switch Gated Checkboxes error text',
-                success : 'Default Switch Gated Checkboxes success text'
+                help    : ['Default Switch Gated Checkboxes help text'],
+                error   : ['Default Switch Gated Checkboxes error text'],
+                success : ['Default Switch Gated Checkboxes success text']
             },
             form_modal_text : {
                 heading: 'Default Switch Gated Checkboxes',
@@ -263,19 +263,19 @@ class Custom_checkboxes_switch_gated_form_group
         let form_help_text = document.createElement('small');
         form_help_text.className = opts.classes.form_help_texts;
         form_help_text.setAttribute('id', opts.group_id + opts.aria_describedby_suffix);
-        let form_help_text_text = document.createTextNode(opts.form_text.help);
+        insert_text(form_help_text, opts.form_text.help);
 
         // create the form error text elements
         let form_error_text = document.createElement('small');
         form_error_text.className = opts.classes.form_error_texts;
         form_error_text.setAttribute('id', opts.group_id + opts.error_text_suffix);
-        let form_error_text_text = document.createTextNode(opts.form_text.error);
+        insert_text(form_error_text, opts.form_text.error);
 
         // create the form success text elements
         let form_success_text = document.createElement('small');
         form_success_text.className = opts.classes.form_success_texts;
         form_success_text.setAttribute('id', opts.group_id + opts.success_text_suffix);
-        let form_success_text_text = document.createTextNode(opts.form_text.success);
+        insert_text(form_success_text, opts.form_text.success);
 
 
 
@@ -442,11 +442,8 @@ class Custom_checkboxes_switch_gated_form_group
         // append all the remaining elements for this input, nested as needed
         form_group.appendChild(form_text_parent);
         form_text_parent.appendChild(form_help_text);
-        form_help_text.appendChild(form_help_text_text);
         form_text_parent.appendChild(form_error_text);
-        form_error_text.appendChild(form_error_text_text);
         form_text_parent.appendChild(form_success_text);
-        form_success_text.appendChild(form_success_text_text);
 
         // return the form group element
         return form_group;
