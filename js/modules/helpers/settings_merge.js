@@ -1,4 +1,8 @@
 
+function is_null (val) {
+    return val === null;
+}
+
 function is_boolean (val) {
     return typeof val === 'boolean';
 }
@@ -47,8 +51,13 @@ function settings_merge (baseObj, modObj) {
 
             if (baseObj.hasOwnProperty(prop)) {
 
+                // if this base object property is null
+                if ( is_null(baseObj[prop]) ) {
+
+                    output[prop] = ( modObj[prop] != null ) ? modObj[prop] : baseObj[prop];
+
                 // if this base object property is a boolean
-                if ( is_boolean(baseObj[prop]) ) {
+                } else if ( is_boolean(baseObj[prop]) ) {
 
                     // init a var to help handle incorrect declarations of true/false values
                     let mod_obj_bool;
@@ -88,10 +97,12 @@ function settings_merge (baseObj, modObj) {
 
                     output[prop] = is_prop_defined(modObj[prop]) ? modObj[prop] : baseObj[prop];
 
+                // or if this base object prop is an object
                 } else if ( is_object(baseObj[prop]) ) {
 
                     output[prop] = is_prop_defined(modObj[prop]) ? settings_merge( baseObj[prop], modObj[prop] ) : baseObj[prop];
 
+                // or if this base object prop is an array
                 } else if ( is_array(baseObj[prop]) ) {
 
                     let temp_array = [];
@@ -171,4 +182,4 @@ function settings_merge (baseObj, modObj) {
 
 }
 
-export { is_boolean, is_string, is_number, is_bigint, is_function, is_object, is_array, is_element_node, is_prop_defined, settings_merge };
+export { is_null, is_boolean, is_string, is_number, is_bigint, is_function, is_object, is_array, is_element_node, is_prop_defined, settings_merge };
