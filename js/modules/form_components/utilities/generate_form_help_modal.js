@@ -17,10 +17,11 @@ function generate_form_help_modal (opts = false)
     let button_text     = opts.button_text     ? opts.button_text     : 'CLOSE';
 
 
-    let form_modal_text            = opts.form_modal_text            ? opts.form_modal_text            : modal_defaults.form_modal_text;
-    let form_modal_text_p_classes  = opts.form_modal_text_p_classes  ? opts.form_modal_text_p_classes  : modal_defaults.classes.form_modal_text_ps;
-    let form_modal_text_ul_classes = opts.form_modal_text_ul_classes ? opts.form_modal_text_ul_classes : modal_defaults.classes.form_modal_text_uls;
-    let form_modal_text_li_classes = opts.form_modal_text_li_classes ? opts.form_modal_text_li_classes : modal_defaults.classes.form_modal_text_lis;
+    let form_modal_text             = opts.form_modal_text             ? opts.form_modal_text             : modal_defaults.form_modal_text;
+    let form_modal_text_p_classes   = opts.form_modal_text_p_classes   ? opts.form_modal_text_p_classes   : modal_defaults.classes.form_modal_text_ps;
+    let form_modal_text_ul_classes  = opts.form_modal_text_ul_classes  ? opts.form_modal_text_ul_classes  : modal_defaults.classes.form_modal_text_uls;
+    let form_modal_text_li_classes  = opts.form_modal_text_li_classes  ? opts.form_modal_text_li_classes  : modal_defaults.classes.form_modal_text_lis;
+    let form_modal_text_img_classes = opts.form_modal_text_img_classes ? opts.form_modal_text_img_classes : modal_defaults.classes.form_modal_text_imgs;
     
     let help_modal_body_styles = opts.help_modal_body_styles ? opts.help_modal_body_styles : modal_defaults.help_modal_body_styles;
 
@@ -119,6 +120,27 @@ function generate_form_help_modal (opts = false)
 
                 // append the ul to the modal body element
                 body.appendChild(ul);
+            }
+            else if (form_modal_text.body[i].type === 'image')
+            {
+                // create a parent unordered list element
+                let img = document.createElement('img');
+                img.className = form_modal_text_img_classes;
+                img.setAttribute('src', form_modal_text.body[i].src);
+                
+                if (form_modal_text.body[i].alt) {
+                    img.setAttribute('alt', form_modal_text.body[i].alt);
+                }
+
+                // append the img to the modal body element
+                body.appendChild(img);
+            }
+            else if (form_modal_text.body[i].type === 'node')
+            {
+                if (form_modal_text.body[i].node) {
+                    // append the node to the modal body element
+                    body.appendChild(form_modal_text.body[i].node);
+                }
             }
         }
     }
