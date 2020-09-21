@@ -6,9 +6,7 @@ error_log
 node_modules/
 cgi-bin/
 
-index.html
-test.html
-test2.html
+*.html
 docs/
 images/
 images/favicons/
