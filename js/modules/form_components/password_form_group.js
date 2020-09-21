@@ -72,9 +72,6 @@ class Password_form_group
 
     generate (options = false)
     {
-        // dupe the class to a variable to access class data (for use inside a listner)
-        let thisClass = this;
-
         // merge any passed options settings into the default settings to get a final settings object
         let opts = (options) ? settings_merge(this.defaults, options) : this.defaults;
         
