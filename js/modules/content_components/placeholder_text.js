@@ -1,10 +1,10 @@
 import { get_random_index } from '../helpers/get_random_index.js';
 import { settings_merge } from '../helpers/settings_merge.js';
 
-class Placeholder_text
-{
-    constructor (opts = false)
-    {
+class Placeholder_text {
+    
+    constructor (opts = false) {
+        
         // define default class settings/options
         this._defaults = {
             headlines : [
@@ -48,71 +48,80 @@ class Placeholder_text
     }
 
     get_class_defaults () {
+
         return this.defaults;
+
     }
 
-    headline (index = false)
-    {
+    headline (index = false) {
+        
         // get a random index and return placeholder text string
         let i = index ? Number(index) : get_random_index(this.defaults.headlines.length);
         return this.defaults.headlines[i];
+
     }
 
-    paragraph (index = false)
-    {
+    paragraph (index = false) {
+
         // get a random index and return placeholder text string
         let i = index ? Number(index) : get_random_index(this.defaults.paragraphs.length);
         return this.defaults.paragraphs[i];
+
     }
 
-    quote (index = false)
-    {
+    quote (index = false) {
+
         // get a random index and return placeholder text string
         let i = index ? Number(index) : get_random_index(this.defaults.quotes.length);
         return this.defaults.quotes[i];
+
     }
 
-    brand (index = false)
-    {
+    brand (index = false) {
+
         // get a random index and return placeholder text string
         let i = index ? Number(index) : get_random_index(this.defaults.brands.length);
         return this.defaults.brands[i];
+
     }
 
-    navigation (index = false)
-    {
+    navigation (index = false) {
+
         // get a random index and return placeholder text string
         let i = index ? Number(index) : get_random_index(this.defaults.navigation.length);
         return this.defaults.navigation[i];
+
     }
 
-    node (type, index = false)
-    {
+    node (type, index = false) {
+        
         let text;
-        if (type === 'headline')
-        {
+        
+        if (type === 'headline') {
+            
             // 
             text = index ? this.headline(index) : this.headline();
-        }
-        else if (type === 'paragraph')
-        {
+
+        } else if (type === 'paragraph') {
+            
             // 
             text = index ? this.paragraph(index) : this.paragraph();
-        }
-        else if (type === 'quote')
-        {
+
+        } else if (type === 'quote') {
+            
             // 
             text = index ? this.quote(index) : this.quote();
-        }
-        else if (type === 'brand')
-        {
+
+        } else if (type === 'brand') {
+            
             // 
             text = index ? this.brand(index) : this.brand();
-        }
-        else if (type === 'navigation')
-        {
+
+        } else if (type === 'navigation') {
+            
             // 
             text = index ? this.navigation(index) : this.navigation();
+            
         }
 
         return document.createTextNode( text );
