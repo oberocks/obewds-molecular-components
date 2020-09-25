@@ -1,46 +1,46 @@
 
-function is_null (val) {
+export function is_null (val) {
     return val === null;
 }
 
-function is_boolean (val) {
+export function is_boolean (val) {
     return typeof val === 'boolean';
 }
 
-function is_string (val) {
+export function is_string (val) {
     return typeof val === 'string';
 }
 
-function is_number (val) {
+export function is_number (val) {
     return typeof val === 'number';
 }
 
-function is_bigint (val) {
+export function is_bigint (val) {
     return typeof val === 'bigint';
 }
 
-function is_function (val) {
+export function is_function (val) {
     return typeof val === 'function';
 }
 
-function is_object (val) {
+export function is_object (val) {
     return (Object.prototype.toString.call(val) === '[object Object]' && val != null) ? true : false;
 }
 
-function is_array (val) {
+export function is_array (val) {
     return Array.isArray(val);
 }
 
-function is_element_node (val) {
+export function is_element_node (val) {
     return (val instanceof Element || val instanceof HTMLDocument) ? true : false;
 }
 
-function is_prop_defined (val) {
+export function is_prop_defined (val) {
     return typeof val !== 'undefined'
 }
 
 
-function settings_merge (baseObj, modObj) {
+export function settings_merge (baseObj, modObj) {
 
     let output = {};
             
@@ -51,13 +51,8 @@ function settings_merge (baseObj, modObj) {
 
             if (baseObj.hasOwnProperty(prop)) {
 
-                // if this base object property is null
-                if ( is_null(baseObj[prop]) ) {
-
-                    output[prop] = ( modObj[prop] != null ) ? modObj[prop] : baseObj[prop];
-
                 // if this base object property is a boolean
-                } else if ( is_boolean(baseObj[prop]) ) {
+                if ( is_boolean(baseObj[prop]) ) {
 
                     // init a var to help handle incorrect declarations of true/false values
                     let mod_obj_bool;
@@ -102,6 +97,24 @@ function settings_merge (baseObj, modObj) {
 
                     output[prop] = is_prop_defined(modObj[prop]) ? settings_merge( baseObj[prop], modObj[prop] ) : baseObj[prop];
 
+                    // if the current property is called attributes (and it's value is an object obviously)
+                    if (prop === 'attributes') {
+                        
+                        // if there is a matching attributes object in the modObj, too
+                        if ( is_object(modObj[prop]) ) {
+                            // loop through the attributes object's properties
+                            for ( var subprop in modObj[prop] ) {
+                                // if the property doesn't already exist in the output object
+                                // (meaning this is a user-defined attribute - possibly a data-* attribute)
+                                if (!output[prop][subprop]) {
+                                    // add/overwrite each attribute key/value pair from the modObj
+                                    output[prop][subprop] = modObj[prop][subprop]
+                                }
+                            }
+                        }
+                        
+                    }
+
                 // or if this base object prop is an array
                 } else if ( is_array(baseObj[prop]) ) {
 
@@ -141,11 +154,7 @@ function settings_merge (baseObj, modObj) {
                                 let final_obj = settings_merge( modObj[prop][i], temp_obj );
                                 temp_array.push( final_obj );
 
-                            } /*else if ( is_array(modObj[prop][i]) ) {
-
-                                temp_array.push( settings_merge( baseObj[prop][i], modObj[prop][i] ) );
-
-                            }*/
+                            }
 
                         }
 
@@ -157,9 +166,15 @@ function settings_merge (baseObj, modObj) {
 
                     output[prop] = temp_array;
 
+                // if this base object property is null
+                } else if ( is_null(baseObj[prop]) ) {
+
+                    output[prop] = ( modObj[prop] != null ) ? modObj[prop] : baseObj[prop];
+
+                // otherwise if this base object property has a value of undefined
                 } else {
 
-                    console.error('OBE:WDS Molecular Components Warning: The property [ ' + prop + ' ] was passed with a value of [ ' + modObj[prop] + ' ], which is not an data type the merge_settings() function can work with. Component settings values need to be either booleans, strings, numbers, big integers, functions, objects, arrays, or element nodes (depending on the contexts and the component).' );
+                    console.error('OBE:WDS MC Error: The property [ ' + prop + ' ] was passed with a value of [ ' + modObj[prop] + ' ], which is not an data type the merge_settings() function can work with. Component settings values need to be either booleans, strings, numbers, big integers, functions, objects, arrays, or element nodes (depending on the contexts and the component).' );
 
                 }
 
@@ -181,5 +196,3 @@ function settings_merge (baseObj, modObj) {
     return output;
 
 }
-
-export { is_null, is_boolean, is_string, is_number, is_bigint, is_function, is_object, is_array, is_element_node, is_prop_defined, settings_merge };

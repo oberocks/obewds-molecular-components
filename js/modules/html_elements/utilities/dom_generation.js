@@ -1,15 +1,20 @@
-function apply_attributes (node, obj)
+export function apply_attributes (node, obj)
 {
     if (Object.keys(obj).length > 0)
     {
         for (const key in obj)
         {
-            node.setAttribute(key, obj[key]);
+            if (obj[key] != null) {
+
+                node.setAttribute(key, obj[key]);
+
+            }
+            
         }
     }
 }
 
-function insert_text (node, str)
+export function insert_text (node, str)
 {
     if (typeof str === 'string' && str.length > 0)
     {
@@ -33,12 +38,10 @@ function insert_text (node, str)
     }
 }
 
-function append_children (node, childNodes)
+export function append_child (node, childNodes)
 {
     if (childNodes && childNodes.nodeType === Node.ELEMENT_NODE)
     {
         node.appendChild(childNodes);
     }
 }
-
-export { apply_attributes, insert_text, append_children };
