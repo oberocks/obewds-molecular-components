@@ -1,13 +1,33 @@
 import { Html_element } from './data/html_element.js';
-import { apply_attributes, insert_text } from './utilities/dom_generation.js';
+import { apply_attributes } from './utilities/dom_generation.js';
 import { settings_merge } from '../helpers/settings_merge.js';
 
-export class Cite extends Html_element {
+export class Img extends Html_element {
 
     constructor (opts = false) {
 
         // get props from inhereted class
         super();
+
+        // define default class settings/options
+        this.class_default_attributes = {
+            alt : null,
+            crossorigin : null,
+            decoding : null,
+            height : null,
+            importance : null,
+            ismap : null,
+            loading : null,
+            referrerpolicy : null,
+            sizes : null,
+            src : null,
+            srcset : null,
+            width : null,
+            usemap : null
+        };
+
+        // assign any class default attributes/settings
+        Object.assign(this._defaults.attributes, this.class_default_attributes);
 
         // merge any passed options settings into the default settings to get a final settings object
         this.defaults = (opts) ? settings_merge(this._defaults, opts) : this._defaults;
@@ -35,16 +55,13 @@ export class Cite extends Html_element {
         let opts = (options) ? settings_merge(this.defaults, options) : this.defaults;
 
         // create the element
-        let cite = document.createElement('cite');
+        let el = document.createElement('img');
 
         // check if there are attributes then set them
-        apply_attributes(cite, opts.attributes);
-
-        // insert text into element
-        insert_text(cite, opts.text);
+        apply_attributes(el, opts.attributes);
 
         // return the new element node
-        return cite;
+        return el;
         
     }
 
@@ -52,9 +69,10 @@ export class Cite extends Html_element {
         
         return this.generate({
             attributes: {
-                title: 'Lorem Ipsum'
-            },
-            text: ['Lorem Ipsum']
+                src: 'https://obewds.com/images/obewds-logo-social-square-light-ground.jpg',
+                alt: 'OBE:WDS Square Profile Logo',
+                class: 'img-fluid box-shadow-xs mb-3'
+            }
         });
     
     }

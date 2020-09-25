@@ -1,34 +1,39 @@
-import { settings_merge } from '../helpers/settings_merge.js';
+import { Html_element } from './data/html_element.js';
 import { apply_attributes, insert_text } from './utilities/dom_generation.js';
+import { settings_merge } from '../helpers/settings_merge.js';
 
-class Headline
-{
-    constructor (opts = false)
-    {
-        // define default class settings/options
-        this._defaults = {
-            tag: 'h1',
-            attributes: {},
-            text: ['Default Headline Text'] 
-        };
+export class Headline extends Html_element {
+
+    constructor (opts = false) {
+
+        // get props from inhereted class
+        super();
+        
+        // assign any class default attributes/settings
+        this._defaults.tag = 'h1';
 
         // merge any passed options settings into the default settings to get a final settings object
         this.defaults = (opts) ? settings_merge(this._defaults, opts) : this._defaults;
 
         // clear original defaults
         this._defaults = null;
+
     }
 
     get_class_defaults () {
+        
         return this.defaults;
+    
     }
 
     get_generate_options (options) {
+        
         return settings_merge(this.defaults, options);
+    
     }
 
-    generate (options = false)
-    {
+    generate (options = false) {
+
         // merge any passed options settings into the default settings to get a final settings object
         let opts = (options) ? settings_merge(this.defaults, options) : this.defaults;
 
@@ -43,10 +48,19 @@ class Headline
 
         // return the new element node
         return el;
+
     }
 
-    h1 (options = false)
-    {
+    example () {
+        
+        return this.generate({
+            text : 'Default Example (h1) Headline'
+        });
+    
+    }
+
+    h1 (options = false) {
+
         // merge any passed options settings into the default settings to get a final settings object
         let opts = (options) ? settings_merge(this.defaults, options) : this.defaults;
 
@@ -61,10 +75,11 @@ class Headline
 
         // return the new element node
         return el;
+
     }
 
-    h2 (options = false)
-    {
+    h2 (options = false) {
+
         // merge any passed options settings into the default settings to get a final settings object
         let opts = (options) ? settings_merge(this.defaults, options) : this.defaults;
 
@@ -79,10 +94,11 @@ class Headline
 
         // return the new element node
         return el;
+
     }
 
-    h3 (options = false)
-    {
+    h3 (options = false) {
+
         // merge any passed options settings into the default settings to get a final settings object
         let opts = (options) ? settings_merge(this.defaults, options) : this.defaults;
 
@@ -97,10 +113,11 @@ class Headline
 
         // return the new element node
         return el;
+
     }
 
-    h4 (options = false)
-    {
+    h4 (options = false) {
+
         // merge any passed options settings into the default settings to get a final settings object
         let opts = (options) ? settings_merge(this.defaults, options) : this.defaults;
 
@@ -115,10 +132,11 @@ class Headline
 
         // return the new element node
         return el;
+
     }
 
-    h5 (options = false)
-    {
+    h5 (options = false) {
+
         // merge any passed options settings into the default settings to get a final settings object
         let opts = (options) ? settings_merge(this.defaults, options) : this.defaults;
 
@@ -133,10 +151,11 @@ class Headline
 
         // return the new element node
         return el;
+
     }
 
-    h6 (options = false)
-    {
+    h6 (options = false) {
+
         // merge any passed options settings into the default settings to get a final settings object
         let opts = (options) ? settings_merge(this.defaults, options) : this.defaults;
 
@@ -151,8 +170,7 @@ class Headline
 
         // return the new element node
         return el;
+        
     }
     
 }
-  
-export { Headline };

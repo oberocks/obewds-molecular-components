@@ -2,7 +2,7 @@ import { Html_element } from './data/html_element.js';
 import { apply_attributes, insert_text } from './utilities/dom_generation.js';
 import { settings_merge } from '../helpers/settings_merge.js';
 
-export class Cite extends Html_element {
+export class Section extends Html_element {
 
     constructor (opts = false) {
 
@@ -35,26 +35,23 @@ export class Cite extends Html_element {
         let opts = (options) ? settings_merge(this.defaults, options) : this.defaults;
 
         // create the element
-        let cite = document.createElement('cite');
+        let el = document.createElement('section');
 
         // check if there are attributes then set them
-        apply_attributes(cite, opts.attributes);
+        apply_attributes(el, opts.attributes);
 
-        // insert text into element
-        insert_text(cite, opts.text);
+        // check if text is a string and if so then add it as a text node
+        insert_text(el, opts.text);
 
         // return the new element node
-        return cite;
-        
+        return el;
+
     }
 
     example () {
         
         return this.generate({
-            attributes: {
-                title: 'Lorem Ipsum'
-            },
-            text: ['Lorem Ipsum']
+            text : '<section>'
         });
     
     }

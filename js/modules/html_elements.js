@@ -1,6 +1,12 @@
 export { Anchor } from './html_elements/anchor.js';
+export { Article } from './html_elements/article.js';
 export { Cite } from './html_elements/cite.js';
+export { Div } from './html_elements/div.js';
 export { Headline } from './html_elements/headline.js';
 export { Icon } from './html_elements/icon.js';
+export { Idiomatic_text } from './html_elements/idiomatic_text.js';
 export { Image } from './html_elements/image.js';
+export { Img } from './html_elements/img.js';
+export { Main } from './html_elements/main.js';
 export { Paragraph } from './html_elements/paragraph.js';
+export { Section } from './html_elements/section.js';
