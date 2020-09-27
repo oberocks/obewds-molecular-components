@@ -2,7 +2,6 @@ function add_element_aria_attribute_defaults (obj)
 {
     // REF: https://www.w3.org/WAI/PF/aria-1.1/states_and_properties
     
-    // convert the passed class strings into an array, splitting by spaces
     let arias = {
         'aria-activedescendant' : null,
         'aria-atomic' : null,

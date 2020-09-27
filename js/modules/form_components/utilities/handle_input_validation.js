@@ -1,8 +1,8 @@
 import { inject_invalid_box_shadow_css_reset } from './inject_invalid_box_shadow_css_reset.js';
 import { swap_classes } from './swap_classes.js';
 
-export function handle_client_side_validation (optsObj, inputEl, labelEl, helpTxtEl, errorTxtEl, successTxtEl)
-{
+export function handle_input_validation (optsObj, inputEl, labelEl, helpTxtEl, errorTxtEl, successTxtEl) {
+    
     // handle the required attribute
     if ( optsObj.type === 'checkbox' || optsObj.type === 'date' || optsObj.type === 'datetime-local' || optsObj.type === 'email' || optsObj.type === 'file' || optsObj.type === 'month' || optsObj.type === 'number' || optsObj.type === 'password' || optsObj.type === 'radio' || optsObj.type === 'search' || optsObj.type === 'tel' || optsObj.type === 'text' || optsObj.type === 'time' || optsObj.type === 'url' || optsObj.type === 'week' ) {
     

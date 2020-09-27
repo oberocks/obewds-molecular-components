@@ -1,5 +1,4 @@
-export function handle_default_input_attributes (optsObj, inputEl)
-{
+export function handle_input_attributes (optsObj, inputEl) {
 
     // handle the autocomplete attribute
     if ( optsObj.autocomplete ) { inputEl.setAttribute('autocomplete', optsObj.autocomplete); }
