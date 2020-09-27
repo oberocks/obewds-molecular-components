@@ -167,7 +167,7 @@ class Upload_single_file_form_group
                 }
                 else
                 {
-                    console.error('Node Reference Error: There was an unexpected child node count (less than 3 child nodes) inside the parent .form-group element that is handling the newly uploaded image file.');
+                    console.error('OBE:WDS MC Error: There was an unexpected child node count (less than 3 child nodes) inside the parent .form-group element that is handling the newly uploaded image file.');
                 }
                 
                 // https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications
