@@ -1,8 +1,4 @@
-/** 
- * Form Group Defaults Data : Sets the defaults for form group component elements and functionalities
- */
-
-let form_group_defaults = {
+export let form_group_defaults = {
     classes: {
         form_groups : 'form-group mb-4',
         label_wrappers : 'd-flex justify-content-between align-items-center',
@@ -35,7 +31,7 @@ let form_group_defaults = {
         submit_button : 'btn btn-lg btn-primary box-shadow-xs',
         invalid_label : 'text-danger',
         valid_label : 'text-success',
-        invalid_input : 'form-danger border-width-3',
+        invalid_input : 'form-danger border-width-4',
         valid_input : 'form-success border-width-2',
     },
     aria_describedby_suffix : '-help',
@@ -78,5 +74,3 @@ let form_group_defaults = {
     },
     custom_validation_success_listner : 'change'
 };
-
-export { form_group_defaults };
