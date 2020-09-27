@@ -1,10 +1,10 @@
 import { apply_attributes, insert_text } from '../html_elements/utilities/dom_generation.js';
 import { settings_merge } from '../helpers/settings_merge.js';
 
-class Blockquote_with_footer
-{
-    constructor (opts = false)
-    {
+export class Blockquote_with_footer {
+    
+    constructor (opts = false) {
+
         // define default class settings/options
         this._defaults = {
             blockquote: {
@@ -83,5 +83,3 @@ class Blockquote_with_footer
     }
     
 }
-  
-export { Blockquote_with_footer };

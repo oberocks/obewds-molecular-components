@@ -1,10 +1,10 @@
 import { form_group_defaults as defaults } from './data/form_group_defaults.js';
 import { settings_merge } from '../helpers/settings_merge.js';
 
-class Custom_checkbox_orphan_component
-{
-    constructor (opts = false)
-    {
+export class Custom_checkbox_orphan_component {
+
+    constructor (opts = false) {
+        
         // define default class settings/options
         this._defaults = {
             classes : {
@@ -75,5 +75,3 @@ class Custom_checkbox_orphan_component
         return parent;
     }
 }
-
-export { Custom_checkbox_orphan_component };

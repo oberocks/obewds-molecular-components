@@ -1,10 +1,10 @@
 import { apply_attributes, insert_text } from '../html_elements/utilities/dom_generation.js';
 import { settings_merge } from '../helpers/settings_merge.js';
 
-class Blockquote
-{
-    constructor (opts = false)
-    {
+export class Blockquote {
+
+    constructor (opts = false) {
+
         // define default class settings/options
         this._defaults = {
             blockquote: {
@@ -63,5 +63,3 @@ class Blockquote
     }
     
 }
-  
-export { Blockquote };

@@ -8,10 +8,10 @@ import { insert_text } from '../html_elements/utilities/dom_generation.js';
 import IMask from '../plugins/imask/index.js';
 import { set_imask_format } from './utilities/set_imask_format.js';
 
-class Credit_payment_component
-{
-    constructor (opts = false)
-    {
+export class Credit_payment_component {
+
+    constructor (opts = false) {
+        
         // define default class settings/options
         this._defaults = {
             id: 'default-cc-payment-id',
@@ -827,5 +827,3 @@ class Credit_payment_component
         return component;
     }
 }
-
-export { Credit_payment_component };

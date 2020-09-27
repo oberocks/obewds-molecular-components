@@ -1,10 +1,9 @@
 import { apply_attributes, insert_text } from '../html_elements/utilities/dom_generation.js';
 import { settings_merge } from '../helpers/settings_merge.js';
 
-class Headline_group
-{
-    constructor (opts = false)
-    {
+export class Headline_group {
+
+    constructor (opts = false) {
         // define default class settings/options
         this._defaults = {
             parent: {
@@ -83,5 +82,3 @@ class Headline_group
     }
     
 }
-  
-export { Headline_group };

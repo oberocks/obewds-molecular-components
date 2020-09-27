@@ -1,7 +1,7 @@
 import { get_random_index } from '../helpers/get_random_index.js';
 import { settings_merge } from '../helpers/settings_merge.js';
 
-class Placeholder_text {
+export class Placeholder_text {
     
     constructor (opts = false) {
         
@@ -127,5 +127,3 @@ class Placeholder_text {
         return document.createTextNode( text );
     }
 }
-
-export { Placeholder_text };
