@@ -1,31 +1,31 @@
-export function handle_textarea_attributes (optsObj, inputEl) {
+export function handle_textarea_attributes (obj, el) {
 
     // handle the autocomplete attribute
-    if ( optsObj.autocomplete ) { inputEl.setAttribute('autocomplete', optsObj.autocomplete); }
+    if ( obj.autocomplete ) { el.setAttribute('autocomplete', obj.autocomplete); }
 
     // handle the autofocus attribute
-    if ( optsObj.autofocus === true ) { inputEl.setAttribute('autofocus', optsObj.autofocus); }
+    if ( obj.autofocus === true ) { el.setAttribute('autofocus', obj.autofocus); }
 
     // handle the cols attribute
-    if ( optsObj.cols ) { inputEl.setAttribute('cols', optsObj.cols); }
+    if ( obj.cols ) { el.setAttribute('cols', obj.cols); }
 
     // handle the disabled attribute
-    if ( optsObj.disabled === true ) { inputEl.setAttribute('disabled', optsObj.disabled); }
+    if ( obj.disabled === true ) { el.setAttribute('disabled', obj.disabled); }
 
     // handle the form attribute
-    if ( optsObj.form ) { inputEl.setAttribute('form', optsObj.form); }
+    if ( obj.form ) { el.setAttribute('form', obj.form); }
 
     // handle the maxlength and minlength attributes
-    if ( optsObj.maxlength ) { inputEl.setAttribute('maxlength', optsObj.maxlength); }
-    if ( optsObj.minlength ) { inputEl.setAttribute('minlength', optsObj.minlength); }
+    if ( obj.maxlength ) { el.setAttribute('maxlength', obj.maxlength); }
+    if ( obj.minlength ) { el.setAttribute('minlength', obj.minlength); }
 
     // handle the readonly attribute
-    if ( optsObj.readonly === true ) { inputEl.setAttribute('readonly', optsObj.readonly); }
+    if ( obj.readonly === true ) { el.setAttribute('readonly', obj.readonly); }
 
     // handle the spellcheck attribute
-    if ( optsObj.spellcheck ) { inputEl.setAttribute('spellcheck', optsObj.spellcheck); }
+    if ( obj.spellcheck ) { el.setAttribute('spellcheck', obj.spellcheck); }
 
     // handle the wrap attribute
-    if ( optsObj.wrap ) { inputEl.setAttribute('wrap', optsObj.wrap); }
+    if ( obj.wrap ) { el.setAttribute('wrap', obj.wrap); }
 
 }

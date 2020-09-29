@@ -4,7 +4,7 @@ import { apply_attributes, insert_text } from '../html_elements/utilities/dom_ge
 import { clear_user_value } from './utilities/clear_user_value.js';
 import { generate_form_help_modal } from './utilities/generate_form_help_modal.js';
 import { handle_textarea_attributes } from './utilities/handle_textarea_attributes.js';
-import { handle_textarea_validation } from './utilities/handle_textarea_validation.js';
+import { determine_textarea_validation } from './utilities/determine_textarea_validation.js';
 import { settings_merge } from '../helpers/settings_merge.js';
 
 export class Textarea_form_group extends Form_group_textarea {
@@ -14,15 +14,17 @@ export class Textarea_form_group extends Form_group_textarea {
         // get props from inhereted class
         super();
 
+        // default textarea settings
+        this.new_textarea_attributes = {
+            id : 'default-textarea-id',
+            name : 'default-textarea-name',
+        };
+
         // define default class settings/options
         this.class_defaults = {
             
             // default component label text
             label : 'Default Textarea Label',
-
-            // default input settings
-            id : 'default-textarea-id',
-            name : 'default-textarea-name',
 
             // default component help modal settings
             form_modal_text : {
@@ -43,6 +45,7 @@ export class Textarea_form_group extends Form_group_textarea {
         };
 
         // assign any class default attributes/settings
+        Object.assign(this._defaults.textarea.attributes, this.new_textarea_attributes);
         Object.assign(this._defaults, this.class_defaults);
 
         // merge any passed options settings into the default settings to get a final settings object
@@ -88,7 +91,7 @@ export class Textarea_form_group extends Form_group_textarea {
         // create the label element
         let label_el = document.createElement('label');
         label_el.className = opts.classes.labels;
-        label_el.setAttribute('for', opts.id);
+        label_el.setAttribute('for', opts.textarea.attributes.id);
         insert_text(label_el, opts.label);
 
         // create the button element for the textarea help modal
@@ -96,7 +99,7 @@ export class Textarea_form_group extends Form_group_textarea {
         label_button.className = opts.classes.label_buttons;
         label_button.setAttribute('type', 'button');
         label_button.setAttribute('data-toggle', 'modal');
-        label_button.setAttribute('data-target', '#' + opts.id + '-modal');
+        label_button.setAttribute('data-target', '#' + opts.textarea.attributes.id + '-modal');
 
         // create the font awesome label button icon element
         let label_button_icon = document.createElement('i');
@@ -104,13 +107,13 @@ export class Textarea_form_group extends Form_group_textarea {
 
         // create the textarea element
         let textarea = document.createElement('textarea');
-        textarea.className = opts.classes.textareas;
+        handle_textarea_attributes(opts.textarea.attributes, textarea);
         apply_attributes(textarea, opts.textarea.attributes);
-        textarea.setAttribute('id', opts.id);
-        textarea.setAttribute('name', opts.name);
-        textarea.setAttribute('rows', opts.rows);
-        textarea.value = opts.value; // CANNOT BE: textarea.setAttribute('value', opts.value);
-        textarea.setAttribute('aria-describedby', opts.id + opts.aria_describedby_suffix);
+        //textarea.setAttribute('id', opts.textarea.attributes.id);
+        //textarea.setAttribute('name', opts.name);
+        //textarea.setAttribute('rows', opts.rows);
+        textarea.value = opts.textarea.attributes.value; // CANNOT BE: textarea.setAttribute('value', opts.textarea.attributes.value);
+        textarea.setAttribute('aria-describedby', opts.textarea.attributes.id + opts.aria_describedby_suffix);
 
         // create the parent text clear element
         let clear_text_parent = document.createElement('div');
@@ -135,26 +138,20 @@ export class Textarea_form_group extends Form_group_textarea {
         // create the form help text elements
         let form_help_text = document.createElement('small');
         form_help_text.className = opts.classes.form_help_texts;
-        form_help_text.setAttribute('id', opts.id + opts.aria_describedby_suffix);
+        form_help_text.setAttribute('id', opts.textarea.attributes.id + opts.aria_describedby_suffix);
         insert_text(form_help_text, opts.form_text.help);
 
         // create the form error text elements
         let form_error_text = document.createElement('small');
         form_error_text.className = opts.classes.form_error_texts;
-        form_error_text.setAttribute('id', opts.id + opts.error_text_suffix);
+        form_error_text.setAttribute('id', opts.textarea.attributes.id + opts.error_text_suffix);
         insert_text(form_error_text, opts.form_text.error);
 
         // create the form success text elements
         let form_success_text = document.createElement('small');
         form_success_text.className = opts.classes.form_success_texts;
-        form_success_text.setAttribute('id', opts.id + opts.success_text_suffix);
+        form_success_text.setAttribute('id', opts.textarea.attributes.id + opts.success_text_suffix);
         insert_text(form_success_text, opts.form_text.success);
-
-        //
-        // HANDLE COMPONENT ATTRIBUTES
-        //
-
-        handle_textarea_attributes(opts, textarea);
 
         //
         // HANDLE COMPONENT LISTENERS
@@ -163,11 +160,11 @@ export class Textarea_form_group extends Form_group_textarea {
         // add listner for the help modal generation functionality
         label_button.addEventListener('click', function(e) {
             
-            let modalCheck = document.getElementById(opts.id + '-modal');
+            let modalCheck = document.getElementById(opts.textarea.attributes.id + '-modal');
             
             if (!modalCheck) {
                 let modal_options = {
-                    id: opts.id,
+                    id: opts.textarea.attributes.id,
                     form_modal_text: opts.form_modal_text
                 };
                 let modal_nodes = generate_form_help_modal(modal_options);
@@ -180,7 +177,7 @@ export class Textarea_form_group extends Form_group_textarea {
         // add listner for the clear text button functionality
         clear_text_button.addEventListener('click', function(e) {
             
-            clear_user_value(opts.id);
+            clear_user_value(opts.textarea.attributes.id);
 
         });
 
@@ -188,7 +185,7 @@ export class Textarea_form_group extends Form_group_textarea {
         // HANDLE COMPONENT VALIDATION
         //
 
-        handle_textarea_validation(opts, textarea, label_el, form_help_text, form_error_text, form_success_text);
+        determine_textarea_validation(opts, textarea, label_el, form_help_text, form_error_text, form_success_text);
 
         //
         // ASSEMBLE COMPONENT ELEMENTS
