@@ -1,5 +1,7 @@
 import { Form_group } from './Form_group.js';
 import { Html_element } from '../../html_elements/data/html_element.js';
+import { add_global_form_input_attribute_defaults } from '../utilities/add_global_form_input_attribute_defaults.js';
+
 
 export class Form_group_input extends Form_group {
 
@@ -8,15 +10,10 @@ export class Form_group_input extends Form_group {
         // get props from inhereted class
         super();
 
-        // define default class CSS class settings/options
-        this.class_classes_defaults = {
-            inputs : 'form-control form-control-lg'
-        };
+        // default input attributes
+        this.input_base_attributes = {
 
-        // define default class settings/options
-        this.class_defaults = {
-            
-            // default input attributes
+            class : 'form-control form-control-lg',
             dirname : null, // for types search or text only
             list : null, // for types color, date, datetime-local, email, month, number, range, search, tel, text, time, url, or week only
             maxlength : null, // for types password, search, tel, text or url only
@@ -25,12 +22,17 @@ export class Form_group_input extends Form_group {
             pattern : null, // for types password, tel or text only
             placeholder : 'Default Placeholder', // for types password, search, tel, text or url only
             readonly : false, // for <input> types date, datetime-local, email, month, password, search, tel, text, time, url, week, and for <textarea>
-            size : null,
-            type : 'text',
-
-            // global validation defaults
             required : false, // for <input> types checkbox, date, datetime-local, email, file, month, number, password, radio, search, tel, text, time, url, week, and for <select> and <textarea>
-            enable_custom_validation : false,
+            size : null,
+            type : 'text'
+
+        };
+
+        // define default class settings/options
+        this.class_defaults = {
+            
+            // global validation defaults
+            enable_custom_validation : false, // for <input> types checkbox, date, datetime-local, email, file, month, number, password, radio, search, tel, text, time, url, week, and for <select> and <textarea>
             inject_invalid_box_shadow_css_reset : false,
             custom_validation : {
                 success_listner : 'change',
@@ -54,16 +56,19 @@ export class Form_group_input extends Form_group {
         };
 
         // assign any class default attributes/settings
-        Object.assign(this._defaults.classes, this.class_classes_defaults);
         Object.assign(this._defaults, this.class_defaults);
+
+        // create the input & input.attributes _defaults objects
+        this._defaults.input = {};
+        this._defaults.input.attributes = {};
 
         // add html global attributes to main <input> element
         let global_attrs = new Html_element()._defaults.attributes;
-        this._defaults.input = { attributes : global_attrs };
+        Object.assign(this._defaults.input.attributes, global_attrs);
 
-        // add html global aria attributes to main <input> element
-        let global_aria = new Html_element()._defaults.arias;
-        this._defaults.input.arias = global_aria;
+        // and add global and base input attributes from this class
+        add_global_form_input_attribute_defaults(this._defaults.input);
+        Object.assign(this._defaults.input.attributes, this.input_base_attributes);
 
     }
 

@@ -1,91 +1,61 @@
-import { form_group_defaults as defaults } from './data/form_group_defaults.js';
+import { Form_group_textarea } from './data/Form_group_textarea.js';
 
+import { apply_attributes, insert_text } from '../html_elements/utilities/dom_generation.js';
 import { clear_user_value } from './utilities/clear_user_value.js';
 import { generate_form_help_modal } from './utilities/generate_form_help_modal.js';
-import { inject_invalid_box_shadow_css_reset } from './utilities/inject_invalid_box_shadow_css_reset.js';
-import { insert_text } from '../html_elements/utilities/dom_generation.js';
+import { handle_textarea_attributes } from './utilities/handle_textarea_attributes.js';
+import { handle_textarea_validation } from './utilities/handle_textarea_validation.js';
 import { settings_merge } from '../helpers/settings_merge.js';
-import { swap_classes } from './utilities/swap_classes.js';
 import { update_character_count } from './utilities/update_character_count.js';
 
-class Textarea_character_counter_form_group {
+export class Textarea_character_counter_form_group extends Form_group_textarea {
 
     constructor (opts = false) {
 
+        // get props from inhereted class
+        super();
+
+        // define default class CSS class settings/options
+        this.class_classes_defaults = {
+            character_counter_parents : 'small text-right text-muted form-text'
+        };
+
         // define default class settings/options
-        this._defaults = {
-            // default component css classes strings
-            classes : {
-                form_groups : defaults.classes.form_groups,
-                label_wrappers : defaults.classes.label_wrappers,
-                labels : defaults.classes.labels,
-                label_buttons : defaults.classes.label_buttons,
-                label_button_icons : defaults.classes.label_button_icons,
-                textareas : defaults.classes.textareas,
-                clear_text_parents : defaults.classes.clear_text_parents,
-                clear_text_buttons : defaults.classes.clear_text_buttons,
-                form_text_wrappers : defaults.classes.form_text_wrappers,
-                form_text_parents : defaults.classes.form_text_parents,
-                form_help_texts : defaults.classes.form_help_texts,
-                form_error_texts : defaults.classes.form_error_texts,
-                form_success_texts : defaults.classes.form_success_texts,
-                character_counter_parents : defaults.classes.character_counter_parents
-            },
-            // default component clear text button settings
-            clear_text_button_styles : 'top:-82px; -webkit-appearance:none;',
-            clear_text_button_text : defaults.clear_text_button_text,
-            // default component help modal settings
-            form_modal_text : {
-                heading : 'Textarea Inputs',
-                body : [{
-                    type : 'paragraphs',
-                    content : [ 'Textarea Inputs are very useful and convenient options to help users enter data. Textareas differ from traditional inputs by allowing desktop browser users to re-size the input, and allowing both desktop and mobile browsers to scroll vertically whenever longer content is entered.' ]
-                }]
-            },
-            // default component form text settings
-            aria_describedby_suffix : defaults.aria_describedby_suffix,
-            error_text_suffix : defaults.error_text_suffix,
-            success_text_suffix : defaults.success_text_suffix,
-            form_text : {
-                help : ['Default Textarea help text'],
-                error : ['Default Textarea error text'],
-                success : ['Default Textarea success text']
-            },
+        this.class_defaults = {
+            
             // default component label text
             label : 'Character Counter Textarea',
-            // default textarea settings
-            autocomplete : null,
-            autofocus : false,
-            cols : null,
-            disabled : false,
-            form : null,
+            
+            // default input settings
             id : 'char-textarea-id',
-            maxlength : null,
-            minlength : null,
             name : 'char-textarea-name',
             placeholder : 'Default Placeholder',
-            readonly : false,
-            rows : defaults.rows,
-            spellcheck : null,
-            wrap : null,
-            value : '',
-            // default validation settings
-            required : false,
-            enable_custom_validation : false,
-            inject_invalid_box_shadow_css_reset : false,
-            custom_validation : {
-                success_listner : defaults.custom_validation_success_listner,
-                classes : {
-                    invalid_label : defaults.classes.invalid_label,
-                    valid_label : defaults.classes.valid_label,
-                    invalid_input : defaults.classes.invalid_input,
-                    valid_input : defaults.classes.valid_input
-                }
+
+            // default component help modal settings
+            form_modal_text : {
+                heading: 'Character Counter Textareas',
+                body: [{
+                    type: 'paragraphs',
+                    content: [ 'Character Counter Form Textareas are very useful and convenient options to help users enter data while also being precicely aware of how much they have typed and how much more they can type, too. Textareas differ from traditional inputs by allowing desktop browser users to re-size the input, and allowing both desktop and mobile browsers to scroll vertically whenever longer content is entered.' ]
+                }]
             },
+
+            // default component form text settings
+            form_text : {
+                help : ['Char Counter Textarea help text'],
+                error : ['Char Counter Textarea error text'],
+                success : ['Char Counter Textarea success text']
+            },
+
             // default character counter settings
-            characters_count_suffix : defaults.characters_count_suffix,
+            characters_count_suffix : '-characters',
             max_characters : '1200'
+
         };
+
+        // assign any class default attributes/settings
+        Object.assign(this._defaults.classes, this.class_classes_defaults);
+        Object.assign(this._defaults, this.class_defaults);
 
         // merge any passed options settings into the default settings to get a final settings object
         this.defaults = (opts) ? settings_merge(this._defaults, opts) : this._defaults;
@@ -148,6 +118,7 @@ class Textarea_character_counter_form_group {
         // create the textarea element
         let textarea = document.createElement('textarea');
         textarea.className = opts.classes.textareas;
+        apply_attributes(textarea, opts.textarea.attributes);
         textarea.setAttribute('id', opts.id);
         textarea.setAttribute('name', opts.name);
         textarea.setAttribute('rows', opts.rows);
@@ -207,33 +178,7 @@ class Textarea_character_counter_form_group {
         // HANDLE COMPONENT ATTRIBUTES
         //
 
-        // handle the autocomplete attribute
-        if ( opts.autocomplete ) { textarea.setAttribute('autocomplete', opts.autocomplete); }
-
-        // handle the autofocus attribute
-        if ( opts.autofocus === true ) { textarea.setAttribute('autofocus', opts.autofocus); }
-
-        // handle the cols attribute
-        if ( opts.cols ) { textarea.setAttribute('cols', opts.cols); }
-
-        // handle the disabled attribute
-        if ( opts.disabled === true ) { textarea.setAttribute('disabled', opts.disabled); }
-
-        // handle the form attribute
-        if ( opts.form ) { textarea.setAttribute('form', opts.form); }
-
-        // handle the maxlength and minlength attributes
-        if ( opts.maxlength ) { textarea.setAttribute('maxlength', opts.maxlength); }
-        if ( opts.minlength ) { textarea.setAttribute('minlength', opts.minlength); }
-
-        // handle the readonly attribute
-        if ( opts.readonly === true ) { textarea.setAttribute('readonly', opts.readonly); }
-
-        // handle the spellcheck attribute
-        if ( opts.spellcheck ) { textarea.setAttribute('spellcheck', opts.spellcheck); }
-
-        // handle the wrap attribute
-        if ( opts.wrap ) { textarea.setAttribute('wrap', opts.wrap); }
+        handle_textarea_attributes(opts, textarea);
 
         //
         // HANDLE COMPONENT LISTENERS
@@ -275,79 +220,7 @@ class Textarea_character_counter_form_group {
         // HANDLE COMPONENT VALIDATION
         //
 
-        // add validation to the input as specified by the defaults/options
-        if ( opts.required === true ) {
-            
-            // enable the browser's default required user feedback
-            textarea.setAttribute('required', opts.required);
-
-        }
-        
-        if ( opts.enable_custom_validation === true ) {
-            
-            // enable the browser's default required user feedback
-            textarea.setAttribute('required', opts.enable_custom_validation);
-
-            // check if the option to inject custom validation invalid box shadow css reset
-            // and inject the css as needed
-            if ( opts.inject_invalid_box_shadow_css_reset === true ) {
-                
-                inject_invalid_box_shadow_css_reset();
-
-            }
-            
-            // add the custom validation features for this element to the browser's invalid event
-            textarea.addEventListener('invalid', function(e) {
-                
-                // prevent the browser's default invalid UI from triggering
-                e.preventDefault();
-
-                // remove valid classes and add invalid classes to the input and label elements
-                swap_classes(
-                    label_el,
-                    opts.custom_validation.classes.valid_label,
-                    opts.custom_validation.classes.invalid_label
-                );
-                swap_classes(
-                    this,
-                    opts.custom_validation.classes.valid_input,
-                    opts.custom_validation.classes.invalid_input
-                );
-
-                // adjust form text for an invalid state
-                form_help_text.classList.add('d-none');
-                form_error_text.classList.remove('d-none');
-                form_success_text.classList.add('d-none');
-
-                // add a listener to the input to control change to success state from an invalid state
-                this.addEventListener(opts.custom_validation.success_listner, function(event) {
-                    
-                    // if the HTML5 validity valid state is true
-                    if ( this.validity.valid === true ) {
-                        
-                        // remove invalid and add valid classes to the input and label elements
-                        swap_classes(
-                            label_el,
-                            opts.custom_validation.classes.invalid_label,
-                            opts.custom_validation.classes.valid_label
-                        );
-                        swap_classes(
-                            this,
-                            opts.custom_validation.classes.invalid_input,
-                            opts.custom_validation.classes.valid_input
-                        );
-
-                        // adjust form text for a valid state
-                        form_help_text.classList.add('d-none');
-                        form_error_text.classList.add('d-none');
-                        form_success_text.classList.remove('d-none'); 
-                    }
-
-                });
-
-            });
-        
-        }
+        handle_textarea_validation(opts, textarea, label_el, form_help_text, form_error_text, form_success_text);
 
         //
         // ASSEMBLE COMPONENT ELEMENTS
@@ -382,5 +255,3 @@ class Textarea_character_counter_form_group {
     }
 
 }
-
-export { Textarea_character_counter_form_group };

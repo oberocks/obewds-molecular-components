@@ -34,8 +34,8 @@ export class Form_group {
                 form_modal_text_uls : 'text-left pl-3 mx-3',
                 form_modal_text_lis : '',
                 form_modal_imgs : 'img-fluid mb-3',
-                submit_button_parent  : 'form-group pt-3',
-                submit_button : 'btn btn-lg btn-primary box-shadow-xs'
+                //submit_button_form_group  : 'form-group pt-3',
+                //submit_button : 'btn btn-lg btn-primary box-shadow-xs'
             },
             
             // global component clear text button settings defaults
@@ -53,12 +53,14 @@ export class Form_group {
             },
 
             // global form element attribute defaults
+            /*I 
             autocomplete : null,
             autofocus : false,
             disabled : false,
             form : null,
             name : '',
             value : '',
+            */
 
             // global component help modal settings defaults
             help_modal_body_styles : 'max-height:200px;',

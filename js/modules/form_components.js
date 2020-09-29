@@ -8,7 +8,7 @@ export { Input_character_counter_form_group } from './form_components/Input_char
 export { Input_form_group } from './form_components/Input_form_group.js';
 export { Password_form_group } from './form_components/password_form_group.js';
 export { Phone_input_form_group } from './form_components/phone_input_form_group.js';
-export { Submit_button_form_group } from './form_components/submit_button_form_group.js';
-export { Textarea_character_counter_form_group } from './form_components/textarea_character_counter_form_group.js';
+export { Submit_button_form_group } from './form_components/Submit_button_form_group.js';
+export { Textarea_character_counter_form_group } from './form_components/Textarea_character_counter_form_group.js';
 export { Textarea_form_group } from './form_components/Textarea_form_group.js';
 export { Upload_single_file_form_group } from './form_components/upload_single_file_form_group.js';

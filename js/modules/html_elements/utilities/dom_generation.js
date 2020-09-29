@@ -4,7 +4,7 @@ export function apply_attributes (node, obj)
     {
         for (const key in obj)
         {
-            if (obj[key] != null) {
+            if (obj[key] != null && obj[key] != false) {
 
                 node.setAttribute(key, obj[key]);
 

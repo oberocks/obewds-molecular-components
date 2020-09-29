@@ -43,10 +43,6 @@ export class Form_group_custom_select extends Form_group {
         let global_attrs = new Html_element()._defaults.attributes;
         this._defaults.select = { attributes : global_attrs };
 
-        // add html global aria attributes to main <input> element
-        let global_aria = new Html_element()._defaults.arias;
-        this._defaults.select.arias = global_aria;
-
     }
 
 }

@@ -17,16 +17,18 @@ export class Input_form_group extends Form_group_input {
         // get props from inhereted class
         super();
 
+        // default input settings
+        this.new_input_attributes = {
+            id : 'default-input-id',
+            name : 'default-input-name',
+            placeholder : 'Default Placeholder', // for types password, search, tel, text or url only
+        };
+
         // define default class settings/options
         this.class_defaults = {
             
             // default component label text
             label : 'Default Input Label',
-            
-            // default input settings
-            id : 'default-input-id',
-            name : 'default-input-name',
-            placeholder : 'Default Placeholder', // for types password, search, tel, text or url only
             
             // default component help modal settings
             form_modal_text : {
@@ -47,6 +49,7 @@ export class Input_form_group extends Form_group_input {
         };
 
         // assign any class default attributes/settings
+        Object.assign(this._defaults.input.attributes, this.new_input_attributes);
         Object.assign(this._defaults, this.class_defaults);
 
         // merge any passed options settings into the default settings to get a final settings object
@@ -93,7 +96,7 @@ export class Input_form_group extends Form_group_input {
         // create the label element
         let label_el = document.createElement('label');
         label_el.className = opts.classes.labels;
-        label_el.setAttribute('for', opts.id);
+        label_el.setAttribute('for', opts.input.attributes.id);
         insert_text(label_el, opts.label);
 
         // create the button element for the input help modal
@@ -101,7 +104,7 @@ export class Input_form_group extends Form_group_input {
         label_button.className = opts.classes.label_buttons;
         label_button.setAttribute('type', 'button');
         label_button.setAttribute('data-toggle', 'modal');
-        label_button.setAttribute('data-target', '#' + opts.id + '-modal');
+        label_button.setAttribute('data-target', '#' + opts.input.attributes.id + '-modal');
 
         // create the font awesome label button icon element
         let label_button_icon = document.createElement('i');
@@ -109,14 +112,13 @@ export class Input_form_group extends Form_group_input {
 
         // create the input element
         let input = document.createElement('input');
-        input.className = opts.classes.inputs;
+        handle_input_attributes(opts, input);
         apply_attributes(input, opts.input.attributes);
-        apply_attributes(input, opts.input.arias);
-        input.setAttribute('type', opts.type);
-        input.setAttribute('id', opts.id);
-        input.setAttribute('name', opts.name);
-        input.setAttribute('value', opts.value);
-        input.setAttribute('aria-describedby', opts.id + opts.aria_describedby_suffix);
+        //input.setAttribute('type', opts.type);
+        //input.setAttribute('id', opts.input.attributes.id);
+        //input.setAttribute('name', opts.name);
+        //input.setAttribute('value', opts.value);
+        input.setAttribute('aria-describedby', opts.input.attributes.id + opts.aria_describedby_suffix);
 
         // create the parent text clear element
         let clear_text_parent = document.createElement('div');
@@ -141,19 +143,19 @@ export class Input_form_group extends Form_group_input {
         // create the form help text elements
         let form_help_text = document.createElement('small');
         form_help_text.className = opts.classes.form_help_texts;
-        form_help_text.setAttribute('id', opts.id + opts.aria_describedby_suffix);
+        form_help_text.setAttribute('id', opts.input.attributes.id + opts.aria_describedby_suffix);
         insert_text(form_help_text, opts.form_text.help);
 
         // create the form error text elements
         let form_error_text = document.createElement('small');
         form_error_text.className = opts.classes.form_error_texts;
-        form_error_text.setAttribute('id', opts.id + opts.error_text_suffix);
+        form_error_text.setAttribute('id', opts.input.attributes.id + opts.error_text_suffix);
         insert_text(form_error_text, opts.form_text.error);
 
         // create the form success text elements
         let form_success_text = document.createElement('small');
         form_success_text.className = opts.classes.form_success_texts;
-        form_success_text.setAttribute('id', opts.id + opts.success_text_suffix);
+        form_success_text.setAttribute('id', opts.input.attributes.id + opts.success_text_suffix);
         insert_text(form_success_text, opts.form_text.success);
 
         //
@@ -170,23 +172,17 @@ export class Input_form_group extends Form_group_input {
         }
 
         //
-        // HANDLE COMPONENT ATTRIBUTES
-        //
-
-        handle_input_attributes(opts, input);
-
-        //
         // HANDLE COMPONENT LISTENERS
         //
 
         // add listner for the help modal generation functionality
         label_button.addEventListener('click', function(e) {
             
-            let modalCheck = document.getElementById(opts.id + '-modal');
+            let modalCheck = document.getElementById(opts.input.attributes.id + '-modal');
             
             if (!modalCheck) {
                 let modal_options = {
-                    id: opts.id,
+                    id: opts.input.attributes.id,
                     form_modal_text: opts.form_modal_text
                 };
                 let modal_nodes = generate_form_help_modal(modal_options);
@@ -199,7 +195,7 @@ export class Input_form_group extends Form_group_input {
         // add listner for the clear text button functionality
         clear_text_button.addEventListener('click', function(e) {
             
-            clear_user_value(opts.id);
+            clear_user_value(opts.input.attributes.id);
 
         });
 

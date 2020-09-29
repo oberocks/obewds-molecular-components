@@ -7,7 +7,7 @@ import { password_visibility_toggle } from './utilities/password_visibility_togg
 import { settings_merge } from '../helpers/settings_merge.js';
 import { swap_classes } from './utilities/swap_classes.js';
 
-class Password_form_group {
+export class Password_form_group {
     
     constructor (opts = false) {
         
@@ -408,5 +408,3 @@ class Password_form_group {
     }
 
 }
-
-export { Password_form_group };

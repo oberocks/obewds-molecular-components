@@ -24,9 +24,6 @@ export class Textarea_form_group extends Form_group_textarea {
             id : 'default-textarea-id',
             name : 'default-textarea-name',
 
-            // default component specific settings
-            clear_text_button_styles : 'top:-82px; -webkit-appearance:none;',
-
             // default component help modal settings
             form_modal_text : {
                 heading : 'Textarea Inputs',
@@ -109,7 +106,6 @@ export class Textarea_form_group extends Form_group_textarea {
         let textarea = document.createElement('textarea');
         textarea.className = opts.classes.textareas;
         apply_attributes(textarea, opts.textarea.attributes);
-        apply_attributes(textarea, opts.textarea.arias);
         textarea.setAttribute('id', opts.id);
         textarea.setAttribute('name', opts.name);
         textarea.setAttribute('rows', opts.rows);

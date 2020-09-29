@@ -3,10 +3,10 @@ import { settings_merge } from '../helpers/settings_merge.js';
 import { generate_form_help_modal } from './utilities/generate_form_help_modal.js';
 import { insert_text } from '../html_elements/utilities/dom_generation.js';
 
-class Upload_single_file_form_group
-{
-    constructor (opts = false)
-    {
+export class Upload_single_file_form_group {
+
+    constructor (opts = false) {
+
         // define default class settings/options
         this._defaults = {
             aria_describedby_suffix : defaults.aria_describedby_suffix,
@@ -49,6 +49,7 @@ class Upload_single_file_form_group
             required            : false,
             accept              : '',
             capture             : ''
+
         };
 
         // merge any passed options settings into the default settings to get a final settings object
@@ -237,5 +238,3 @@ class Upload_single_file_form_group
         return form_group;
     }
 }
-
-export { Upload_single_file_form_group };

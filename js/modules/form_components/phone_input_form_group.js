@@ -9,7 +9,7 @@ import { swap_classes } from './utilities/swap_classes.js';
 import IMask from '../plugins/imask/index.js';
 import { set_imask_format } from './utilities/set_imask_format.js';
 
-class Phone_input_form_group {
+export class Phone_input_form_group {
 
     constructor (opts = false) {
         
@@ -407,5 +407,3 @@ class Phone_input_form_group {
     }
 
 }
-
-export { Phone_input_form_group };

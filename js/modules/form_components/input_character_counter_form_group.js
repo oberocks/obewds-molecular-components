@@ -122,7 +122,6 @@ export class Input_character_counter_form_group extends Form_group_input {
         let input = document.createElement('input');
         input.className = opts.classes.inputs;
         apply_attributes(input, opts.input.attributes);
-        apply_attributes(input, opts.input.arias);
         input.setAttribute('type', opts.type);
         input.setAttribute('id', opts.id);
         input.setAttribute('name', opts.name);

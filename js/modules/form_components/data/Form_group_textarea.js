@@ -26,6 +26,9 @@ export class Form_group_textarea extends Form_group {
             spellcheck : null,
             wrap : null,
 
+            // default component specific settings
+            clear_text_button_styles : 'top:-82px; -webkit-appearance:none;',
+
             // global validation defaults
             required : false, // for <input> types checkbox, date, datetime-local, email, file, month, number, password, radio, search, tel, text, time, url, week, and for <select> and <textarea>
             enable_custom_validation : false,
@@ -49,10 +52,6 @@ export class Form_group_textarea extends Form_group {
         // add html global attributes to main <input> element
         let global_attrs = new Html_element()._defaults.attributes;
         this._defaults.textarea = { attributes : global_attrs };
-
-        // add html global aria attributes to main <input> element
-        let global_aria = new Html_element()._defaults.arias;
-        this._defaults.textarea.arias = global_aria;
 
     }
 

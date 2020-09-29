@@ -1,5 +1,5 @@
-function clear_user_value (elId, counterSuffix = false)
-{
+export function clear_user_value (elId, counterSuffix = false) {
+
     if (counterSuffix)
     {
         // grab the user's visable counter element and reset it to 0
@@ -13,6 +13,5 @@ function clear_user_value (elId, counterSuffix = false)
 
     // focus the cleared form element
     target.focus();
-}
 
-export { clear_user_value };
+}

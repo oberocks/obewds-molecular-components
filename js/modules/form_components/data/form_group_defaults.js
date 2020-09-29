@@ -27,7 +27,7 @@ export let form_group_defaults = {
         form_modal_text_uls : 'text-left pl-3 mx-3',
         form_modal_text_lis : '',
         form_modal_imgs : 'img-fluid mb-3',
-        submit_button_parent  : 'form-group pt-3',
+        submit_button_form_group  : 'form-group pt-3',
         submit_button : 'btn btn-lg btn-primary box-shadow-xs',
         invalid_label : 'text-danger',
         valid_label : 'text-success',
