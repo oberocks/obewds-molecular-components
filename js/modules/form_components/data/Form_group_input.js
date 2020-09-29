@@ -44,6 +44,11 @@ export class Form_group_input extends Form_group {
                 }
             },
 
+            // create empty input & input.attributes objects
+            input : {
+                attributes : {}
+            },
+
             // global masking settings defaults
             masking : {
                 enable : false,
@@ -58,16 +63,12 @@ export class Form_group_input extends Form_group {
         // assign any class default attributes/settings
         Object.assign(this._defaults, this.class_defaults);
 
-        // create the input & input.attributes _defaults objects
-        this._defaults.input = {};
-        this._defaults.input.attributes = {};
-
         // add html global attributes to main <input> element
         let global_attrs = new Html_element()._defaults.attributes;
         Object.assign(this._defaults.input.attributes, global_attrs);
 
         // and add global and base input attributes from this class
-        add_global_form_input_attribute_defaults(this._defaults.input);
+        add_global_form_input_attribute_defaults(this._defaults.input.attributes);
         Object.assign(this._defaults.input.attributes, this.input_base_attributes);
 
     }

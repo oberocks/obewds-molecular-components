@@ -10,7 +10,7 @@ export function inject_invalid_box_shadow_css_reset ()
         // create the style element and set attributes and content
         var style = document.createElement('style');
         style.setAttribute('id', id);
-        style.innerHTML = ' :invalid { box-shadow: none; } ' + ' :-moz-submit-invalid { box-shadow: none; } ' + ' :-moz-ui-invalid { box-shadow: none; } ';
+        style.innerHTML = ' :invalid { box-shadow: none; } ' + ' :-moz-ui-invalid { box-shadow: none; } '; // cut :-moz-submit-invalid { box-shadow: none; } out so submit's can have box shadows
         
         // add the new style tag to the head element
         document.getElementsByTagName('head')[0].appendChild(style);
