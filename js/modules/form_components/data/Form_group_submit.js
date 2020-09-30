@@ -51,7 +51,7 @@ export class Form_group_submit extends Form_group {
         let global_attrs = new Html_element()._defaults.attributes;
         Object.assign(this._defaults.input.attributes, global_attrs);
 
-        // and add global and base input attributes from this class
+        // and add global and base <input> attributes from this class
         add_global_form_input_attribute_defaults(this._defaults.input.attributes);
         Object.assign(this._defaults.input.attributes, this.input_base_attributes);
 
