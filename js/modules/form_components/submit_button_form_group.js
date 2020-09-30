@@ -1,7 +1,10 @@
+// import class dependencies
 import { Form_group_submit } from './data/Form_group_submit.js';
 
+// import utility dependencies
 import { settings_merge } from '../helpers/settings_merge.js';
 import { apply_attributes } from '../html_elements/utilities/dom_generation.js';
+
 
 export class Submit_button_form_group extends Form_group_submit {
 

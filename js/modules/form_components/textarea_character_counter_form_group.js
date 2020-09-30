@@ -1,5 +1,7 @@
+// import class dependencies
 import { Form_group_textarea } from './data/Form_group_textarea.js';
 
+// import utility dependencies
 import { apply_attributes, insert_text } from '../html_elements/utilities/dom_generation.js';
 import { clear_user_value } from './utilities/clear_user_value.js';
 import { generate_form_help_modal } from './utilities/generate_form_help_modal.js';
@@ -7,6 +9,7 @@ import { handle_textarea_attributes } from './utilities/handle_textarea_attribut
 import { determine_textarea_validation } from './utilities/determine_textarea_validation.js';
 import { settings_merge } from '../helpers/settings_merge.js';
 import { update_character_count } from './utilities/update_character_count.js';
+
 
 export class Textarea_character_counter_form_group extends Form_group_textarea {
 
@@ -121,9 +124,6 @@ export class Textarea_character_counter_form_group extends Form_group_textarea {
         let textarea = document.createElement('textarea');
         handle_textarea_attributes(opts.textarea.attributes, textarea);
         apply_attributes(textarea, opts.textarea.attributes);
-        //textarea.setAttribute('id', opts.textarea.attributes.id);
-        //textarea.setAttribute('name', opts.name);
-        //textarea.setAttribute('rows', opts.rows);
         textarea.value = opts.textarea.attributes.value; // CANNOT BE: textarea.setAttribute('value', opts.textarea.attributes.value);
         textarea.setAttribute('aria-describedby', opts.textarea.attributes.id + opts.aria_describedby_suffix);
         textarea.setAttribute('data-max-characters', opts.max_characters);

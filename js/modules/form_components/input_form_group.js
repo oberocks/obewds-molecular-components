@@ -1,5 +1,7 @@
+// import class dependencies
 import { Form_group_input } from './data/Form_group_input.js';
 
+// import utility dependencies
 import { apply_attributes, insert_text } from '../html_elements/utilities/dom_generation.js';
 import { clear_user_value } from './utilities/clear_user_value.js';
 import { generate_form_help_modal } from './utilities/generate_form_help_modal.js';
@@ -7,8 +9,10 @@ import { determine_input_validation } from './utilities/determine_input_validati
 import { handle_input_attributes } from './utilities/handle_input_attributes.js';
 import { settings_merge } from '../helpers/settings_merge.js';
 
+// import plugin dependencies
 import IMask from '../plugins/imask/index.js';
 import { set_imask_format } from './utilities/set_imask_format.js';
+
 
 export class Input_form_group extends Form_group_input {
     
@@ -113,10 +117,6 @@ export class Input_form_group extends Form_group_input {
         let input = document.createElement('input');
         handle_input_attributes(opts.input.attributes, input);
         apply_attributes(input, opts.input.attributes);
-        //input.setAttribute('type', opts.type);
-        //input.setAttribute('id', opts.input.attributes.id);
-        //input.setAttribute('name', opts.name);
-        //input.setAttribute('value', opts.value);
         input.setAttribute('aria-describedby', opts.input.attributes.id + opts.aria_describedby_suffix);
 
         // create the parent text clear element
