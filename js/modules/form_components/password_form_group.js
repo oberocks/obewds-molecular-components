@@ -28,7 +28,7 @@ export class Password_form_group extends Form_group_input {
 
         // define default class CSS class settings/options
         this.class_css_classes = {
-            visibility_toggle_btn : 'btn btn-sm btn-link text-decoration-none'
+            visibility_toggle_btn : 'btn btn-sm btn-link text-decoration-none pr-0'
         };
 
         // define default class settings/options
