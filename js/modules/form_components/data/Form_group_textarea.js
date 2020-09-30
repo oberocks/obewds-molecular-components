@@ -23,7 +23,8 @@ export class Form_group_textarea extends Form_group {
             placeholder : 'Default Textarea Placeholder',
             required : false, // for text, search, url, tel, email, password, date, month, week, time, datetime-local, number, checkbox, radio, file, <input> types along with the <select> and <textarea>
             spellcheck : null,
-            wrap : null
+            wrap : null,
+            value : ''
         };
 
         // define default class settings/options
