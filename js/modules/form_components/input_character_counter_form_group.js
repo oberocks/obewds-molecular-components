@@ -21,8 +21,7 @@ export class Input_character_counter_form_group extends Form_group_input {
         // default input settings
         this.new_input_attributes = {
             id : 'default-char-count-input-id',
-            name : 'default-char-count-input-name',
-            placeholder : 'Default Placeholder', // for types password, search, tel, text or url only
+            name : 'default-char-count-input-name'
         };
 
         // define default class CSS class settings/options

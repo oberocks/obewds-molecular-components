@@ -20,8 +20,7 @@ export class Input_form_group extends Form_group_input {
         // default input settings
         this.new_input_attributes = {
             id : 'default-input-id',
-            name : 'default-input-name',
-            placeholder : 'Default Placeholder', // for types password, search, tel, text or url only
+            name : 'default-input-name'
         };
 
         // define default class settings/options
