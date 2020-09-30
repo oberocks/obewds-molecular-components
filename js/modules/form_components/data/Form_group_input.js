@@ -34,6 +34,11 @@ export class Form_group_input extends Form_group {
 
         // define default class settings/options
         this.class_defaults = {
+
+            // create empty input & input.attributes objects
+            input : {
+                attributes : {}
+            },
             
             // global validation defaults
             enable_custom_validation : false, // for <input> types checkbox, date, datetime-local, email, file, month, number, password, radio, search, tel, text, time, url, week, and for <select> and <textarea>
@@ -46,11 +51,6 @@ export class Form_group_input extends Form_group {
                     invalid_input : 'form-danger border-width-4',
                     valid_input : 'form-success border-width-2'
                 }
-            },
-
-            // create empty input & input.attributes objects
-            input : {
-                attributes : {}
             },
 
             // global masking settings defaults
