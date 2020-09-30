@@ -1,6 +1,6 @@
-import { settings_merge } from '../../helpers/settings_merge.js';
+import { settings_merge } from '../helpers/settings_merge.js';
 
-class Validation_patterns {
+export class Validation_patterns {
     
     constructor (opts = false) {
         
@@ -24,6 +24,12 @@ class Validation_patterns {
                     name : 'US Minimal Dot Phone Number',
                     descrip : 'A minimally formatted US phone number expecting 3 number digits, a dot, another 3 number digits, another dot, and 4 final number digits.',
                     source : 'http://html5pattern.com/Phones'
+                },
+                fourteen_characters : {
+                    regex : '.{14}',
+                    name : 'Fourteen Characters String',
+                    descrip : 'A 14 character string of any characters excluding line breaks.',
+                    source : 'https://www.freeformatter.com/regex-tester.html'
                 }
             },
             string : {
@@ -74,5 +80,3 @@ class Validation_patterns {
     }
     
 }
-
-export { Validation_patterns };
