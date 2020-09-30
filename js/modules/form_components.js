@@ -1,5 +1,5 @@
 export { Credit_payment_component } from './form_components/credit_payment_component.js';
-export { Custom_checkbox_orphan_component } from './form_components/custom_checkbox_orphan_component.js';
+export { Orphan_custom_checkbox_form_group } from './form_components/Orphan_custom_checkbox_form_group.js';
 export { Custom_checkboxes_form_group } from './form_components/custom_checkboxes_form_group.js';
 export { Custom_checkboxes_switch_gated_form_group } from './form_components/custom_checkboxes_switch_gated_form_group.js';
 export { Custom_radios_form_group } from './form_components/custom_radios_form_group.js';
