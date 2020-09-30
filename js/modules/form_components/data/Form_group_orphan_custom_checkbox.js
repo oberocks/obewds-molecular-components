@@ -49,6 +49,19 @@ export class Form_group_orphan_custom_checkbox extends Form_group {
                 attributes : {}
             },
 
+            // global validation defaults
+            enable_custom_validation : false, // for <input> types checkbox, date, datetime-local, email, file, month, number, password, radio, search, tel, text, time, url, week, and for <select> and <textarea>
+            inject_invalid_box_shadow_css_reset : false,
+            custom_validation : {
+                success_listner : 'change',
+                classes : {
+                    invalid_label : 'text-danger',
+                    valid_label : 'text-success',
+                    invalid_input : 'form-danger border-width-4',
+                    valid_input : 'form-success border-width-2'
+                }
+            },
+
             // add any additional component attributes
             aria_describedby_suffix : '-label'
 
