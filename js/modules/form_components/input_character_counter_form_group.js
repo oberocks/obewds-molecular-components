@@ -3,7 +3,7 @@ import { Form_group_input } from './data/Form_group_input.js';
 import { apply_attributes, insert_text } from '../html_elements/utilities/dom_generation.js';
 import { clear_user_value } from './utilities/clear_user_value.js';
 import { generate_form_help_modal } from './utilities/generate_form_help_modal.js';
-import { handle_input_validation } from './utilities/handle_input_validation.js';
+import { determine_input_validation } from './utilities/determine_input_validation.js';
 import { handle_input_attributes } from './utilities/handle_input_attributes.js';
 import { settings_merge } from '../helpers/settings_merge.js';
 import { update_character_count } from './utilities/update_character_count.js';
@@ -18,8 +18,15 @@ export class Input_character_counter_form_group extends Form_group_input {
         // get props from inhereted class
         super();
 
+        // default input settings
+        this.new_input_attributes = {
+            id : 'default-char-count-input-id',
+            name : 'default-char-count-input-name',
+            placeholder : 'Default Placeholder', // for types password, search, tel, text or url only
+        };
+
         // define default class CSS class settings/options
-        this.class_classes_defaults = {
+        this.class_css_classes = {
             character_counter_parents : 'small text-right text-muted form-text'
         };
 
@@ -28,11 +35,6 @@ export class Input_character_counter_form_group extends Form_group_input {
             
             // default component label text
             label : 'Character Counter Input',
-            
-            // default input settings
-            id : 'input-char-count-id',
-            name : 'input-char-count-name',
-            placeholder : 'Default Placeholder', // for types password, search, tel, text or url only
 
             // default component help modal settings
             form_modal_text : {
@@ -57,7 +59,8 @@ export class Input_character_counter_form_group extends Form_group_input {
         };
 
         // assign any class default attributes/settings
-        Object.assign(this._defaults.classes, this.class_classes_defaults);
+        Object.assign(this._defaults.input.attributes, this.new_input_attributes);
+        Object.assign(this._defaults.classes, this.class_css_classes);
         Object.assign(this._defaults, this.class_defaults);
 
         // merge any passed options settings into the default settings to get a final settings object
@@ -104,7 +107,7 @@ export class Input_character_counter_form_group extends Form_group_input {
         // create the label element
         let label_el = document.createElement('label');
         label_el.className = opts.classes.labels;
-        label_el.setAttribute('for', opts.id);
+        label_el.setAttribute('for', opts.input.attributes.id);
         insert_text(label_el, opts.label);
 
         // create the button element for the input help modal
@@ -112,7 +115,7 @@ export class Input_character_counter_form_group extends Form_group_input {
         label_button.className = opts.classes.label_buttons;
         label_button.setAttribute('type', 'button');
         label_button.setAttribute('data-toggle', 'modal');
-        label_button.setAttribute('data-target', '#' + opts.id + '-modal');
+        label_button.setAttribute('data-target', '#' + opts.input.attributes.id + '-modal');
 
         // create the font awesome label button icon element
         let label_button_icon = document.createElement('i');
@@ -121,12 +124,13 @@ export class Input_character_counter_form_group extends Form_group_input {
         // create the input element
         let input = document.createElement('input');
         input.className = opts.classes.inputs;
+        handle_input_attributes(opts.input.attributes, input);
         apply_attributes(input, opts.input.attributes);
-        input.setAttribute('type', opts.type);
-        input.setAttribute('id', opts.id);
-        input.setAttribute('name', opts.name);
-        input.setAttribute('value', opts.value);
-        input.setAttribute('aria-describedby', opts.id + opts.aria_describedby_suffix);
+        //input.setAttribute('type', opts.type);
+        //input.setAttribute('id', opts.input.attributes.id);
+        //input.setAttribute('name', opts.name);
+        //input.setAttribute('value', opts.value);
+        input.setAttribute('aria-describedby', opts.input.attributes.id + opts.aria_describedby_suffix);
         input.setAttribute('data-max-characters', opts.max_characters);
 
         // create the parent text clear element
@@ -152,19 +156,19 @@ export class Input_character_counter_form_group extends Form_group_input {
         // create the form help text elements
         let form_help_text = document.createElement('small');
         form_help_text.className = opts.classes.form_help_texts;
-        form_help_text.setAttribute('id', opts.id + opts.aria_describedby_suffix);
+        form_help_text.setAttribute('id', opts.input.attributes.id + opts.aria_describedby_suffix);
         insert_text(form_help_text, opts.form_text.help);
 
         // create the form error text elements
         let form_error_text = document.createElement('small');
         form_error_text.className = opts.classes.form_error_texts;
-        form_error_text.setAttribute('id', opts.id + opts.error_text_suffix);
+        form_error_text.setAttribute('id', opts.input.attributes.id + opts.error_text_suffix);
         insert_text(form_error_text, opts.form_text.error);
 
         // create the form success text elements
         let form_success_text = document.createElement('small');
         form_success_text.className = opts.classes.form_success_texts;
-        form_success_text.setAttribute('id', opts.id + opts.success_text_suffix);
+        form_success_text.setAttribute('id', opts.input.attributes.id + opts.success_text_suffix);
         insert_text(form_success_text, opts.form_text.success);
 
         // create the parent character counter wrapper element
@@ -173,8 +177,8 @@ export class Input_character_counter_form_group extends Form_group_input {
 
         // create the character counter elements
         let char_counter = document.createElement('span');
-        char_counter.setAttribute('id', opts.id + opts.characters_count_suffix);
-        let char_counter_text = document.createTextNode(Number(opts.value.length).toLocaleString());
+        char_counter.setAttribute('id', opts.input.attributes.id + opts.characters_count_suffix);
+        let char_counter_text = document.createTextNode(Number(opts.input.attributes.value.length).toLocaleString());
         let char_counter_limit = document.createTextNode('/' + Number(opts.max_characters).toLocaleString());
 
         //
@@ -202,11 +206,11 @@ export class Input_character_counter_form_group extends Form_group_input {
 
         // add listner for the help modal generation functionality
         label_button.addEventListener('click', function(e) {
-            let modalCheck = document.getElementById(opts.id + '-modal');
+            let modalCheck = document.getElementById(opts.input.attributes.id + '-modal');
             if (!modalCheck)
             {
                 let modal_options = {
-                    id: opts.id,
+                    id: opts.input.attributes.id,
                     form_modal_text: opts.form_modal_text
                 };
                 let modal_nodes = generate_form_help_modal(modal_options);
@@ -221,7 +225,7 @@ export class Input_character_counter_form_group extends Form_group_input {
         // add listner for the clear text button functionality
         clear_text_button.addEventListener('click', function(e) {
             
-            clear_user_value(opts.id, thisClass.defaults.characters_count_suffix);
+            clear_user_value(opts.input.attributes.id, thisClass.defaults.characters_count_suffix);
 
         });
 
@@ -236,7 +240,7 @@ export class Input_character_counter_form_group extends Form_group_input {
         // HANDLE COMPONENT VALIDATION
         //
 
-        handle_input_validation(opts, input, label_el, form_help_text, form_error_text, form_success_text);
+        determine_input_validation(opts, input, label_el, form_help_text, form_error_text, form_success_text);
 
         //
         // ASSEMBLE COMPONENT ELEMENTS
