@@ -13,41 +13,50 @@ export class Form_group_custom_select extends Form_group {
         // get props from inhereted class
         super();
 
-        // define default class CSS class settings/options
-        this.class_classes_defaults = {
-            selects : 'custom-select'
+        // default select attributes
+        this.select_base_attributes = {
+
+            class : 'custom-select custom-select-lg',
+            multiple : null,
+            required : false, // for <input> types checkbox, date, datetime-local, email, file, month, number, password, radio, search, tel, text, time, url, week, and for <select> and <textarea>
+            size : null
+
         };
 
         // define default class settings/options
         this.class_defaults = {
-            
-            // default textarea attributes
-            multiple : null,
-            size : null,
 
             // global validation defaults
-            required : false, // for <input> types checkbox, date, datetime-local, email, file, month, number, password, radio, search, tel, text, time, url, week, and for <select> and <textarea>
-            enable_custom_validation : false,
+            enable_custom_validation : false, // for <input> types checkbox, date, datetime-local, email, file, month, number, password, radio, search, tel, text, time, url, week, and for <select> and <textarea>
             inject_invalid_box_shadow_css_reset : false,
             custom_validation : {
                 success_listner : 'change',
                 classes : {
                     invalid_label : 'text-danger',
                     valid_label : 'text-success',
-                    invalid_input : 'form-danger border-width-4',
-                    valid_input : 'form-success border-width-2'
+                    invalid_input : 'form-danger border-red-300 border-width-4',
+                    valid_input : 'form-success border-success border-width-2'
                 }
+            },
+
+            // create empty select & select.attributes objects
+            select : {
+                attributes : {}
             }
 
         };
 
         // assign any class default attributes/settings
-        Object.assign(this._defaults.classes, this.class_classes_defaults);
         Object.assign(this._defaults, this.class_defaults);
+        Object.assign(this._defaults.select.attributes, this.select_base_attributes);
 
-        // add html global attributes to main <input> element
+        // add html global attributes to main <select> element
         let global_attrs = new Html_element()._defaults.attributes;
-        this._defaults.select = { attributes : global_attrs };
+        Object.assign(this._defaults.select.attributes, global_attrs);
+
+        // and add global and base <select> attributes from this class
+        add_global_form_element_attribute_defaults(this._defaults.select.attributes);
+        Object.assign(this._defaults.select.attributes, this.select_base_attributes);
 
     }
 
