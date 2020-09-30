@@ -1,5 +1,8 @@
+// import class dependencies
 import { Form_group } from './Form_group.js';
 import { Html_element } from '../../html_elements/data/html_element.js';
+
+// import utility dependencies
 import { add_global_form_input_attribute_defaults } from '../utilities/add_global_form_input_attribute_defaults.js';
 
 
