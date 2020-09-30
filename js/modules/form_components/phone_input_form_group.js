@@ -1,39 +1,42 @@
-import { form_group_defaults as defaults } from './data/form_group_defaults.js';
+import { Form_group_input } from './data/Form_group_input.js';
 
+import { apply_attributes, insert_text } from '../html_elements/utilities/dom_generation.js';
 import { clear_user_value } from './utilities/clear_user_value.js';
 import { generate_form_help_modal } from './utilities/generate_form_help_modal.js';
-import { insert_text } from '../html_elements/utilities/dom_generation.js';
+import { determine_input_validation } from './utilities/determine_input_validation.js';
+import { handle_input_attributes } from './utilities/handle_input_attributes.js';
 import { settings_merge } from '../helpers/settings_merge.js';
-import { swap_classes } from './utilities/swap_classes.js';
 
 import IMask from '../plugins/imask/index.js';
 import { set_imask_format } from './utilities/set_imask_format.js';
 
-export class Phone_input_form_group {
+export class Phone_input_form_group extends Form_group_input {
 
     constructor (opts = false) {
-        
+
+        // get props from inhereted class
+        super();
+
+        // default input settings
+        this.new_input_attributes = {
+            id : 'default-phone-input-id',
+            name : 'default-phone-input-name',
+            placeholder : '(123) 123-1234', // for types password, search, tel, text or url only
+            type : 'tel'
+        };
+
+        // default masking settings
+        this.new_input_masking = {
+            enable : true,
+            type : 'phone_us'
+        };
+
         // define default class settings/options
-        this._defaults = {
-            // default component css classes strings
-            classes : {
-                form_groups : defaults.classes.form_groups,
-                label_wrappers : defaults.classes.label_wrappers,
-                labels : defaults.classes.labels,
-                label_buttons : defaults.classes.label_buttons,
-                label_button_icons : defaults.classes.label_button_icons,
-                inputs : defaults.classes.inputs,
-                clear_text_parents : defaults.classes.clear_text_parents,
-                clear_text_buttons : defaults.classes.clear_text_buttons,
-                form_text_wrappers : defaults.classes.form_text_wrappers,
-                form_text_parents : defaults.classes.form_text_parents,
-                form_help_texts : defaults.classes.form_help_texts,
-                form_error_texts : defaults.classes.form_error_texts,
-                form_success_texts : defaults.classes.form_success_texts
-            },
-            // default component clear text button settings
-            clear_text_button_styles : defaults.clear_text_button_styles,
-            clear_text_button_text : defaults.clear_text_button_text,
+        this.class_defaults = {
+            
+            // default component label text
+            label : 'Default Phone Input Label',
+
             // default component help modal settings
             form_modal_text : {
                 heading : 'Form Phone Inputs',
@@ -42,56 +45,20 @@ export class Phone_input_form_group {
                     content : [ 'Form Phone Inputs are very useful and convenient options to help users enter telephone number data. This phone input comes with JavaScript masking built-in from a third-party plugin calles iMask.js!' ]
                 }]
             },
+
             // default component form text settings
-            aria_describedby_suffix : defaults.aria_describedby_suffix,
-            error_text_suffix : defaults.error_text_suffix,
-            success_text_suffix : defaults.success_text_suffix,
             form_text : {
                 help : ['Default Phone Input help text'],
                 error : ['Default Phone Input error text'],
                 success : ['Default Phone Input success text']
-            },
-            // default component label text
-            label : 'Default Phone Input Label',
-            // default input settings
-            autocomplete : null,
-            autofocus : false,
-            dirname : null, // for types search or text only
-            disabled : false,
-            form : null,
-            id : 'default-phone-input-id',
-            list : null,
-            maxlength : null, // for types password, search, tel, text or url only
-            minlength : null, // for types password, search, tel, text or url only
-            multiple : false, // for types email only
-            name : 'default-phone-input-name',
-            pattern : null, // for types password, tel or text only
-            placeholder : '(123) 123-1234', // for types password, search, tel, text or url only
-            readonly : false,
-            size : null, // for types email, password, tel or text only
-            type : 'tel',
-            value : '',
-            // default validation settings
-            required : false,
-            enable_custom_validation : false,
-            custom_validation : {
-                success_listner : defaults.custom_validation_success_listner,
-                classes : {
-                    invalid_label : defaults.classes.invalid_label,
-                    valid_label : defaults.classes.valid_label,
-                    invalid_input : defaults.classes.invalid_input,
-                    valid_input : defaults.classes.valid_input
-                }
-            },
-            // default masking settings
-            masking : {
-                enable : true,
-                type : 'phone_us',
-                min : defaults.masking.min,
-                max : defaults.masking.max,
-                seperator : defaults.masking.seperator
             }
+
         };
+
+        // assign any class default attributes/settings
+        Object.assign(this._defaults.input.attributes, this.new_input_attributes);
+        Object.assign(this._defaults.masking, this.new_input_masking);
+        Object.assign(this._defaults, this.class_defaults);
 
         // merge any passed options settings into the default settings to get a final settings object
         this.defaults = (opts) ? settings_merge(this._defaults, opts) : this._defaults;
@@ -137,7 +104,7 @@ export class Phone_input_form_group {
         // create the label element
         let label_el = document.createElement('label');
         label_el.className = opts.classes.labels;
-        label_el.setAttribute('for', opts.id);
+        label_el.setAttribute('for', opts.input.attributes.id);
         insert_text(label_el, opts.label);
 
         // create the button element for the input help modal
@@ -145,7 +112,7 @@ export class Phone_input_form_group {
         label_button.className = opts.classes.label_buttons;
         label_button.setAttribute('type', 'button');
         label_button.setAttribute('data-toggle', 'modal');
-        label_button.setAttribute('data-target', '#' + opts.id + '-modal');
+        label_button.setAttribute('data-target', '#' + opts.input.attributes.id + '-modal');
 
         // create the font awesome label button icon element
         let label_button_icon = document.createElement('i');
@@ -153,12 +120,13 @@ export class Phone_input_form_group {
 
         // create the input element
         let input = document.createElement('input');
-        input.className = opts.classes.inputs;
-        input.setAttribute('type', opts.type);
-        input.setAttribute('id', opts.id);
-        input.setAttribute('name', opts.name);
-        input.setAttribute('value', opts.value);
-        input.setAttribute('aria-describedby', opts.id + opts.aria_describedby_suffix);
+        handle_input_attributes(opts.input.attributes, input);
+        apply_attributes(input, opts.input.attributes);
+        //input.setAttribute('type', opts.type);
+        //input.setAttribute('id', opts.input.attributes.id);
+        //input.setAttribute('name', opts.name);
+        //input.setAttribute('value', opts.value);
+        input.setAttribute('aria-describedby', opts.input.attributes.id + opts.aria_describedby_suffix);
 
         // create the parent text clear element
         let clear_text_parent = document.createElement('div');
@@ -183,19 +151,19 @@ export class Phone_input_form_group {
         // create the form help text elements
         let form_help_text = document.createElement('small');
         form_help_text.className = opts.classes.form_help_texts;
-        form_help_text.setAttribute('id', opts.id + opts.aria_describedby_suffix);
+        form_help_text.setAttribute('id', opts.input.attributes.id + opts.aria_describedby_suffix);
         insert_text(form_help_text, opts.form_text.help);
 
         // create the form error text elements
         let form_error_text = document.createElement('small');
         form_error_text.className = opts.classes.form_error_texts;
-        form_error_text.setAttribute('id', opts.id + opts.error_text_suffix);
+        form_error_text.setAttribute('id', opts.input.attributes.id + opts.error_text_suffix);
         insert_text(form_error_text, opts.form_text.error);
 
         // create the form success text elements
         let form_success_text = document.createElement('small');
         form_success_text.className = opts.classes.form_success_texts;
-        form_success_text.setAttribute('id', opts.id + opts.success_text_suffix);
+        form_success_text.setAttribute('id', opts.input.attributes.id + opts.success_text_suffix);
         insert_text(form_success_text, opts.form_text.success);
 
         //
@@ -212,90 +180,16 @@ export class Phone_input_form_group {
         }
 
         //
-        // HANDLE COMPONENT ATTRIBUTES
-        //
-
-        // handle the autocomplete attribute
-        if ( opts.autocomplete ) { input.setAttribute('autocomplete', opts.autocomplete); }
-
-        // handle the autofocus attribute
-        if ( opts.autofocus === true ) { input.setAttribute('autofocus', opts.autofocus); }
-
-        // handle the dirname attribute
-        if ( opts.type === 'search' || opts.type === 'text' ) {
-            
-            if ( opts.dirname ) { input.setAttribute('dirname', opts.dirname); }
-
-        }
-
-        // handle the disabled attribute
-        if ( opts.disabled === true ) { input.setAttribute('disabled', opts.disabled); }
-
-        // handle the form attribute
-        if ( opts.form ) { input.setAttribute('form', opts.form); }
-
-        // handle the list attribute
-        if ( opts.list ) { input.setAttribute('form', opts.list); }
-
-        // handle the maxlength, minlength, placeholder attributes
-        if ( opts.type === 'password' || opts.type === 'search' || opts.type === 'tel' || opts.type === 'text' || opts.type === 'url' ) {
-
-            if ( opts.maxlength ) { input.setAttribute('maxlength', opts.maxlength); }
-
-            if ( opts.minlength ) { input.setAttribute('minlength', opts.minlength); }
-        
-            input.setAttribute('placeholder', opts.placeholder);
-
-        }
-
-        // handle the multiple attribute
-        if ( opts.type === 'email' ) {
-            
-            if ( opts.multiple === true ) { input.setAttribute('multiple', opts.multiple); }
-
-        }
-
-        // handle the minlength attribute
-        if ( opts.minlength ) { input.setAttribute('minlength', opts.minlength); }
-
-        // handle the pattern attribute
-        if ( opts.required === true || opts.enable_custom_validation === true ) {
-            
-            // check if an allowed input type for a pattern attribute is set
-            if ( opts.type === 'password' || opts.type === 'tel' || opts.type === 'text' ) {
-                
-                // if the options pattern setting is set, add the pattern attribute and value
-                if ( opts.pattern ) {
-                    
-                    input.setAttribute('pattern', opts.pattern);
-
-                }
-
-            }
-
-        }
-
-        // handle the readonly attribute
-        if ( opts.readonly === true ) { input.setAttribute('readonly', opts.readonly); }
-
-        // handle the size attribute
-        if ( opts.type === 'email' || opts.type === 'password' || opts.type === 'tel' || opts.type === 'text' ) {
-            
-            if ( opts.size ) { input.setAttribute('size', opts.size); }
-
-        }
-
-        //
         // HANDLE COMPONENT LISTENERS
         //
 
         // add listner for the help modal generation functionality
         label_button.addEventListener('click', function(e) {
-            let modalCheck = document.getElementById(opts.id + '-modal');
+            let modalCheck = document.getElementById(opts.input.attributes.id + '-modal');
             if (!modalCheck)
             {
                 let modal_options = {
-                    id: opts.id,
+                    id: opts.input.attributes.id,
                     form_modal_text: opts.form_modal_text
                 };
                 let modal_nodes = generate_form_help_modal(modal_options);
@@ -306,78 +200,14 @@ export class Phone_input_form_group {
 
         // add listner for the clear text button functionality
         clear_text_button.addEventListener('click', function(e) {
-            clear_user_value(opts.id);
+            clear_user_value(opts.input.attributes.id);
         });
 
         //
         // HANDLE COMPONENT VALIDATION
         //
 
-        // add validation to the input as specified by the defaults/options
-        if ( opts.required === true ) {
-            
-            // enable the browser's default required user feedback
-            input.setAttribute('required', opts.required);
-
-        }
-        
-        if ( opts.enable_custom_validation === true ) {
-            
-            // enable the browser's default required user feedback
-            input.setAttribute('required', opts.enable_custom_validation);
-            
-            // add the custom validation features for this element to the browser's invalid event
-            input.addEventListener('invalid', function(e) {
-                
-                // prevent the browser's default invalid UI from triggering
-                e.preventDefault();
-
-                // remove valid classes and add invalid classes to the input and label elements
-                swap_classes(
-                    label_el,
-                    opts.custom_validation.classes.valid_label,
-                    opts.custom_validation.classes.invalid_label
-                );
-                swap_classes(
-                    this,
-                    opts.custom_validation.classes.valid_input,
-                    opts.custom_validation.classes.invalid_input
-                );
-
-                // adjust form text for an invalid state
-                form_help_text.classList.add('d-none');
-                form_error_text.classList.remove('d-none');
-                form_success_text.classList.add('d-none');
-
-                // add a listener to the input to control change to success state from an invalid state
-                this.addEventListener(opts.custom_validation.success_listner, function(event) {
-                    
-                    // if the HTML5 validity valid state is true
-                    if ( this.validity.valid === true ) {
-                        
-                        // remove invalid and add valid classes to the input and label elements
-                        swap_classes(
-                            label_el,
-                            opts.custom_validation.classes.invalid_label,
-                            opts.custom_validation.classes.valid_label
-                        );
-                        swap_classes(
-                            this,
-                            opts.custom_validation.classes.invalid_input,
-                            opts.custom_validation.classes.valid_input
-                        );
-
-                        // adjust form text for a valid state
-                        form_help_text.classList.add('d-none');
-                        form_error_text.classList.add('d-none');
-                        form_success_text.classList.remove('d-none'); 
-                    }
-
-                });
-
-            });
-        
-        }
+        determine_input_validation(opts, input, label_el, form_help_text, form_error_text, form_success_text);
 
         //
         // ASSEMBLE COMPONENT ELEMENTS
