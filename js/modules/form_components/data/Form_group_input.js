@@ -20,7 +20,7 @@ export class Form_group_input extends Form_group {
             minlength : null, // for types password, search, tel, text or url only
             multiple : false, // for types email, file or <select> only
             pattern : null, // for types password, tel or text only
-            placeholder : 'Default Placeholder', // for types password, search, tel, text or url only
+            placeholder : 'Default Input Placeholder', // for types password, search, tel, text or url only
             readonly : false, // for <input> types date, datetime-local, email, month, password, search, tel, text, time, url, week, and for <textarea>
             required : false, // for <input> types checkbox, date, datetime-local, email, file, month, number, password, radio, search, tel, text, time, url, week, and for <select> and <textarea>
             size : null,
