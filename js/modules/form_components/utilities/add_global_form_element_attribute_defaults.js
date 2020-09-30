@@ -1,4 +1,4 @@
-export function add_global_form_input_attribute_defaults (attrObj) {
+export function add_global_form_element_attribute_defaults (attrObj) {
 
     // global form element attribute defaults
     attrObj.autocomplete = null;
@@ -6,6 +6,5 @@ export function add_global_form_input_attribute_defaults (attrObj) {
     attrObj.disabled = null;
     attrObj.form = null;
     attrObj.name = '';
-    attrObj.value = '';
 
 }

@@ -3,7 +3,7 @@ import { Form_group } from './Form_group.js';
 import { Html_element } from '../../html_elements/data/html_element.js';
 
 // import utility dependencies
-import { add_global_form_input_attribute_defaults } from '../utilities/add_global_form_input_attribute_defaults.js';
+import { add_global_form_element_attribute_defaults } from '../utilities/add_global_form_element_attribute_defaults.js';
 
 
 export class Form_group_input extends Form_group {
@@ -27,7 +27,8 @@ export class Form_group_input extends Form_group {
             readonly : false, // for <input> types date, datetime-local, email, month, password, search, tel, text, time, url, week, and for <textarea>
             required : false, // for <input> types checkbox, date, datetime-local, email, file, month, number, password, radio, search, tel, text, time, url, week, and for <select> and <textarea>
             size : null,
-            type : 'text'
+            type : 'text',
+            value : ''
 
         };
 
@@ -71,7 +72,7 @@ export class Form_group_input extends Form_group {
         Object.assign(this._defaults.input.attributes, global_attrs);
 
         // and add global and base <input> attributes from this class
-        add_global_form_input_attribute_defaults(this._defaults.input.attributes);
+        add_global_form_element_attribute_defaults(this._defaults.input.attributes);
         Object.assign(this._defaults.input.attributes, this.input_base_attributes);
 
     }
