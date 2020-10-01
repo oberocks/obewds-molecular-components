@@ -24,7 +24,7 @@ export function is_function (val) {
 }
 
 export function is_object (val) {
-    return (Object.prototype.toString.call(val) === '[object Object]' && val != null) ? true : false;
+    return (Object.prototype.toString.call(val) === '[object Object]' && val !== null) ? true : false;
 }
 
 export function is_array (val) {
@@ -169,7 +169,7 @@ export function settings_merge (baseObj, modObj) {
                 // if this base object property is null
                 } else if ( is_null(baseObj[prop]) ) {
 
-                    output[prop] = ( modObj[prop] != null ) ? modObj[prop] : baseObj[prop];
+                    output[prop] = ( modObj[prop] ) ? modObj[prop] : baseObj[prop];
 
                 // otherwise if this base object property has a value of undefined
                 } else {

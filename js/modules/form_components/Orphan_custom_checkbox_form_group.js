@@ -52,7 +52,7 @@ export class Orphan_custom_checkbox_form_group extends Form_group_orphan_custom_
         input.setAttribute('aria-describedby', opts.input.attributes.id + opts.aria_describedby_suffix);
 
         // set the checked attribute if needed upon render
-        if (opts.input.attributes.checked != null && opts.input.attributes.checked != false)
+        if (opts.input.attributes.checked !== null && opts.input.attributes.checked !== false)
         {
             input.setAttribute('checked', '');
         }
