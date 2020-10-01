@@ -47,8 +47,8 @@ export class Form_group_textarea extends Form_group {
                 classes : {
                     invalid_label : 'text-danger',
                     valid_label : 'text-success',
-                    invalid_input : 'form-danger border-width-4',
-                    valid_input : 'form-success border-width-2'
+                    invalid_element : 'form-danger border-width-4',
+                    valid_element : 'form-success border-width-2'
                 }
             }
 

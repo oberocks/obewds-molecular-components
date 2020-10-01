@@ -33,8 +33,8 @@ export function handle_input_validation (optsObj, inputEl, labelEl, helpTxtEl, e
                 );
                 swap_classes(
                     this,
-                    optsObj.custom_validation.classes.valid_input,
-                    optsObj.custom_validation.classes.invalid_input
+                    optsObj.custom_validation.classes.valid_element,
+                    optsObj.custom_validation.classes.invalid_element
                 );
 
                 // adjust form text for an invalid state
@@ -56,8 +56,8 @@ export function handle_input_validation (optsObj, inputEl, labelEl, helpTxtEl, e
                         );
                         swap_classes(
                             this,
-                            optsObj.custom_validation.classes.invalid_input,
-                            optsObj.custom_validation.classes.valid_input
+                            optsObj.custom_validation.classes.invalid_element,
+                            optsObj.custom_validation.classes.valid_element
                         );
 
                         // adjust form text for a valid state

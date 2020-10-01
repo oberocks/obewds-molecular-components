@@ -34,8 +34,8 @@ export class Form_group_custom_select extends Form_group {
                 classes : {
                     invalid_label : 'text-danger',
                     valid_label : 'text-success',
-                    invalid_input : 'form-danger border-red-300 border-width-4',
-                    valid_input : 'form-success border-success border-width-2'
+                    invalid_element : 'form-danger border-red-300 border-width-4',
+                    valid_element : 'form-success border-success border-width-2'
                 }
             },
 

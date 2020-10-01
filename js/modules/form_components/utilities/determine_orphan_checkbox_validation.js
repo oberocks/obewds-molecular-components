@@ -35,8 +35,8 @@ export function determine_orphan_checkbox_validation (optsObj, inputEl, labelEl)
                 );
                 swap_classes(
                     this,
-                    optsObj.custom_validation.classes.valid_input,
-                    optsObj.custom_validation.classes.invalid_input
+                    optsObj.custom_validation.classes.valid_element,
+                    optsObj.custom_validation.classes.invalid_element
                 );
 
                 // add a listener to the input to control change to success state from an invalid state
@@ -53,8 +53,8 @@ export function determine_orphan_checkbox_validation (optsObj, inputEl, labelEl)
                         );
                         swap_classes(
                             this,
-                            optsObj.custom_validation.classes.invalid_input,
-                            optsObj.custom_validation.classes.valid_input
+                            optsObj.custom_validation.classes.invalid_element,
+                            optsObj.custom_validation.classes.valid_element
                         );
                         
                     }
