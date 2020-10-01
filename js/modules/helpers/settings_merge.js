@@ -1,38 +1,37 @@
-
-export function is_null (val) {
-    return val === null;
-}
-
-export function is_boolean (val) {
-    return typeof val === 'boolean';
-}
-
-export function is_string (val) {
-    return typeof val === 'string';
-}
-
-export function is_number (val) {
-    return typeof val === 'number';
+export function is_array (val) {
+    return Array.isArray(val);
 }
 
 export function is_bigint (val) {
     return typeof val === 'bigint';
 }
 
+export function is_boolean (val) {
+    return typeof val === 'boolean';
+}
+
+export function is_element_node (val) {
+    return (val instanceof Element || val instanceof HTMLDocument) ? true : false;
+}
+
 export function is_function (val) {
     return typeof val === 'function';
+}
+
+export function is_null (val) {
+    return val === null;
+}
+
+export function is_number (val) {
+    return typeof val === 'number';
 }
 
 export function is_object (val) {
     return (Object.prototype.toString.call(val) === '[object Object]' && val !== null) ? true : false;
 }
 
-export function is_array (val) {
-    return Array.isArray(val);
-}
-
-export function is_element_node (val) {
-    return (val instanceof Element || val instanceof HTMLDocument) ? true : false;
+export function is_string (val) {
+    return typeof str === 'string' || str instanceof String;
 }
 
 export function is_prop_defined (val) {
