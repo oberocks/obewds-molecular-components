@@ -3,10 +3,10 @@ import { settings_merge } from '../helpers/settings_merge.js';
 import { generate_form_help_modal } from './utilities/generate_form_help_modal.js';
 import { apply_attributes, insert_text } from '../html_elements/utilities/dom_generation.js';
 
-class Custom_checkboxes_form_group
-{
-    constructor (opts = false)
-    {
+export class Custom_checkboxes_form_group {
+
+    constructor (opts = false) {
+
         // define default class settings/options
         this._defaults = {
             classes : {
@@ -58,18 +58,23 @@ class Custom_checkboxes_form_group
 
         // clear original defaults
         this._defaults = null;
+
     }
 
     get_class_defaults () {
+
         return this.defaults;
+
     }
 
     get_generate_options (options) {
+
         return settings_merge(this.defaults, options);
+
     }
 
-    generate (options = false)
-    {
+    generate (options = false) {
+
         // merge any passed options settings into the default settings to get a final settings object
         let opts = (options) ? settings_merge(this.defaults, options) : this.defaults;
         
@@ -179,7 +184,7 @@ class Custom_checkboxes_form_group
 
         // return the form group element
         return form_group;
-    }
-}
 
-export { Custom_checkboxes_form_group };
+    }
+
+}
