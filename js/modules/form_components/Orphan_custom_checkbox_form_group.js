@@ -1,12 +1,10 @@
-import { form_group_defaults as defaults } from './data/form_group_defaults.js';
-
-
 // import class dependencies
 import { Form_group_orphan_custom_checkbox } from './data/Form_group_orphan_custom_checkbox.js';
 
 // import utility dependencies
-import { settings_merge } from '../helpers/settings_merge.js';
 import { apply_attributes, insert_text } from '../html_elements/utilities/dom_generation.js';
+import { determine_orphan_checkbox_validation } from './utilities/determine_orphan_checkbox_validation.js';
+import { settings_merge } from '../helpers/settings_merge.js';
 
 
 export class Orphan_custom_checkbox_form_group extends Form_group_orphan_custom_checkbox {
@@ -37,8 +35,15 @@ export class Orphan_custom_checkbox_form_group extends Form_group_orphan_custom_
 
     generate (options = false) {
 
-        // merge any passed options settings into the default settings to get a final settings object
+        //
+        // MERGE INSTANCE OPTIONS
+        //
+        
         let opts = (options) ? settings_merge(this.defaults, options) : this.defaults;
+
+        //
+        // GENERATE AND SET COMPONENT NODES
+        //
 
         // create the form group element
         let form_group = document.createElement('div');
@@ -64,11 +69,23 @@ export class Orphan_custom_checkbox_form_group extends Form_group_orphan_custom_
         label.setAttribute('id', opts.input.attributes.id + opts.aria_describedby_suffix);
         insert_text(label, opts.label);
 
-        // append all the elements
+        //
+        // HANDLE COMPONENT VALIDATION
+        //
+
+        determine_orphan_checkbox_validation(opts, input, label);
+
+        //
+        // ASSEMBLE COMPONENT ELEMENTS
+        //
+        
         form_group.appendChild(input);
         form_group.appendChild(label);
 
-        // return the form group element
+        //
+        // RETURN COMPONENT NODES
+        //
+
         return form_group;
 
     }
