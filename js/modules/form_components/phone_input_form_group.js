@@ -10,7 +10,7 @@ import { handle_input_attributes } from './utilities/handle_input_attributes.js'
 import { settings_merge } from '../helpers/settings_merge.js';
 
 // import plugin dependencies
-import IMask from '../plugins/imask/index.js';
+import IMask from '../plugins/imask/esm/index.js';
 import { set_imask_format } from './utilities/set_imask_format.js';
 
 

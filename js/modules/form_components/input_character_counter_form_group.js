@@ -11,7 +11,7 @@ import { settings_merge } from '../helpers/settings_merge.js';
 import { update_character_count } from './utilities/update_character_count.js';
 
 // import plugin dependencies
-import IMask from '../plugins/imask/index.js';
+import IMask from '../plugins/imask/esm/index.js';
 import { set_imask_format } from './utilities/set_imask_format.js';
 
 

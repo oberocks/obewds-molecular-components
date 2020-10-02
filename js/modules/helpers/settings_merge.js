@@ -31,7 +31,7 @@ export function is_object (val) {
 }
 
 export function is_string (val) {
-    return typeof str === 'string' || str instanceof String;
+    return typeof val === 'string' || val instanceof String;
 }
 
 export function is_prop_defined (val) {

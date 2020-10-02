@@ -5,7 +5,7 @@ import { generate_form_help_modal } from './utilities/generate_form_help_modal.j
 import { get_partial_cc_icon_classes } from './utilities/get_partial_cc_icon_classes.js';
 import { insert_text } from '../html_elements/utilities/dom_generation.js';
 
-import IMask from '../plugins/imask/index.js';
+import IMask from '../plugins/imask/esm/index.js';
 import { set_imask_format } from './utilities/set_imask_format.js';
 
 export class Credit_payment_component {

@@ -1,17 +1,12 @@
 {
   "name": "obewds-molecular-components",
-  "version": "2.16.0",
+  "version": "2.17.0",
   "description": "A pure JavaScript ES Modules project built to compliment the OBE:WDS (OBE:BS4) Web Design System for rapid modern JavaScript development with design-flexible and deeply configurable interactive and static content components.",
   "main": "index.js",
   "scripts": {
-    "install_newest_typy": "npm install --save typy",
-    "move_newest_typy": "cp -a ./node_modules/typy ./js/modules/plugins/typy",
-    "update_typy": "npm run install_newest_typy && npm run move_newest_typy",
     "install_newest_imask": "npm install --save imask",
     "move_newest_imask": "cp -a ./node_modules/imask/esm ./js/modules/plugins/imask",
-    "update_imask": "npm run install_newest_imask && npm run move_newest_imask",
-
-    "update_dependencies": "npm run update_imask && npm run update_typy"
+    "update_imask": "npm run install_newest_imask && npm run move_newest_imask"
   },
   "repository": {
     "type": "git",
