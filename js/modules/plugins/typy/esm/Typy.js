@@ -67,6 +67,11 @@ export default class Typy {
         return false;
     }
 
+    get isElementNode() {
+        if (this.input instanceof Element || this.input instanceof HTMLDocument) return true;
+        return false;
+    }
+
     get isBoolean() {
         if (typeof this.input === typeof true) return true;
         return false;

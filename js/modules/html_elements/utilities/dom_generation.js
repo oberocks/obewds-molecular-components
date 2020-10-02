@@ -1,12 +1,20 @@
+import Typy from '../../plugins/typy/esm/Typy.js'; // import the default exported class
+
+const typy = new Typy();
+
 export function apply_attributes (node, obj) {
 
     if (Object.keys(obj).length > 0) {
 
         for (const key in obj) {
 
-            if (obj[key] !== null && obj[key] !== false) {
+            if (obj.hasOwnProperty(key)) {
 
-                node.setAttribute(key, obj[key]);
+                if (obj[key] !== null && obj[key] !== false) {
+
+                    node.setAttribute(key, obj[key]);
+
+                }
 
             }
             
@@ -44,11 +52,47 @@ export function insert_text (node, str) {
 
 }
 
-export function append_child (node, childNodes) {
+export function append_child (node, childNode) {
 
-    if (childNodes && childNodes.nodeType === Node.ELEMENT_NODE) {
+    if (childNode && childNode.nodeType === Node.ELEMENT_NODE) {
 
-        node.appendChild(childNodes);
+        node.appendChild(childNode);
+
+    }
+
+}
+
+export function append_children_array (node, array) {
+
+    if (Array.isArray(array)) {
+
+        for (var i = 0; i < array.length; i++) {
+
+            if (array[i].tag) {
+
+                let child = document.createElement(array[i].tag);
+
+                if (array[i].attributes) {
+                    apply_attributes(child, array[i].attributes);
+                }
+
+                if (array[i].text) {
+                    insert_text(child, array[i].text); 
+                }
+
+                if (array[i].children) {
+                    append_children_array(child, array[i].children);
+                }
+
+                node.appendChild(child);
+
+            } else if (typy.check(array[i]).isElementNode) {
+
+                node.appendChild(array[i]);
+
+            }
+
+        }
 
     }
 
@@ -84,14 +128,14 @@ export function add_to_dom (parent, type, el, subType = false, refNode = false) 
 
     } else if (t === 'replacechild' || t === 'replace') {
         
-        if (subType === 'with' || self.isString(subType)) {
+        if (subType === 'with' || typy.check(subType).isString) {
             
             let ref = refNode ? refNode : undefined;
             if (ref) {
                 parent.replaceChild(ref, el);
             }
 
-        } else if (self.isElementNode(subType)) {
+        } else if (typy.check(subType).isElementNode) {
             
             parent.replaceChild(subType, el);
 
@@ -130,12 +174,12 @@ export function generate_element (elemType, elemText = false, attributes = false
     
     // check for passed elemText
     if (elemText) {
-
+        
         // check if value is a string and has length
-        if (self.isString(elemText) && elemText.length > 0) {
+        if (typy.check(elemText).isString && elemText.length > 0) {
             
             // if it's a string then create a text node and append it to the returned element
-            el.appendChild(self.textNode(elemText));
+            el.appendChild(document.createTextNode(elemText));
 
         } 
         // if the value is an array
@@ -146,19 +190,19 @@ export function generate_element (elemType, elemText = false, attributes = false
             for (var i = 0; i < elemText.length; i++) {
                 
                 // if it's a string then create a text node and append it to the returned element
-                if (self.isString(elemText[i])) {
+                if (typy.check(elemText[i]).isString) {
                     
-                    el.appendChild(self.textNode(elemText[i]));
+                    el.appendChild(document.createTextNode(elemText[i]));
 
                 }
                 // if it's an element node then append it to the returned element
-                else if (self.isElementNode(elemText[i])) {
+                else if (typy.check(elemText[i]).isElementNode) {
                     
                     el.appendChild(elemText[i]);
 
                 } else {
 
-                    self.logTextArrayError();
+                    //self.logTextArrayError();
 
                 }
 
@@ -166,7 +210,7 @@ export function generate_element (elemType, elemText = false, attributes = false
 
         } else {
 
-            self.logTextArrayError();
+            //self.logTextArrayError();
 
         }
         
@@ -177,7 +221,7 @@ export function generate_element (elemType, elemText = false, attributes = false
     if (attributes) {
         
         // check that the argument is an object and is not null
-        if (self.isObject(attributes)) {
+        if (typy.check(attributes).isObject) {
             
             // loop through the object
             for (var attr in attributes) {
@@ -193,7 +237,7 @@ export function generate_element (elemType, elemText = false, attributes = false
 
         } else {
 
-            self.logSettingsError(".element()'s 3rd argument");
+            //self.logSettingsError(".element()'s 3rd argument");
 
         }
 
@@ -209,14 +253,14 @@ export function generate_element (elemType, elemText = false, attributes = false
             for (var i = 0; i < nestedElem.length; i++) {
                 
                 // check the array item is an element node
-                if (self.isElementNode(nestedElem[i])) {
+                if (typy.check(nestedElem[i]).isElementNode) {
                             
                     // and attach each element
                     el.appendChild(nestedElem[i]);
                     
                 } else {
 
-                    self.logNodeError(".element()'s 4th argument at index: [" + i + "]");
+                    //self.logNodeError(".element()'s 4th argument at index: [" + i + "]");
 
                 }
 
@@ -225,14 +269,14 @@ export function generate_element (elemType, elemText = false, attributes = false
         } else {
             
             // check that the passed item is an element node
-            if (self.isElementNode(nestedElem)) {
+            if (typy.check(nestedElem).isElementNode) {
                             
                 // if so, then just attach the passed element
                 el.appendChild(nestedElem);
                 
             } else {
 
-                self.logNodeError(".element()'s 4th argument");
+                //self.logNodeError(".element()'s 4th argument");
 
             }
 
@@ -241,5 +285,58 @@ export function generate_element (elemType, elemText = false, attributes = false
 
     // return the element
     return el;
+
+}
+
+export function generate_cell (cell_plan = false) {
+        
+    let settings;
+    if (cell_plan) {
+        settings = cell_plan;
+    } else {
+        console.error('OBE:WDS MC Error: The generate_cell() function requires a passed Array ([...]) of JavaScript objects that follow the tag/attribute/text/children key and values schema.');
+        return;
+    }
+
+    // initialize the output variable as a fragment
+    let output = document.createDocumentFragment();
+
+    for (var i = 0; i < settings.length; i++) {
+        
+        if (typy.check(settings[i]).isObject) {
+            
+            if (settings[i].tag) {
+                
+                let parent = document.createElement(settings[i].tag);
+
+                if (settings[i].attributes) {
+                    apply_attributes(parent, settings[i].attributes);
+                }
+
+                if (settings[i].text) {
+                    insert_text(parent, settings[i].text);
+                }
+
+                if (settings[i].children) {
+                    append_children_array(parent, settings[i].children);
+                }
+
+                output.appendChild(parent);
+
+            } else {
+
+                console.error("OBE:WDS MC Error: The array of objects passed (at index " + i + ") into the generate_cell() function did not have a 'tag' property. This property's String value is REQUIRED to properly generate your markup!");
+
+            }
+
+        } else {
+
+            console.error("OBE:WDS MC Error: The generate_cell() method requires that you pass an array of objects to properly generate your markup!");
+
+        }
+
+    }
+
+    return output;
 
 }
