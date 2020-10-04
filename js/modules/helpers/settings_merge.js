@@ -1,46 +1,10 @@
-export function is_array (val) {
-    return Array.isArray(val);
-}
-
-export function is_bigint (val) {
-    return typeof val === 'bigint';
-}
-
-export function is_boolean (val) {
-    return typeof val === 'boolean';
-}
-
-export function is_element_node (val) {
-    return (val instanceof Element || val instanceof HTMLDocument) ? true : false;
-}
-
-export function is_function (val) {
-    return typeof val === 'function';
-}
-
-export function is_null (val) {
-    return val === null;
-}
-
-export function is_number (val) {
-    return typeof val === 'number';
-}
-
-export function is_object (val) {
-    return (Object.prototype.toString.call(val) === '[object Object]' && val !== null) ? true : false;
-}
-
-export function is_string (val) {
-    return typeof val === 'string' || val instanceof String;
-}
-
-export function is_prop_defined (val) {
-    return typeof val !== 'undefined'
-}
+import { Type_checker } from '../libraries/Type_checker.js';
 
 
 export function settings_merge (baseObj, modObj) {
 
+    let type_checker = new Type_checker();
+    
     let output = {};
             
     var merge = function (baseObj, modObj) {
@@ -51,7 +15,7 @@ export function settings_merge (baseObj, modObj) {
             if (baseObj.hasOwnProperty(prop)) {
 
                 // if this base object property is a boolean
-                if ( is_boolean(baseObj[prop]) ) {
+                if ( type_checker.is_boolean(baseObj[prop]) ) {
 
                     // init a var to help handle incorrect declarations of true/false values
                     let mod_obj_bool;
@@ -72,35 +36,35 @@ export function settings_merge (baseObj, modObj) {
                     output[prop] = (typeof modObj[prop] !== 'undefined') ? mod_obj_bool : baseObj[prop];
 
                 // if this base object property is a boolean
-                } else if ( is_string(baseObj[prop]) ) {
+                } else if ( type_checker.is_string(baseObj[prop]) ) {
 
-                    output[prop] = is_prop_defined(modObj[prop]) ? String(modObj[prop]) : baseObj[prop];
+                    output[prop] = type_checker.is_defined(modObj[prop]) ? String(modObj[prop]) : baseObj[prop];
 
                 // otherwise if this base object prop is a number
-                } else if ( is_number(baseObj[prop]) ) {
+                } else if ( type_checker.is_number(baseObj[prop]) ) {
 
-                    output[prop] = is_prop_defined(modObj[prop]) ? Number(modObj[prop]) : baseObj[prop];
+                    output[prop] = type_checker.is_defined(modObj[prop]) ? Number(modObj[prop]) : baseObj[prop];
 
                 // or if this base object prop is a big int
-                } else if ( is_bigint(baseObj[prop]) ) {
+                } else if ( type_checker.is_big_integer(baseObj[prop]) ) {
 
-                    output[prop] = is_prop_defined(modObj[prop]) ? BigInt(modObj[prop]) : baseObj[prop];
+                    output[prop] = type_checker.is_defined(modObj[prop]) ? BigInt(modObj[prop]) : baseObj[prop];
 
                 // or if this base object prop is a function
-                } else if ( is_function(baseObj[prop]) ) {
+                } else if ( type_checker.is_function(baseObj[prop]) ) {
 
-                    output[prop] = is_prop_defined(modObj[prop]) ? modObj[prop] : baseObj[prop];
+                    output[prop] = type_checker.is_defined(modObj[prop]) ? modObj[prop] : baseObj[prop];
 
                 // or if this base object prop is an object
-                } else if ( is_object(baseObj[prop]) ) {
+                } else if ( type_checker.is_object(baseObj[prop]) ) {
 
-                    output[prop] = is_prop_defined(modObj[prop]) ? settings_merge( baseObj[prop], modObj[prop] ) : baseObj[prop];
+                    output[prop] = type_checker.is_defined(modObj[prop]) ? settings_merge( baseObj[prop], modObj[prop] ) : baseObj[prop];
 
                     // if the current property is called attributes (and it's value is an object obviously)
                     if (prop === 'attributes') {
                         
                         // if there is a matching attributes object in the modObj, too
-                        if ( is_object(modObj[prop]) ) {
+                        if ( type_checker.is_object(modObj[prop]) ) {
                             // loop through the attributes object's properties
                             for ( var subprop in modObj[prop] ) {
                                 // if the property doesn't already exist in the output object
@@ -115,39 +79,39 @@ export function settings_merge (baseObj, modObj) {
                     }
 
                 // or if this base object prop is an array
-                } else if ( is_array(baseObj[prop]) ) {
+                } else if ( type_checker.is_array(baseObj[prop]) ) {
 
                     let temp_array = [];
 
-                    if ( is_array(modObj[prop]) ) {
+                    if ( type_checker.is_array(modObj[prop]) ) {
 
                         for (var i = 0; i < modObj[prop].length; i++) {
 
-                            if ( is_boolean(modObj[prop][i]) ) {
+                            if ( type_checker.is_boolean(modObj[prop][i]) ) {
 
-                                let temp_value = is_prop_defined(modObj[prop][i]) ? Boolean(modObj[prop][i]) : baseObj[prop][i];
+                                let temp_value = type_checker.is_defined(modObj[prop][i]) ? Boolean(modObj[prop][i]) : baseObj[prop][i];
                                 temp_array.push( temp_value );
 
-                            } else if ( is_string(modObj[prop][i]) ) {
+                            } else if ( type_checker.is_string(modObj[prop][i]) ) {
 
-                                let temp_value = is_prop_defined(modObj[prop][i]) ? String(modObj[prop][i]) : baseObj[prop][i];
+                                let temp_value = type_checker.is_defined(modObj[prop][i]) ? String(modObj[prop][i]) : baseObj[prop][i];
                                 temp_array.push( temp_value );
 
-                            } else if ( is_number(modObj[prop][i]) ) {
+                            } else if ( type_checker.is_number(modObj[prop][i]) ) {
 
-                                let temp_value = is_prop_defined(modObj[prop][i]) ? Number(modObj[prop][i]) : baseObj[prop][i];
+                                let temp_value = type_checker.is_defined(modObj[prop][i]) ? Number(modObj[prop][i]) : baseObj[prop][i];
                                 temp_array.push( temp_value );
 
-                            } else if ( is_bigint(modObj[prop][i]) ) {
+                            } else if ( type_checker.is_big_integer(modObj[prop][i]) ) {
 
-                                let temp_value = is_prop_defined(modObj[prop][i]) ? BigInt(modObj[prop][i]) : baseObj[prop][i];
+                                let temp_value = type_checker.is_defined(modObj[prop][i]) ? BigInt(modObj[prop][i]) : baseObj[prop][i];
                                 temp_array.push( temp_value );
 
-                            } else if ( is_element_node(modObj[prop][i]) ) {
+                            } else if ( type_checker.is_element_node(modObj[prop][i]) ) {
 
                                 temp_array.push( modObj[prop][i] );
 
-                            } else if ( is_object(modObj[prop][i]) ) {
+                            } else if ( type_checker.is_object(modObj[prop][i]) ) {
 
                                 let temp_obj = settings_merge( baseObj[prop][0], modObj[prop][i] );
                                 let final_obj = settings_merge( modObj[prop][i], temp_obj );
@@ -166,7 +130,7 @@ export function settings_merge (baseObj, modObj) {
                     output[prop] = temp_array;
 
                 // if this base object property is null
-                } else if ( is_null(baseObj[prop]) ) {
+                } else if ( type_checker.is_null(baseObj[prop]) ) {
 
                     output[prop] = ( modObj[prop] ) ? modObj[prop] : baseObj[prop];
 
