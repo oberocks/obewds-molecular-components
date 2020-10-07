@@ -1,6 +1,10 @@
 import { Type_checker } from '../../libraries/Type_checker.js';
 
 
+export function on_dom_ready (callback) {
+    document.readyState === "interactive" || document.readyState === "complete" ? callback() : document.addEventListener("DOMContentLoaded", callback);
+}
+
 export function apply_attributes (node, obj) {
 
     if (Object.keys(obj).length > 0) {
@@ -155,7 +159,7 @@ export function add_to_dom (parent, type, el, subType = false, refNode = false) 
 
     }
 
-};
+}
 
 export function generate_element (elemType, elemText = false, attributes = false, nestedElem = false) {
         
