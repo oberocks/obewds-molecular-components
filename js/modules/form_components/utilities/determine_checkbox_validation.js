@@ -58,21 +58,45 @@ export function determine_checkbox_validation (optsObj, inputAttrsObj, inputEl, 
                             optsObj.custom_validation.classes.invalid_label,
                             optsObj.custom_validation.classes.valid_label
                         );
-                        swap_classes(
-                            labelEl,
-                            optsObj.custom_validation.classes.invalid_label,
-                            optsObj.custom_validation.classes.valid_label
-                        );
-                        swap_classes(
-                            this,
-                            optsObj.custom_validation.classes.invalid_element,
-                            optsObj.custom_validation.classes.valid_element
-                        );
 
-                        // adjust form text for a valid state
-                        helpTxtEl.classList.add('d-none');
-                        errorTxtEl.classList.add('d-none');
-                        successTxtEl.classList.remove('d-none'); 
+                        // collect and init data needed to check all checkboxes currently in the component
+                        let fg = this.closest('.form-group');
+                        let inputs = fg.querySelectorAll('input');
+                        let input_count = inputs.length;
+                        let required_input_count = 0;
+                        let valid_input_count = 0;
+
+                        // loop through each checkbox input
+                        for (var x = 0; x < input_count; x++) {
+
+                            if (inputs[x].hasAttribute('required')) { required_input_count++; }
+
+                            if ( inputs[x].validity.valid === true ) { valid_input_count++; }
+
+                        }
+
+                        // if all required checkboxes are valid
+                        if (required_input_count === valid_input_count) {
+
+                            // update the css label and input classes
+                            swap_classes(
+                                labelEl,
+                                optsObj.custom_validation.classes.invalid_label,
+                                optsObj.custom_validation.classes.valid_label
+                            );
+                            swap_classes(
+                                this,
+                                optsObj.custom_validation.classes.invalid_element,
+                                optsObj.custom_validation.classes.valid_element
+                            );
+
+                            // adjust form text for a valid state
+                            helpTxtEl.classList.add('d-none');
+                            errorTxtEl.classList.add('d-none');
+                            successTxtEl.classList.remove('d-none'); 
+
+                        }
+                        
                     }
 
                 });
