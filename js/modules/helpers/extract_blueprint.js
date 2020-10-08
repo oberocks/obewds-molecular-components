@@ -41,8 +41,6 @@ export function extract_blueprint (nodes) {
 
         // 
         let depth = get_node_list_depth(nodes);
-        //console.log('node depth: ' + depth);
-        //console.log('kids length: ' + kids.length);
         
         // loop through the child nodes
         for (var i = 0; i < kids.length; i++) {
