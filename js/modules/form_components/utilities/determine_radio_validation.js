@@ -1,7 +1,8 @@
 // import utility dependencies
 import { swap_classes } from './swap_classes.js';
 
-export function determine_checkbox_validation (optsObj, inputAttrsObj, inputEl, labelEl, inputLabel, helpTxtEl, errorTxtEl, successTxtEl) {
+
+export function determine_radio_validation (optsObj, inputAttrsObj, inputEl, labelEl, inputLabel, helpTxtEl, errorTxtEl, successTxtEl) {
     
     let attrs = inputAttrsObj;
     
@@ -56,7 +57,7 @@ export function determine_checkbox_validation (optsObj, inputAttrsObj, inputEl, 
 
                         // collect and init data needed to check all checkboxes currently in the component
                         let fg = this.closest('.form-group');
-                        let inputs = fg.querySelectorAll('input[type=checkbox]');
+                        let inputs = fg.querySelectorAll('input[type=radio]');
                         let input_count = inputs.length;
                         let required_input_count = 0;
                         let valid_input_count = 0;
@@ -72,6 +73,18 @@ export function determine_checkbox_validation (optsObj, inputAttrsObj, inputEl, 
 
                         // if all required checkboxes are valid
                         if (required_input_count === valid_input_count) {
+
+                            // loop through each checkbox input
+                            for (var x = 0; x < input_count; x++) {
+
+                                let current_label = inputs[x].parentElement.querySelector('label');
+                                swap_classes(
+                                    current_label,
+                                    optsObj.custom_validation.classes.invalid_label,
+                                    optsObj.custom_validation.classes.valid_label
+                                );
+
+                            }
 
                             // update the css label and input classes
                             swap_classes(

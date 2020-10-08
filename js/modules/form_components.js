@@ -2,7 +2,7 @@ export { Credit_payment_component } from './form_components/credit_payment_compo
 export { Orphan_custom_checkbox_form_group } from './form_components/Orphan_custom_checkbox_form_group.js';
 export { Custom_checkboxes_form_group } from './form_components/Custom_checkboxes_form_group.js';
 export { Custom_checkboxes_switch_gated_form_group } from './form_components/custom_checkboxes_switch_gated_form_group.js';
-export { Custom_radios_form_group } from './form_components/custom_radios_form_group.js';
+export { Custom_radios_form_group } from './form_components/Custom_radios_form_group.js';
 export { Custom_select_form_group } from './form_components/Custom_select_form_group.js';
 export { Input_character_counter_form_group } from './form_components/Input_character_counter_form_group.js';
 export { Input_form_group } from './form_components/Input_form_group.js';
@@ -11,4 +11,4 @@ export { Phone_input_form_group } from './form_components/Phone_input_form_group
 export { Submit_button_form_group } from './form_components/Submit_button_form_group.js';
 export { Textarea_character_counter_form_group } from './form_components/Textarea_character_counter_form_group.js';
 export { Textarea_form_group } from './form_components/Textarea_form_group.js';
-export { Upload_single_file_form_group } from './form_components/upload_single_file_form_group.js';
+export { Upload_single_file_form_group } from './form_components/Upload_single_file_form_group.js';

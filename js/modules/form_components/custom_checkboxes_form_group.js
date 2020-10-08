@@ -208,10 +208,6 @@ export class Custom_checkboxes_form_group extends Form_group_custom_checkboxes {
         });
 
         //
-        // HANDLE COMPONENT VALIDATION
-        //
-
-        //
         // ASSEMBLE COMPONENT ELEMENTS
         //
         

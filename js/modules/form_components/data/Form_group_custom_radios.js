@@ -6,7 +6,7 @@ import { Html_element } from '../../html_elements/data/html_element.js';
 import { add_global_form_element_attribute_defaults } from '../utilities/add_global_form_element_attribute_defaults.js';
 
 
-export class Form_group_custom_checkboxes extends Form_group {
+export class Form_group_custom_radios extends Form_group {
 
     constructor () {
 
@@ -17,7 +17,7 @@ export class Form_group_custom_checkboxes extends Form_group {
         this.class_defaults = {
 
             // create empty input & input.attributes objects
-            checkboxes : [
+            radios : [
                 {
                     label : '',
                     attributes : {}
@@ -42,10 +42,10 @@ export class Form_group_custom_checkboxes extends Form_group {
 
         // add html global attributes to main <input> element
         let global_attrs = new Html_element()._defaults.attributes;
-        Object.assign(this._defaults.checkboxes[0].attributes, global_attrs);
+        Object.assign(this._defaults.radios[0].attributes, global_attrs);
 
         // and add global and base <input> attributes from this class
-        add_global_form_element_attribute_defaults(this._defaults.checkboxes[0].attributes);
+        add_global_form_element_attribute_defaults(this._defaults.radios[0].attributes);
 
     }
 

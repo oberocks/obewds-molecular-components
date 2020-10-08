@@ -1,39 +1,55 @@
-import { form_group_defaults as defaults } from './data/form_group_defaults.js';
-import { settings_merge } from '../helpers/settings_merge.js';
-import { generate_form_help_modal } from './utilities/generate_form_help_modal.js';
-import { apply_attributes, insert_text } from '../html_elements/utilities/dom_generation.js';
+// import class dependencies
+import { Form_group_custom_radios } from './data/Form_group_custom_radios.js';
 
-class Custom_radios_form_group
-{
-    constructor (opts = false)
-    {
+// import utility dependencies
+import { apply_attributes, insert_text } from '../html_elements/utilities/dom_generation.js';
+import { determine_radio_validation } from './utilities/determine_radio_validation.js';
+import { generate_form_help_modal } from './utilities/generate_form_help_modal.js';
+import { handle_input_attributes } from './utilities/handle_input_attributes.js';
+import { settings_merge } from '../helpers/settings_merge.js';
+
+
+export class Custom_radios_form_group extends Form_group_custom_radios {
+
+    constructor (opts = false) {
+
+        // get props from inhereted class
+        super();
+
+        // default input settings
+        this.new_radios = [
+            {
+                label : 'Default Custom Radio 1',
+                attributes : {
+                    id : 'default-custom-radio-1-id',
+                    name : 'default-custom-radio-1-name',
+                    class : 'custom-control-input',
+                    checked : false,
+                    indeterminate : null,
+                    required : false, // for <input> types checkbox, date, datetime-local, email, file, month, number, password, radio, search, tel, text, time, url, week, and for <select> and <textarea>
+                    type : 'radio',
+                    value : 'value1'
+                }
+            }
+        ];
+
+        // define default class CSS class settings/options
+        this.class_css_classes = {
+            bordered_label_wrappers : 'd-flex justify-content-between align-items-center border-bottom mb-2',
+            radio_parents : 'custom-control custom-radio',
+            radios : 'custom-control-input',
+            radio_labels : 'custom-control-label'
+        };
+
         // define default class settings/options
-        this._defaults = {
-            classes : {
-                form_groups             : defaults.classes.form_groups,
-                bordered_label_wrappers : defaults.classes.bordered_label_wrappers,
-                labels                  : defaults.classes.labels,
-                label_buttons           : defaults.classes.label_buttons,
-                label_button_icons      : defaults.classes.label_button_icons,
-                radio_parents           : defaults.classes.radio_parents,
-                radios                  : defaults.classes.radios,
-                radio_labels            : defaults.classes.radio_labels,
-                form_text_parents       : defaults.classes.form_text_parents,
-                form_help_texts         : defaults.classes.form_help_texts,
-                form_error_texts        : defaults.classes.form_error_texts,
-                form_success_texts      : defaults.classes.form_success_texts
-            },
-            aria_describedby_suffix : defaults.aria_describedby_suffix,
-            error_text_suffix       : defaults.error_text_suffix,
-            success_text_suffix     : defaults.success_text_suffix,
-            group_id                : 'default-radios',
-            group_name              : 'custom-radios',
-            label                   : 'Default Custom Radios',
-            form_text : {
-                help    : ['Custom Radios help text'],
-                error   : ['Custom Radios error text'],
-                success : ['Custom Radios success text']
-            },
+        this.class_defaults = {
+            
+            // default component label text
+            label : 'Default Custom Radios',
+            group_id : 'default-radios',
+            group_name : 'custom-radios',
+            
+            // default component help modal settings
             form_modal_text : {
                 heading: 'Custom Radios',
                 body: [{
@@ -41,38 +57,53 @@ class Custom_radios_form_group
                     content: [ 'Custom Radios are Bootstrap 4 custom form elements. Custom Radios leverage brand colors and CSS to replace the browser-defined styling of radios.', 'Using Custom Radios lets a web app provide users with radio elements that look/feel the same across different browsers.' ]
                 }]
             },
-            radios : [
-                {
-                    label: 'Default Radio 1',
-                    attributes:
-                    {
-                        id    : 'radio-1',
-                        value : 'value1',
-                        checked: ''
-                    }
-                }
-            ]
+            
+            // default component form text settings
+            form_text : {
+                help    : ['Custom Radios help text'],
+                error   : ['Custom Radios error text'],
+                success : ['Custom Radios success text']
+            }
+
         };
+
+        // assign any class default attributes/settings
+        Object.assign(this._defaults.classes, this.class_css_classes);
+        Object.assign(this._defaults, this.class_defaults);
+        this._defaults.radios[0].label = this.new_radios[0].label;
+        Object.assign(this._defaults.radios[0].attributes, this.new_radios[0].attributes);
 
         // merge any passed options settings into the default settings to get a final settings object
         this.defaults = (opts) ? settings_merge(this._defaults, opts) : this._defaults;
 
         // clear original defaults
         this._defaults = null;
+
     }
 
     get_class_defaults () {
+
         return this.defaults;
+
     }
 
     get_generate_options (options) {
+
         return settings_merge(this.defaults, options);
+
     }
 
-    generate (options = false)
-    {
-        // merge any passed options settings into the default settings to get a final settings object
+    generate (options = false) {
+
+        //
+        // MERGE INSTANCE OPTIONS
+        //
+        
         let opts = (options) ? settings_merge(this.defaults, options) : this.defaults;
+
+        //
+        // GENERATE AND SET COMPONENT NODES
+        //
         
         // create the form group element
         let form_group = document.createElement('div');
@@ -85,7 +116,7 @@ class Custom_radios_form_group
         // create the label element
         let label_el = document.createElement('label');
         label_el.className = opts.classes.labels;
-        let label_el_text = document.createTextNode(opts.label);
+        insert_text(label_el, opts.label);
 
         // create the button element for the input help modal
         let label_button = document.createElement('button');
@@ -94,20 +125,6 @@ class Custom_radios_form_group
         label_button.setAttribute('data-toggle', 'modal');
         label_button.setAttribute('data-target', '#' + opts.group_id + '-modal');
 
-        label_button.addEventListener('click', function(e) {
-            let modalCheck = document.getElementById(opts.group_id + '-modal');
-            if (!modalCheck)
-            {
-                let modal_options = {
-                    id: opts.group_id,
-                    form_modal_text: opts.form_modal_text
-                };
-                let modal_nodes = generate_form_help_modal(modal_options);
-                document.body.appendChild(modal_nodes);
-                $(modal_nodes).modal('show');
-            }
-        });
-
         // create the font awesome label button icon element
         let label_button_icon = document.createElement('i');
         label_button_icon.className = opts.classes.label_button_icons;
@@ -115,41 +132,8 @@ class Custom_radios_form_group
         // append all the elements created up to now
         form_group.appendChild(label_wrapper);
         label_wrapper.appendChild(label_el);
-        label_el.appendChild(label_el_text);
         label_wrapper.appendChild(label_button);
         label_button.appendChild(label_button_icon);
-
-        // loop through the radios array
-        for (var i = 0; i < opts.radios.length; i++)
-        {
-            // create the parent element for the radio
-            let parent = document.createElement('div');
-            parent.className = opts.classes.radio_parents;
-
-            // create the radio element
-            let input = document.createElement('input');
-            input.className = opts.classes.radios;
-            input.setAttribute('type', 'radio');
-            input.setAttribute('name', opts.group_name);
-            input.setAttribute('aria-describedby', opts.group_id + opts.aria_describedby_suffix);
-
-            // apply the passed attributes from the passed options
-            apply_attributes(input, opts.radios[i].attributes);
-
-            // create the label and label text node elements
-            let label = document.createElement('label');
-            label.className = opts.classes.radio_labels;
-            label.setAttribute('for', opts.radios[i].attributes.id);
-            let label_txt = document.createTextNode(opts.radios[i].label);
-
-            // append all the elements
-            parent.appendChild(input);
-            parent.appendChild(label);
-            label.appendChild(label_txt);
-            
-            // append the parent to the current form group
-            form_group.appendChild(parent);
-        }
 
         // create the parent form text wrapper element
         let form_text_parent = document.createElement('div');
@@ -172,16 +156,77 @@ class Custom_radios_form_group
         form_success_text.className = opts.classes.form_success_texts;
         form_success_text.setAttribute('id', opts.group_id + opts.success_text_suffix);
         insert_text(form_success_text, opts.form_text.success);
+
+        // loop through the radios array
+        for (var i = 0; i < opts.radios.length; i++) {
+
+            // create the parent element for the radio
+            let parent = document.createElement('div');
+            parent.className = opts.classes.radio_parents;
+
+            // create the radio element
+            let input = document.createElement('input');
+            input.className = opts.classes.radios;
+            handle_input_attributes(opts.radios[i].attributes, input);
+            apply_attributes(input, opts.radios[i].attributes);
+            input.setAttribute('aria-describedby', opts.group_id + opts.aria_describedby_suffix);
+
+            // create the label and label text node elements
+            let label = document.createElement('label');
+            label.className = opts.classes.radio_labels;
+            label.setAttribute('for', opts.radios[i].attributes.id);
+            insert_text(label, opts.radios[i].label);
+
+            //
+            // HANDLE COMPONENT VALIDATION
+            //
+
+            determine_radio_validation(opts, opts.radios[i].attributes, input, label_el, label, form_help_text, form_error_text, form_success_text);
+
+            // append all the elements
+            parent.appendChild(input);
+            parent.appendChild(label);
+            
+            // append the parent to the current form group
+            form_group.appendChild(parent);
+
+        }
+
+        //
+        // HANDLE COMPONENT LISTENERS
+        //
+
+        label_button.addEventListener('click', function(e) {
+            
+            let modalCheck = document.getElementById(opts.group_id + '-modal');
+            
+            if (!modalCheck) {
+                let modal_options = {
+                    id: opts.group_id,
+                    form_modal_text: opts.form_modal_text
+                };
+                let modal_nodes = generate_form_help_modal(modal_options);
+                document.body.appendChild(modal_nodes);
+                $(modal_nodes).modal('show');
+            }
+
+        });
+
+        //
+        // ASSEMBLE COMPONENT ELEMENTS
+        //
         
-        // append all the remaining elements for this input, nested as needed
         form_group.appendChild(form_text_parent);
         form_text_parent.appendChild(form_help_text);
         form_text_parent.appendChild(form_error_text);
         form_text_parent.appendChild(form_success_text);
 
-        // return the form group element
-        return form_group;
-    }
-}
+        //
+        // RETURN COMPONENT NODES
+        //
 
-export { Custom_radios_form_group };
+        return form_group;
+
+    }
+
+}
