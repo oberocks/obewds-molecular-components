@@ -13,25 +13,16 @@ export class Form_group_custom_checkboxes extends Form_group {
         // get props from inhereted class
         super();
 
-        // default input attributes
-        this.input_base_attributes = {
-
-            class : 'custom-control-input',
-            checked : false,
-            indeterminate : null,
-            required : false, // for <input> types checkbox, date, datetime-local, email, file, month, number, password, radio, search, tel, text, time, url, week, and for <select> and <textarea>
-            type : 'checkbox',
-            value : ''
-
-        };
-
         // define default class settings/options
         this.class_defaults = {
 
             // create empty input & input.attributes objects
-            input : {
-                attributes : {}
-            },
+            checkboxes : [
+                {
+                    label : '',
+                    attributes : {}
+                }
+            ],
             
             // global validation defaults
             enable_custom_validation : false, // for <input> types checkbox, date, datetime-local, email, file, month, number, password, radio, search, tel, text, time, url, week, and for <select> and <textarea>
@@ -53,11 +44,11 @@ export class Form_group_custom_checkboxes extends Form_group {
 
         // add html global attributes to main <input> element
         let global_attrs = new Html_element()._defaults.attributes;
-        Object.assign(this._defaults.input.attributes, global_attrs);
+        Object.assign(this._defaults.checkboxes[0].attributes, global_attrs);
 
         // and add global and base <input> attributes from this class
-        add_global_form_element_attribute_defaults(this._defaults.input.attributes);
-        Object.assign(this._defaults.input.attributes, this.input_base_attributes);
+        add_global_form_element_attribute_defaults(this._defaults.checkboxes[0].attributes);
+        Object.assign(this._defaults.checkboxes[0].attributes, this.input_base_attributes);
 
     }
 
