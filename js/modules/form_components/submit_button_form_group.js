@@ -35,25 +35,61 @@ export class Submit_button_form_group extends Form_group_submit {
 
     generate (options = false) {
 
-        // merge any passed options settings into the default settings to get a final settings object
+        //
+        // MERGE INSTANCE OPTIONS
+        //
+
         let opts = (options) ? settings_merge(this.defaults, options) : this.defaults;
+
+        //
+        // GENERATE AND SET COMPONENT NODES
+        //
         
         // create the form group element
         let form_group = document.createElement('div');
-        
-        // check if there are attributes then set them
         apply_attributes(form_group, opts.form_group.attributes);
 
         // create the form group element
         let btn = document.createElement('input');
-        
-        // check if there are attributes then set them
         apply_attributes(btn, opts.input.attributes);
 
-        // append elements together
+        //
+        // HANDLE COMPONENT LISTENERS
+        //
+
+        if (opts.enable_scroll_into_view === true) {
+
+            // add a scroll to the first invalid form element after validation is triggered
+            btn.addEventListener('click', function(e) {
+                
+                let invalid_elements = document.querySelectorAll(':invalid');
+
+                console.log(invalid_elements);
+
+                // check for an invalid element count of 2 or more (a form element with invalid children is also :invalid)
+                if (invalid_elements.length > 1) {
+
+                    // scroll to the element (using jQuery)
+                    $('html, body').animate({
+                        scrollTop: $(invalid_elements[1]).offset().top - opts.scroll_top_negative_offset
+                    }, opts.scroll_top_duration);
+
+                }
+
+            });
+
+        }
+
+        //
+        // ASSEMBLE COMPONENT ELEMENTS
+        //
+
         form_group.appendChild(btn);
 
-        // return the form group element
+        //
+        // RETURN COMPONENT NODES
+        //
+
         return form_group;
 
     }

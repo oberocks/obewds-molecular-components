@@ -40,7 +40,12 @@ export class Form_group_submit extends Form_group {
             // create empty input & input.attributes objects
             input : {
                 attributes : {}
-            }
+            },
+
+            // create default scrollTop (jQuery) setting
+            enable_scroll_into_view : false,
+            scroll_top_negative_offset : 100,
+            scroll_top_duration : 300
 
         };
 
