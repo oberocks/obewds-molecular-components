@@ -16,30 +16,36 @@ export class Form_group_upload_single_file extends Form_group {
         // default input attributes
         this.input_base_attributes = {
 
-            class : 'btn btn-lg btn-primary box-shadow-xs',
-            formaction : null,
-            formenctype : null,
-            formmethod : null,
-            formnovalidate : null,
-            formtarget : null,
-            type : 'submit',
-            value : 'SUBMIT'
+            class : 'form-control-file',
+            accept : null,
+            capture : null,
+            files : null,
+            multiple : null,
+            required : false, // for <input> types checkbox, date, datetime-local, email, file, month, number, password, radio, search, tel, text, time, url, week, and for <select> and <textarea>
+            type : 'file',
+            value : ''
 
         };
 
         // define default class settings/options
         this.class_defaults = {
             
-            // create form_group objects
-            form_group : {
-                attributes : {
-                    class : 'form-group pt-3'
-                }
-            },
-            
             // create empty input & input.attributes objects
             input : {
                 attributes : {}
+            },
+
+            // global validation defaults
+            enable_custom_validation : false, // for <input> types checkbox, date, datetime-local, email, file, month, number, password, radio, search, tel, text, time, url, week, and for <select> and <textarea>
+            inject_invalid_box_shadow_css_reset : false,
+            custom_validation : {
+                success_listner : 'change',
+                classes : {
+                    invalid_label : 'text-danger',
+                    valid_label : 'text-success',
+                    invalid_parent : 'bg-danger text-white',
+                    valid_parent : 'bg-success text-white'
+                }
             }
 
         };
