@@ -27,6 +27,12 @@ export class Form_group_textarea extends Form_group {
             value : ''
         };
 
+        // define default class CSS class settings/options
+        this.class_css_classes = {
+            clear_text_parents : 'position-relative text-right',
+            clear_text_buttons : 'btn btn-lg position-relative opacity-50 p-2 border-0 bg-transparent'
+        };
+
         // define default class settings/options
         this.class_defaults = {
 
@@ -35,8 +41,9 @@ export class Form_group_textarea extends Form_group {
                 attributes : {}
             },
             
-            // default component specific settings
+            // create component clear text button settings defaults
             clear_text_button_styles : 'top:-82px; -webkit-appearance:none;',
+            clear_text_button_text : '×',
 
             // global validation defaults
             required : false, // for <input> types checkbox, date, datetime-local, email, file, month, number, password, radio, search, tel, text, time, url, week, and for <select> and <textarea>
@@ -56,6 +63,7 @@ export class Form_group_textarea extends Form_group {
 
         // assign any class default attributes/settings
         Object.assign(this._defaults, this.class_defaults);
+        Object.assign(this._defaults.classes, this.class_css_classes);
 
         // add html global attributes to main <textarea> element
         let global_attrs = new Html_element()._defaults.attributes;

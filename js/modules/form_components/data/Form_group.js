@@ -22,8 +22,8 @@ export class Form_group {
                 //radio_labels : 'custom-control-label',
                 //textareas : 'form-control',
                 //selects : 'custom-select',
-                clear_text_parents : 'position-relative text-right',
-                clear_text_buttons : 'btn btn-lg position-relative opacity-50 p-2 border-0 bg-transparent',
+                //clear_text_parents : 'position-relative text-right',
+                //clear_text_buttons : 'btn btn-lg position-relative opacity-50 p-2 border-0 bg-transparent',
                 form_text_wrappers : 'd-flex justify-content-between align-items-start',
                 form_text_parents : 'text-left pr-2',
                 form_help_texts : 'form-text text-muted',
@@ -39,8 +39,8 @@ export class Form_group {
             },
             
             // global component clear text button settings defaults
-            clear_text_button_styles : 'top:-48px; -webkit-appearance:none;',
-            clear_text_button_text : '×',
+            //clear_text_button_styles : 'top:-48px; -webkit-appearance:none;',
+            //clear_text_button_text : '×',
 
             // global component form text settings defaults
             aria_describedby_suffix : '-help',
