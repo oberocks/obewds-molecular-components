@@ -1,7 +1,3 @@
-import { form_group_defaults as defaults } from './data/form_group_defaults.js';
-
-
-
 // import class dependencies
 import { Form_group_custom_select } from './data/Form_group_custom_select.js';
 
@@ -67,57 +63,6 @@ export class Custom_select_form_group extends Form_group_custom_select {
             ]
 
         };
-
-        // define default class settings/options
-        //this._defaults = {
-            /*classes : {
-                form_groups        : defaults.classes.form_groups,
-                label_wrappers     : defaults.classes.label_wrappers,
-                labels             : defaults.classes.labels,
-                label_buttons      : defaults.classes.label_buttons,
-                label_button_icons : defaults.classes.label_button_icons,
-                selects            : defaults.classes.selects,
-                form_text_parents  : defaults.classes.form_text_parents,
-                form_help_texts    : defaults.classes.form_help_texts,
-                form_error_texts   : defaults.classes.form_error_texts,
-                form_success_texts : defaults.classes.form_success_texts
-            },*/
-            //aria_describedby_suffix : defaults.aria_describedby_suffix,
-            //error_text_suffix       : defaults.error_text_suffix,
-            //success_text_suffix     : defaults.success_text_suffix,
-            //id                      : 'custom-select-id',
-            //name                    : 'custom-select-name',
-            //label                   : 'Default Custom Select',
-            /*form_text : {
-                help    : ['Custom Select help text'],
-                error   : ['Custom Select error text'],
-                success : ['Custom Select success text']
-            },*/
-            /*form_modal_text : {
-                heading: 'Custom Selects',
-                body: [{
-                    type: 'paragraphs',
-                    content: [ 'Custom Select elements allow a user to select a single option from a list of options.', 'Custom Selects are specifically styled elements in Bootstrap 4, which is one of our core dependencies.' ]
-                }]
-            },*/
-            /*options : [
-                {
-                    text: 'Select an Option',
-                    attributes:
-                    {
-                        selected : ''
-                    }
-                },
-                {
-                    text: 'Option One',
-                    attributes:
-                    {
-                        value : 'one'
-                    }
-                }
-            ],*/
-            //required : false
-        //};
 
         // assign any class default attributes/settings
         Object.assign(this._defaults.select.attributes, this.new_select_attributes);
