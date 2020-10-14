@@ -1,4 +1,4 @@
-import { Html_element } from './data/html_element.js';
+import { Html_element } from './data/Html_element.js';
 import { apply_attributes, insert_text } from './utilities/dom_generation.js';
 import { settings_merge } from '../helpers/settings_merge.js';
 

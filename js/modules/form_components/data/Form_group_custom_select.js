@@ -1,6 +1,6 @@
 // import class dependencies
 import { Form_group } from './Form_group.js';
-import { Html_element } from '../../html_elements/data/html_element.js';
+import { Html_element } from '../../html_elements/data/Html_element.js';
 
 // import utility dependencies
 import { add_global_form_element_attribute_defaults } from '../utilities/add_global_form_element_attribute_defaults.js';
@@ -48,7 +48,6 @@ export class Form_group_custom_select extends Form_group {
 
         // assign any class default attributes/settings
         Object.assign(this._defaults, this.class_defaults);
-        Object.assign(this._defaults.select.attributes, this.select_base_attributes);
 
         // add html global attributes to main <select> element
         let global_attrs = new Html_element()._defaults.attributes;
