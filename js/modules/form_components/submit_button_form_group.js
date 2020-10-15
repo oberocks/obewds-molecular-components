@@ -64,7 +64,7 @@ export class Submit_button_form_group extends Form_group_submit {
                 
                 let invalid_elements = document.querySelectorAll(':invalid');
 
-                console.log(invalid_elements);
+                //console.log(invalid_elements);
 
                 // check for an invalid element count of 2 or more (a form element with invalid children is also :invalid)
                 if (invalid_elements.length > 1) {
