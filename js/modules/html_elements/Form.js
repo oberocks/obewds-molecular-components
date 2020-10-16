@@ -51,7 +51,7 @@ export class Form extends Html_element {
         let opts = (options) ? settings_merge(this.defaults, options) : this.defaults;
 
         // create the element
-        let el = document.createElement('a');
+        let el = document.createElement('form');
 
         // check if there are attributes then set them
         apply_attributes(el, opts.attributes);
