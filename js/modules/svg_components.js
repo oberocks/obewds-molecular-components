@@ -1,0 +1,1 @@
+export { Obe_mark_svg } from './svg_components/obe/Obe_mark_svg.js';
