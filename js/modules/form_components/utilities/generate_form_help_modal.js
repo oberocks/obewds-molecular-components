@@ -1,7 +1,5 @@
-import { form_group_defaults as modal_defaults } from '../data/form_group_defaults.js';
+export function generate_form_help_modal (opts = false) {
 
-function generate_form_help_modal (opts = false)
-{
     // set the options if passed or use default values
     let modal_classes   = opts.modal_classes   ? opts.modal_classes   : 'modal fade fade-scale';
     let dialog_classes  = opts.dialog_classes  ? opts.dialog_classes  : 'modal-dialog modal-dialog-centered modal-dialog-scrollable';
@@ -13,17 +11,32 @@ function generate_form_help_modal (opts = false)
     let button_classes  = opts.button_classes  ? opts.button_classes  : 'btn btn-outline-white';
     let id              = opts.id              ? opts.id              : 'default-id';
     let title           = opts.title           ? opts.title           : null;
-    let paragraph1      = opts.paragraph1      ? opts.paragraph1      : null;
     let button_text     = opts.button_text     ? opts.button_text     : 'CLOSE';
 
 
-    let form_modal_text             = opts.form_modal_text             ? opts.form_modal_text             : modal_defaults.form_modal_text;
-    let form_modal_text_p_classes   = opts.form_modal_text_p_classes   ? opts.form_modal_text_p_classes   : modal_defaults.classes.form_modal_text_ps;
-    let form_modal_text_ul_classes  = opts.form_modal_text_ul_classes  ? opts.form_modal_text_ul_classes  : modal_defaults.classes.form_modal_text_uls;
-    let form_modal_text_li_classes  = opts.form_modal_text_li_classes  ? opts.form_modal_text_li_classes  : modal_defaults.classes.form_modal_text_lis;
-    let form_modal_text_img_classes = opts.form_modal_text_img_classes ? opts.form_modal_text_img_classes : modal_defaults.classes.form_modal_text_imgs;
+    let form_modal_text = opts.form_modal_text ? opts.form_modal_text : {
+        heading : 'Default Modal Title',
+        body: [{
+            type : 'paragraphs',
+            content : [
+                'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid illo omnis ab tempore ipsam rerum.',
+                'Aliquid illo omnis ab tempore ipsam rerum. Lorem ipsum dolor sit amet consectetur adipisicing elit.'
+            ]
+        },{
+            type : 'listitems',
+            content : [
+                'Lorem ipsum dolor sit amet',
+                'Consectetur adipisicing elit',
+                'Aliquid illo omnis ab tempore ipsam rerum'
+            ]
+        }]
+    };
+    let form_modal_text_p_classes   = opts.form_modal_text_p_classes   ? opts.form_modal_text_p_classes   : 'text-left px-3';
+    let form_modal_text_ul_classes  = opts.form_modal_text_ul_classes  ? opts.form_modal_text_ul_classes  : 'text-left pl-3 mx-3';
+    let form_modal_text_li_classes  = opts.form_modal_text_li_classes  ? opts.form_modal_text_li_classes  : '';
+    let form_modal_text_img_classes = opts.form_modal_text_img_classes ? opts.form_modal_text_img_classes : 'img-fluid mb-3';
     
-    let help_modal_body_styles = opts.help_modal_body_styles ? opts.help_modal_body_styles : modal_defaults.help_modal_body_styles;
+    let help_modal_body_styles = opts.help_modal_body_styles ? opts.help_modal_body_styles : 'max-height:200px;';
 
     // create the modal element
     let modal = document.createElement('div');
@@ -53,13 +66,14 @@ function generate_form_help_modal (opts = false)
     
     let headline_text;
 
-    if (title === null)
-    {
+    if (title === null) {
+
         headline_text = document.createTextNode(form_modal_text.heading);
-    }
-    else
-    {
+
+    } else {
+
         headline_text = document.createTextNode(title);
+
     }
 
     // create the modal body element
@@ -76,86 +90,72 @@ function generate_form_help_modal (opts = false)
     header.appendChild(headline);
     headline.appendChild(headline_text);
     content.appendChild(body);
-
-
-
-
-    let p1, p1_text;
     
-    if (paragraph1 === null)
-    {
-        for (var i = 0; i < form_modal_text.body.length; i++)
-        {
-            if (form_modal_text.body[i].type === 'paragraphs')
-            {
-                for (var j = 0; j < form_modal_text.body[i].content.length; j++)
-                {
-                    // create a paragraph element and text node - and append together
-                    let p = document.createElement('p');
-                    p.className = form_modal_text_p_classes;
-                    let txt = document.createTextNode(form_modal_text.body[i].content[j]);
-                    p.appendChild(txt);
 
-                    // append the paragraph to the modal body element
-                    body.appendChild(p);
-                }
+
+    for (var i = 0; i < form_modal_text.body.length; i++) {
+
+        if (form_modal_text.body[i].type === 'paragraphs') {
+
+            for (var j = 0; j < form_modal_text.body[i].content.length; j++) {
+
+                // create a paragraph element and text node - and append together
+                let p = document.createElement('p');
+                p.className = form_modal_text_p_classes;
+                let txt = document.createTextNode(form_modal_text.body[i].content[j]);
+                p.appendChild(txt);
+
+                // append the paragraph to the modal body element
+                body.appendChild(p);
+
             }
-            else if (form_modal_text.body[i].type === 'listitems')
-            {
-                // create a parent unordered list element
-                let ul = document.createElement('ul');
-                ul.className = form_modal_text_ul_classes;
 
-                for (var k = 0; k < form_modal_text.body[i].content.length; k++)
-                {
-                    // create a paragraph element and text node - and append together
-                    let li = document.createElement('li');
-                    li.className = form_modal_text_li_classes;
-                    let txt = document.createTextNode(form_modal_text.body[i].content[k]);
-                    li.appendChild(txt);
+        } else if (form_modal_text.body[i].type === 'listitems') {
 
-                    // append the li to the ul element
-                    ul.appendChild(li);
-                }
+            // create a parent unordered list element
+            let ul = document.createElement('ul');
+            ul.className = form_modal_text_ul_classes;
 
-                // append the ul to the modal body element
-                body.appendChild(ul);
+            for (var k = 0; k < form_modal_text.body[i].content.length; k++) {
+
+                // create a paragraph element and text node - and append together
+                let li = document.createElement('li');
+                li.className = form_modal_text_li_classes;
+                let txt = document.createTextNode(form_modal_text.body[i].content[k]);
+                li.appendChild(txt);
+
+                // append the li to the ul element
+                ul.appendChild(li);
+
             }
-            else if (form_modal_text.body[i].type === 'image')
-            {
-                // create a parent unordered list element
-                let img = document.createElement('img');
-                img.className = form_modal_text_img_classes;
-                img.setAttribute('src', form_modal_text.body[i].src);
-                
-                if (form_modal_text.body[i].alt) {
-                    img.setAttribute('alt', form_modal_text.body[i].alt);
-                }
 
-                // append the img to the modal body element
-                body.appendChild(img);
+            // append the ul to the modal body element
+            body.appendChild(ul);
+
+        } else if (form_modal_text.body[i].type === 'image') {
+
+            // create a parent unordered list element
+            let img = document.createElement('img');
+            img.className = form_modal_text_img_classes;
+            img.setAttribute('src', form_modal_text.body[i].src);
+            
+            if (form_modal_text.body[i].alt) {
+                img.setAttribute('alt', form_modal_text.body[i].alt);
             }
-            else if (form_modal_text.body[i].type === 'node')
-            {
-                if (form_modal_text.body[i].node) {
-                    // append the node to the modal body element
-                    body.appendChild(form_modal_text.body[i].node);
-                }
+
+            // append the img to the modal body element
+            body.appendChild(img);
+
+        } else if (form_modal_text.body[i].type === 'node') {
+
+            if (form_modal_text.body[i].node) {
+                // append the node to the modal body element
+                body.appendChild(form_modal_text.body[i].node);
             }
+
         }
+
     }
-    else
-    {
-        // create the p element and text node and combine them
-        p1 = document.createElement('p');
-        p1_text = document.createTextNode(paragraph1);
-        p1.appendChild(p1_text);
-
-        // append the p element to the body
-        body.appendChild(p1);
-    }
-
-
 
 
     // create the modal footer element
@@ -175,6 +175,5 @@ function generate_form_help_modal (opts = false)
     button.appendChild(button_txt);
 
     return modal;
-}
 
-export { generate_form_help_modal };
+}
