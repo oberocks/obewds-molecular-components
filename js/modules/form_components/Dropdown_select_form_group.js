@@ -51,7 +51,7 @@ export class Dropdown_select_form_group extends Form_group_dropdown_select {
                 heading: 'Dropdown Selects',
                 body: [{
                     type: 'paragraphs',
-                    content: [ 'Lorem ipsum dolor sit amet consectetur adipisicing elit.' ]
+                    content: [ 'Dropdown Select form elements are great for uniform UIs across devices, and serve as an alternative to classic HTML select elements. These components can even handle multiple data values with the right options/settings passed in. Additionally, Dropdown Selects are fully compatible with this component set\'s custom validation functionalities. So they\'ll display errored status UI when unfulfilled and a success status UI when fufilled after an errored status!' ]
                 }]
             },
 
