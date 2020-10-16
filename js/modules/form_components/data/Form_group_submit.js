@@ -42,10 +42,13 @@ export class Form_group_submit extends Form_group {
                 attributes : {}
             },
 
-            // create default scrollTop (jQuery) setting
+            // create default scrollTop (jQuery) settings
             enable_scroll_into_view : false,
             scroll_top_negative_offset : 100,
-            scroll_top_duration : 300
+            scroll_top_duration : 300,
+
+            // create default custom components (using hidden inputs) validation settings
+            enable_form_dropdown_select_validation : false
 
         };
 

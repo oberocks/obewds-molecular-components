@@ -57,14 +57,70 @@ export class Submit_button_form_group extends Form_group_submit {
         // HANDLE COMPONENT LISTENERS
         //
 
+        if (opts.enable_form_dropdown_select_validation === true) {
+
+            // handle any custom (manual lol) validation 
+            // (Generally tied to hidden inputs/values for UI's to manipulate)
+            btn.addEventListener('click', function(e) {
+
+                e.preventDefault();
+                
+                let form = this.closest('form');
+
+                if (form) {
+                    
+                    // 
+                    let hidden_req_ddselect_inputs = form.querySelectorAll('input[type="hidden"][data-required="true"]');
+                    
+                    // 
+                    for (var i = 0; i < hidden_req_ddselect_inputs.length; i++) {
+                        
+                        // 
+                        if (!hidden_req_ddselect_inputs[i].value) {
+                            
+                            var change_event = new Event('invalid', {
+                                bubbles: true,
+                                cancelable: true
+                            });
+    
+                            hidden_req_ddselect_inputs[i].dispatchEvent(change_event);
+                            hidden_req_ddselect_inputs[i].setAttribute('data-validation-status', 'engaged');
+
+                        }
+
+                    }
+
+                    let invalids = document.querySelectorAll('input[type="hidden"][data-is-valid="false"]');
+
+                    let form_validity_check = form.reportValidity();
+
+                    if (invalids.length <= 0) {
+
+                        if (form_validity_check === true) {
+                            
+                            form.requestSubmit();
+
+                        } else {
+
+                            form.reportValidity();
+
+                        }
+
+                    }
+
+                }
+            
+            });
+
+        }
+
         if (opts.enable_scroll_into_view === true) {
 
             // add a scroll to the first invalid form element after validation is triggered
             btn.addEventListener('click', function(e) {
-                
-                let invalid_elements = document.querySelectorAll(':invalid');
 
-                //console.log(invalid_elements);
+                // 
+                let invalid_elements = document.querySelectorAll(':invalid');
 
                 // check for an invalid element count of 2 or more (a form element with invalid children is also :invalid)
                 if (invalid_elements.length > 1) {
