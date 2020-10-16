@@ -11,3 +11,4 @@ export { Img } from './html_elements/Img.js';
 export { Main } from './html_elements/Main.js';
 export { Paragraph } from './html_elements/Paragraph.js';
 export { Section } from './html_elements/Section.js';
+export { Style } from './html_elements/Style.js';
