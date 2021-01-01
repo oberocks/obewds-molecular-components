@@ -223,15 +223,19 @@ export class Credit_payment_component {
     }
 
     get_class_defaults () {
+        
         return this.defaults;
+
     }
 
     get_generate_options (options) {
+        
         return settings_merge(this.defaults, options);
+
     }
 
-    generate (options = false)
-    {
+    generate (options = false) {
+
         // merge any passed options settings into the default settings to get a final settings object
         let opts = (options) ? settings_merge(this.defaults, options) : this.defaults;
 
@@ -326,10 +330,12 @@ export class Credit_payment_component {
 
         // handle masking plugin options
         let card_number_input_maskedInput;
-        if (opts.inputs.card_number.masking.enable && opts.inputs.card_number.masking.enable === true)
-        {
+
+        if (opts.inputs.card_number.masking.enable && opts.inputs.card_number.masking.enable === true) {
+
             let imask_opts = set_imask_format(opts.inputs.card_number.masking.type);
             card_number_input_maskedInput = IMask(card_number_input, imask_opts);
+
         }
 
         card_number_form_group.appendChild(card_number_input);
@@ -375,10 +381,12 @@ export class Credit_payment_component {
 
         // handle masking plugin options
         let card_name_input_maskedInput;
-        if (opts.inputs.card_name.masking.enable && opts.inputs.card_name.masking.enable === true)
-        {
+
+        if (opts.inputs.card_name.masking.enable && opts.inputs.card_name.masking.enable === true) {
+
             let imask_opts = set_imask_format(opts.inputs.card_name.masking.type);
             card_name_input_maskedInput = IMask(card_name_input, imask_opts);
+
         }
 
         card_name_form_group.appendChild(card_name_input);
@@ -506,10 +514,12 @@ export class Credit_payment_component {
 
         // handle masking plugin options
         let card_month_input_maskedInput;
-        if (opts.inputs.card_month.masking.enable && opts.inputs.card_month.masking.enable === true)
-        {
+
+        if (opts.inputs.card_month.masking.enable && opts.inputs.card_month.masking.enable === true) {
+            
             let imask_opts = set_imask_format(opts.inputs.card_month.masking.type);
             card_month_input_maskedInput = IMask(card_month_input, imask_opts);
+
         }
 
         month_form_group.appendChild(card_month_input);
@@ -564,10 +574,12 @@ export class Credit_payment_component {
 
         // handle masking plugin options
         let year_input_maskedInput;
-        if (opts.inputs.card_year.masking.enable && opts.inputs.card_year.masking.enable === true)
-        {
+        
+        if (opts.inputs.card_year.masking.enable && opts.inputs.card_year.masking.enable === true) {
+
             let imask_opts = set_imask_format(opts.inputs.card_year.masking.type);
             year_input_maskedInput = IMask(year_input, imask_opts);
+
         }
 
         year_form_group.appendChild(year_input);
@@ -668,17 +680,22 @@ export class Credit_payment_component {
 
         // 
         cv_label_button.addEventListener('click', function(e) {
+            
             let modalCheck = document.getElementById(opts.id + opts.inputs.card_cv.suffix + '-modal');
-            if (!modalCheck)
-            {
+            
+            if (!modalCheck) {
+                
                 let modal_options = {
                     id: opts.id + opts.inputs.card_cv.suffix,
                     form_modal_text: opts.text.card_cv_modal_text
                 };
+
                 let modal_nodes = generate_form_help_modal(modal_options);
                 document.body.appendChild(modal_nodes);
                 $(modal_nodes).modal('show');
+
             }
+
         });
 
 
@@ -696,10 +713,12 @@ export class Credit_payment_component {
 
         // handle masking plugin options
         let card_cv_input_maskedInput;
-        if (opts.inputs.card_cv.masking.enable && opts.inputs.card_cv.masking.enable === true)
-        {
+
+        if (opts.inputs.card_cv.masking.enable && opts.inputs.card_cv.masking.enable === true) {
+
             let imask_opts = set_imask_format(opts.inputs.card_cv.masking.type);
             card_cv_input_maskedInput = IMask(card_cv_input, imask_opts);
+
         }
 
         cv_form_group.appendChild(card_cv_input);
@@ -770,30 +789,41 @@ export class Credit_payment_component {
         // add any event listner functionality to any existing elements
         
         reset_button.addEventListener('click', function(e) {
+            
             let comp = component;
             let comp_inputs = comp.querySelectorAll('input');
-            if (comp_inputs)
-            {
-                for (var i = 0; i < comp_inputs.length; i++)
-                {
+            
+            if (comp_inputs) {
+
+                for (var i = 0; i < comp_inputs.length; i++) {
+
                     comp_inputs[i].value = '';
+
                 }
+
                 comp_inputs[0].focus();
+                
             }
+
         });
 
         card_number_label_button.addEventListener('click', function(e) {
+            
             let modalCheck = document.getElementById(opts.id + opts.inputs.card_number.suffix + '-modal');
-            if (!modalCheck)
-            {
+            
+            if (!modalCheck) {
+                
                 let modal_options = {
                     id: opts.id + opts.inputs.card_number.suffix,
                     form_modal_text: opts.text.card_number_modal_text
                 };
+
                 let modal_nodes = generate_form_help_modal(modal_options);
                 document.body.appendChild(modal_nodes);
                 $(modal_nodes).modal('show');
+
             }
+
         });
 
         card_number_input.addEventListener('keyup', function(e){
@@ -810,17 +840,22 @@ export class Credit_payment_component {
         });
 
         expiration_label_button.addEventListener('click', function(e) {
+            
             let modalCheck = document.getElementById(opts.id + opts.inputs.card_month.suffix + '-modal');
-            if (!modalCheck)
-            {
+
+            if (!modalCheck) {
+
                 let modal_options = {
                     id: opts.id + opts.inputs.card_month.suffix,
                     form_modal_text: opts.text.card_month_modal_text
                 };
+
                 let modal_nodes = generate_form_help_modal(modal_options);
                 document.body.appendChild(modal_nodes);
                 $(modal_nodes).modal('show');
+
             }
+
         });
 
         // return the component markup
