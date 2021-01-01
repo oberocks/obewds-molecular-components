@@ -8,6 +8,7 @@ import { generate_form_help_modal } from './utilities/generate_form_help_modal.j
 import { handle_input_attributes } from './utilities/handle_input_attributes.js';
 import { settings_merge } from '../helpers/settings_merge.js';
 
+
 export class Custom_checkboxes_form_group extends Form_group_custom_checkboxes {
 
     constructor (opts = false) {
@@ -194,16 +195,43 @@ export class Custom_checkboxes_form_group extends Form_group_custom_checkboxes {
         //
 
         label_button.addEventListener('click', function(e) {
+            
             let modalCheck = document.getElementById(opts.group_id + '-modal');
-            if (!modalCheck)
-            {
+            
+            if (!modalCheck) {
+                
                 let modal_options = {
+                    
                     id: opts.group_id,
-                    form_modal_text: opts.form_modal_text
+
+                    form_modal_text: opts.form_modal_text,
+
+                    modal_classes:               opts.classes.form_modals,
+                    dialog_classes:              opts.classes.form_modal_dialogs,
+                    content_classes:             opts.classes.form_modal_contents,
+                    header_classes:              opts.classes.form_modal_headers,
+                    headline_classes:            opts.classes.form_modal_headlines,
+                    body_classes:                opts.classes.form_modal_bodys,
+                    footer_classes:              opts.classes.form_modal_footers,
+                    button_classes:              opts.classes.form_modal_buttons,
+                    form_modal_text_p_classes:   opts.classes.form_modal_text_ps,
+                    form_modal_text_ul_classes:  opts.classes.form_modal_text_uls,
+                    form_modal_text_li_classes:  opts.classes.form_modal_text_lis,
+                    form_modal_text_img_classes: opts.classes.form_modal_text_imgs,
+
+                    help_modal_body_styles: opts.help_modal_body_styles,
+
+                    button_text: opts.form_modal_button_text,
+
+                    form_modal_suffix:          opts.form_modal_suffix,
+                    form_modal_headline_suffix: opts.form_modal_headline_suffix
+
                 };
+
                 let modal_nodes = generate_form_help_modal(modal_options);
                 document.body.appendChild(modal_nodes);
                 $(modal_nodes).modal('show');
+                
             }
         });
 

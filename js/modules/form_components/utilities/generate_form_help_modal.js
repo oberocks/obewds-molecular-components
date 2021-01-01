@@ -1,17 +1,17 @@
 export function generate_form_help_modal (opts = false) {
 
     // set the options if passed or use default values
-    let modal_classes   = opts.modal_classes   ? opts.modal_classes   : 'modal fade fade-scale';
-    let dialog_classes  = opts.dialog_classes  ? opts.dialog_classes  : 'modal-dialog modal-dialog-centered modal-dialog-scrollable';
-    let content_classes = opts.content_classes ? opts.content_classes : 'modal-content bg-primary text-white';
-    let header_classes  = opts.header_classes  ? opts.header_classes  : 'modal-header justify-content-center border-0 px-3';
-    let title_classes   = opts.title_classes   ? opts.title_classes   : 'modal-title';
-    let body_classes    = opts.body_classes    ? opts.body_classes    : 'modal-body text-center py-0 px-4';
-    let footer_classes  = opts.footer_classes  ? opts.footer_classes  : 'modal-footer justify-content-center border-0 pt-1 px-3';
-    let button_classes  = opts.button_classes  ? opts.button_classes  : 'btn btn-outline-white';
-    let id              = opts.id              ? opts.id              : 'default-id';
-    let title           = opts.title           ? opts.title           : null;
-    let button_text     = opts.button_text     ? opts.button_text     : 'CLOSE';
+    let modal_classes    = opts.modal_classes    ? opts.modal_classes    : 'modal fade fade-scale';
+    let dialog_classes   = opts.dialog_classes   ? opts.dialog_classes   : 'modal-dialog modal-dialog-centered modal-dialog-scrollable';
+    let content_classes  = opts.content_classes  ? opts.content_classes  : 'modal-content bg-primary text-white p-3';
+    let header_classes   = opts.header_classes   ? opts.header_classes   : 'modal-header justify-content-center border-0';
+    let headline_classes = opts.headline_classes ? opts.headline_classes : 'modal-title';
+    let body_classes     = opts.body_classes     ? opts.body_classes     : 'modal-body text-center py-0';
+    let footer_classes   = opts.footer_classes   ? opts.footer_classes   : 'modal-footer justify-content-center border-0';
+    let button_classes   = opts.button_classes   ? opts.button_classes   : 'btn btn-outline-white';
+    let id               = opts.id               ? opts.id               : 'default-id';
+    //let title          = opts.title            ? opts.title            : null;
+    let button_text      = opts.button_text      ? opts.button_text      : 'CLOSE';
 
 
     let form_modal_text = opts.form_modal_text ? opts.form_modal_text : {
@@ -31,20 +31,22 @@ export function generate_form_help_modal (opts = false) {
             ]
         }]
     };
-    let form_modal_text_p_classes   = opts.form_modal_text_p_classes   ? opts.form_modal_text_p_classes   : 'text-left px-3';
+    let form_modal_text_p_classes   = opts.form_modal_text_p_classes   ? opts.form_modal_text_p_classes   : 'text-center';
     let form_modal_text_ul_classes  = opts.form_modal_text_ul_classes  ? opts.form_modal_text_ul_classes  : 'text-left pl-3 mx-3';
     let form_modal_text_li_classes  = opts.form_modal_text_li_classes  ? opts.form_modal_text_li_classes  : '';
     let form_modal_text_img_classes = opts.form_modal_text_img_classes ? opts.form_modal_text_img_classes : 'img-fluid mb-3';
     
-    let help_modal_body_styles = opts.help_modal_body_styles ? opts.help_modal_body_styles : 'max-height:200px;';
+    let help_modal_body_styles     = opts.help_modal_body_styles     ? opts.help_modal_body_styles     : 'max-height:200px;';
+    let form_modal_suffix          = opts.form_modal_suffix          ? opts.form_modal_suffix          : '-modal';
+    let form_modal_headline_suffix = opts.form_modal_headline_suffix ? opts.form_modal_headline_suffix : '-modal-headline';
 
     // create the modal element
     let modal = document.createElement('div');
     modal.className = modal_classes;
-    modal.setAttribute('id', id + '-modal');
+    modal.setAttribute('id', id + form_modal_suffix);
     modal.setAttribute('tabindex', '-1');
     modal.setAttribute('role', 'dialog');
-    modal.setAttribute('aria-labelledby', id + '-modal-headline');
+    modal.setAttribute('aria-labelledby', id + form_modal_headline_suffix);
     modal.setAttribute('aria-hidden', 'true');
 
     // create the modal dialog element
@@ -61,9 +63,12 @@ export function generate_form_help_modal (opts = false) {
 
     // create the modal header element
     let headline = document.createElement('h5');
-    headline.className = title_classes;
-    headline.setAttribute('id', id + '-modal-headline');
+    headline.className = headline_classes;
+    headline.setAttribute('id', id + form_modal_headline_suffix);
     
+    let headline_text = document.createTextNode(form_modal_text.heading);
+    
+    /*
     let headline_text;
 
     if (title === null) {
@@ -75,6 +80,7 @@ export function generate_form_help_modal (opts = false) {
         headline_text = document.createTextNode(title);
 
     }
+    */
 
     // create the modal body element
     let body = document.createElement('div');

@@ -30,12 +30,20 @@ export class Form_group {
                 form_error_texts : 'd-none form-text text-danger',
                 form_success_texts : 'd-none form-text text-success',
                 //character_counter_parents : 'small text-right text-muted form-text',
-                form_modal_text_ps : 'text-left px-3',
+                //submit_button_form_group  : 'form-group pt-3',
+                //submit_button : 'btn btn-lg btn-primary box-shadow-xs',
+                form_modals : 'modal fade fade-scale',
+                form_modal_dialogs : 'modal-dialog modal-dialog-centered modal-dialog-scrollable',
+                form_modal_contents : 'modal-content bg-primary text-white p-3',
+                form_modal_headers : 'modal-header justify-content-center border-0',
+                form_modal_headlines : 'modal-title',
+                form_modal_bodys : 'modal-body text-center',
+                form_modal_footers : 'modal-footer justify-content-center border-0',
+                form_modal_buttons : 'btn btn-outline-white',
+                form_modal_text_ps : 'text-center',
                 form_modal_text_uls : 'text-left pl-3 mx-3',
                 form_modal_text_lis : '',
-                form_modal_imgs : 'img-fluid mb-3',
-                //submit_button_form_group  : 'form-group pt-3',
-                //submit_button : 'btn btn-lg btn-primary box-shadow-xs'
+                form_modal_imgs : 'img-fluid mb-3'
             },
             
             // global component clear text button settings defaults
@@ -64,6 +72,9 @@ export class Form_group {
 
             // global component help modal settings defaults
             help_modal_body_styles : 'max-height:200px;',
+            form_modal_button_text : 'CLOSE',
+            form_modal_suffix : '-modal',
+            form_modal_headline_suffix : '-modal-headline',
             form_modal_text : {
                 heading : 'Default Modal Title',
                 body: [{
