@@ -69,7 +69,7 @@ export class Anchor extends Html_element {
             attributes : {
                 href : '#'
             },
-            text : 'Default Link'
+            text : 'Default Anchor Link'
         });
     
     }
