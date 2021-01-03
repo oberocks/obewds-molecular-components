@@ -15,7 +15,7 @@ export class Anchor extends Html_element {
             href : null,
             hreflang : null,
             ping : null,
-            referrerpolicy  : null,
+            referrerpolicy : null,
             rel : null,
             target : null,
             type : null
