@@ -75,7 +75,7 @@ export class Upload_single_file_form_group extends Form_group_upload_single_file
 
     }
 
-    get_generate_options (options) {
+    get_merged_options (options) {
 
         return settings_merge(this.defaults, options);
 

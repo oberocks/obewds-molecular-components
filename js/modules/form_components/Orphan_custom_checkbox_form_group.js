@@ -27,7 +27,7 @@ export class Orphan_custom_checkbox_form_group extends Form_group_orphan_custom_
 
     }
 
-    get_generate_options (options) {
+    get_merged_options (options) {
 
         return settings_merge(this.defaults, options);
 

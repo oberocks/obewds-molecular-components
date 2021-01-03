@@ -26,7 +26,7 @@ export class Headline extends Html_element {
     
     }
 
-    get_generate_options (options) {
+    get_merged_options (options) {
         
         return settings_merge(this.defaults, options);
     

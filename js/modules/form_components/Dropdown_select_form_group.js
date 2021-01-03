@@ -106,7 +106,7 @@ export class Dropdown_select_form_group extends Form_group_dropdown_select {
 
     }
 
-    get_generate_options (options) {
+    get_merged_options (options) {
 
         return settings_merge(this.defaults, options);
 
