@@ -39,7 +39,7 @@ export class Address extends Html_element {
         let opts = (options) ? settings_merge(this.defaults, options) : this.defaults;
 
         // create the element
-        let el = document.createElement('section');
+        let el = document.createElement('address');
 
         // check if there are attributes then set them
         apply_attributes(el, opts.attributes);
