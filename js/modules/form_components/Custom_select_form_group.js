@@ -50,7 +50,6 @@ export class Custom_select_form_group extends Form_group_custom_select {
                 {
                     text : 'Select an Option',
                     attributes : {
-                        selected : '',
                         value : ''
                     }
                 },
