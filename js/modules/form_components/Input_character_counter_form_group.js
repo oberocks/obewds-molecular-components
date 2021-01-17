@@ -256,8 +256,14 @@ export class Input_character_counter_form_group extends Form_group_input {
 
         });
 
-        // add listner for the character counter functionality
+        // add listners for the character counter functionality
         input.addEventListener('keyup', function(e) {
+            
+            update_character_count(this.id, this.id + thisClass.defaults.characters_count_suffix, Number(this.getAttribute('data-max-characters')));
+
+        });
+
+        input.addEventListener('input', function(e) {
             
             update_character_count(this.id, this.id + thisClass.defaults.characters_count_suffix, Number(this.getAttribute('data-max-characters')));
 

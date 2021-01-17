@@ -240,6 +240,12 @@ export class Textarea_character_counter_form_group extends Form_group_textarea {
 
         });
 
+        textarea.addEventListener('input', function(e) {
+
+            update_character_count(this.id, this.id + thisClass.defaults.characters_count_suffix, Number(this.getAttribute('data-max-characters')));
+
+        });
+
         //
         // HANDLE COMPONENT VALIDATION
         //
