@@ -3,7 +3,7 @@ import { settings_merge } from '../helpers/settings_merge.js';
 import { clear_user_value } from './utilities/clear_user_value.js';
 import { generate_form_help_modal } from './utilities/generate_form_help_modal.js';
 import { get_partial_cc_icon_classes } from './utilities/get_partial_cc_icon_classes.js';
-import { insert_text } from '../html_elements/utilities/dom_generation.js';
+import { apply_attributes, insert_text } from '../html_elements/utilities/dom_generation.js';
 
 import IMask from '../plugins/imask/esm/index.js';
 import { set_imask_format } from './utilities/set_imask_format.js';
@@ -228,7 +228,7 @@ export class Credit_payment_component {
 
     }
 
-    get_generate_options (options) {
+    get_merged_options (options) {
         
         return settings_merge(this.defaults, options);
 
@@ -244,16 +244,18 @@ export class Credit_payment_component {
         component.id = opts.id;
 
         // check if outer label feature is enabled
-        if (opts.features.outer_label === true)
-        {
+        if (opts.features.outer_label === true) {
+
             // if so then create outer label elements
             let outer_label = document.createElement('label');
             outer_label.className = opts.classes.outer_label;
-            let outer_label_txt = document.createTextNode(opts.text.outer_label);
+            insert_text(outer_label, opts.text.outer_label);
+            //let outer_label_txt = document.createTextNode(opts.text.outer_label);
 
             // and append the elements to the component
-            outer_label.appendChild(outer_label_txt);
+            //outer_label.appendChild(outer_label_txt);
             component.appendChild(outer_label);
+
         }
 
         // create the section element and append it to the component
@@ -269,8 +271,9 @@ export class Credit_payment_component {
         // create the legend element and append it to the heading
         let legend = document.createElement('legend');
         legend.className = opts.classes.legend;
-        let legend_txt = document.createTextNode(opts.text.legend);
-        legend.appendChild(legend_txt);
+        insert_text(legend, opts.text.legend);
+        //let legend_txt = document.createTextNode(opts.text.legend);
+        //legend.appendChild(legend_txt);
         heading.appendChild(legend);
 
         // create the reset button parent element and append it to the heading
@@ -282,8 +285,9 @@ export class Credit_payment_component {
         let reset_button = document.createElement('button');
         reset_button.className = opts.classes.reset_button;
         reset_button.setAttribute('type', 'button');
-        let reset_button_txt = document.createTextNode(opts.text.reset_button);
-        reset_button.appendChild(reset_button_txt);
+        insert_text(reset_button, opts.text.reset_button);
+        //let reset_button_txt = document.createTextNode(opts.text.reset_button);
+        //reset_button.appendChild(reset_button_txt);
         reset_parent.appendChild(reset_button);
 
         // create the card number input form group element and append it to the section
@@ -300,8 +304,9 @@ export class Credit_payment_component {
         let card_number_label = document.createElement('label');
         card_number_label.className = opts.classes.labels;
         card_number_label.setAttribute('for', opts.id + opts.inputs.card_number.suffix);
-        let card_number_label_txt = document.createTextNode(opts.text.card_number_label);
-        card_number_label.appendChild(card_number_label_txt);
+        insert_text(card_number_label, opts.text.card_number_label);
+        //let card_number_label_txt = document.createTextNode(opts.text.card_number_label);
+        //card_number_label.appendChild(card_number_label_txt);
         card_number_label_parent.appendChild(card_number_label);
 
         // create the button element for the input help modal
@@ -405,8 +410,9 @@ export class Credit_payment_component {
         card_name_clear_text_button.addEventListener('click', function(e) {
             clear_user_value(opts.id + opts.inputs.card_name.suffix);
         });
-        let card_name_clear_text_button_txt = document.createTextNode(opts.clear_text_button_text);
-        card_name_clear_text_button.appendChild(card_name_clear_text_button_txt);
+        insert_text(card_name_clear_text_button, opts.clear_text_button_text);
+        //let card_name_clear_text_button_txt = document.createTextNode(opts.clear_text_button_text);
+        //card_name_clear_text_button.appendChild(card_name_clear_text_button_txt);
         card_name_clear_text_parent.appendChild(card_name_clear_text_button);
 
         // create the card name input form group element and append it to the section
@@ -467,8 +473,9 @@ export class Credit_payment_component {
         let expiration_label = document.createElement('label');
         expiration_label.className = opts.classes.labels;
         expiration_label.setAttribute('for', opts.id + opts.inputs.card_month.suffix);
-        let expiration_label_txt = document.createTextNode(opts.text.card_expiration_label);
-        expiration_label.appendChild(expiration_label_txt);
+        insert_text(expiration_label, opts.text.card_expiration_label);
+        //let expiration_label_txt = document.createTextNode(opts.text.card_expiration_label);
+        //expiration_label.appendChild(expiration_label_txt);
         exp_label_wrapper.appendChild(expiration_label);
 
         // create the expiration button element
@@ -538,16 +545,18 @@ export class Credit_payment_component {
         month_clear_button.addEventListener('click', function(e) {
             clear_user_value(opts.id + opts.inputs.card_month.suffix);
         });
-        let card_month_clear_text_button_txt = document.createTextNode(opts.clear_text_button_text);
-        month_clear_button.appendChild(card_month_clear_text_button_txt);
+        insert_text(month_clear_button, opts.clear_text_button_text);
+        //let card_month_clear_text_button_txt = document.createTextNode(opts.clear_text_button_text);
+        //month_clear_button.appendChild(card_month_clear_text_button_txt);
         month_clear_text_parent.appendChild(month_clear_button);
 
 
         // create the sub row second column element
         let sub_row_column_2 = document.createElement('div');
         sub_row_column_2.className = opts.classes.sub_row_column_2;
-        let sub_row_column_2_txt = document.createTextNode(opts.text.card_expiration_divider);
-        sub_row_column_2.appendChild(sub_row_column_2_txt);
+        insert_text(sub_row_column_2, opts.text.card_expiration_divider);
+        //let sub_row_column_2_txt = document.createTextNode(opts.text.card_expiration_divider);
+        //sub_row_column_2.appendChild(sub_row_column_2_txt);
         sub_row.appendChild(sub_row_column_2);
 
 
@@ -598,8 +607,9 @@ export class Credit_payment_component {
         year_clear_button.addEventListener('click', function(e) {
             clear_user_value(opts.id + opts.inputs.card_year.suffix);
         });
-        let card_year_clear_text_button_txt = document.createTextNode(opts.clear_text_button_text);
-        year_clear_button.appendChild(card_year_clear_text_button_txt);
+        insert_text(year_clear_button, opts.clear_text_button_text);
+        //let card_year_clear_text_button_txt = document.createTextNode(opts.clear_text_button_text);
+        //year_clear_button.appendChild(card_year_clear_text_button_txt);
         year_clear_text_parent.appendChild(year_clear_button);
 
         // 
@@ -661,8 +671,9 @@ export class Credit_payment_component {
         let cv_label = document.createElement('label');
         cv_label.className = opts.classes.labels;
         cv_label.setAttribute('for', opts.id + opts.inputs.card_number.suffix);
-        let cv_label_txt = document.createTextNode(opts.text.card_cv_label);
-        cv_label.appendChild(cv_label_txt);
+        insert_text(cv_label, opts.text.card_cv_label);
+        //let cv_label_txt = document.createTextNode(opts.text.card_cv_label);
+        //cv_label.appendChild(cv_label_txt);
         cv_label_parent.appendChild(cv_label);
 
         // create the button element for the input help modal
@@ -737,8 +748,9 @@ export class Credit_payment_component {
         cv_clear_button.addEventListener('click', function(e) {
             clear_user_value(opts.id + opts.inputs.card_cv.suffix);
         });
-        let cv_clear_button_txt = document.createTextNode(opts.clear_text_button_text);
-        cv_clear_button.appendChild(cv_clear_button_txt);
+        insert_text(cv_clear_button, opts.clear_text_button_text);
+        //let cv_clear_button_txt = document.createTextNode(opts.clear_text_button_text);
+        //cv_clear_button.appendChild(cv_clear_button_txt);
         cv_clear_text_parent.appendChild(cv_clear_button);
 
         // 
